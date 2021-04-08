@@ -34,7 +34,7 @@ A día de hoy solo se han encontrado páginas con información de actualización
 
 ### Desde consola
 
-Para actualizar se puede hacer ejecutando el siguiente comando *git submodule update --remote*
+Para actualizar se puede hacer ejecutando el siguiente comando *git pull --recurse-submodules'*
 
 **Recomendacion**
 Para no tener que realizar un pull y un update se recomiento ejecutar el siguiente comando ***git config --global alias.updateAll '!git pull && git submodule update --init --recursive && git pull --recurse-submodules'***
