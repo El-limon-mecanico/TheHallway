@@ -31,8 +31,9 @@ Si se prefiere realizar un único paso se puede realizar mediante el comando *gi
 ### Desde Git Kraken
 
 ## Actualización
-A día de hoy solo se han encontrado páginas con información de actualización desde consola o con GitKraken si en el futuro se encuentra como realizarlo con GitHub Desktop por favor añadalo al documento.
-
+Desde GitKraken es tan simple como añadir los repos y ya está. Recién añadidos te preguntará si quieres ¿actualizar? los submodulos sos no sé qué te decía exactamente, tu le dices que sí y ya. De ahí en adelante abajito en el apartado TAGS/SUBMODULES está el propio submódulo y le pueden dar a actualizar cuando sea necesario.
+Besis
+-El admin
 ### Desde consola
 
 Para actualizar se puede hacer ejecutando el siguiente comando *git pull --recurse-submodules'*
