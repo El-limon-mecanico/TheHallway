@@ -11,8 +11,7 @@ La organización referente a los submodulos se encuentra en el archivo **.gitmod
 
 La *instalacion viene hecha* en el momento que se descargá el repositorio sin embargo los archivos del submodulo no se actualizan ni se descargan solos es decir debemos actualizar por un lado el repositorio actual y por otro el submodulo o submodulos.
 
-Para descargar los archivos la 1º vez se puede hacer en varios pasos o con 1 solo.
-A día de hoy solo se han encontrado páginas con información de instalación desde consola si en el futuro se encuentra como realizarlo con GitHub Desktop o GitHub Kraken por favor añadalo al documento.
+A día de hoy solo se han encontrado páginas con información de instalación desde consola si en el futuro se encuentra como realizarlo con GitHub Desktop por favor añadalo al documento.
 
 ### Desde consola
 
@@ -29,8 +28,10 @@ Tras una investigación se ha observado que se puede hacer en varios pasos o en 
 
 Si se prefiere realizar un único paso se puede realizar mediante el comando *git submodule update --init --recursive* 
 
+### Desde Git Kraken
+
 ## Actualización
-A día de hoy solo se han encontrado páginas con información de actualización desde consola si en el futuro se encuentra como realizarlo con GitHub Desktop o GitHub Kraken por favor añadalo al documento.
+A día de hoy solo se han encontrado páginas con información de actualización desde consola o con GitKraken si en el futuro se encuentra como realizarlo con GitHub Desktop por favor añadalo al documento.
 
 ### Desde consola
 
@@ -39,3 +40,8 @@ Para actualizar se puede hacer ejecutando el siguiente comando *git pull --recur
 **Recomendacion**
 Para no tener que realizar un pull y un update se recomiento ejecutar el siguiente comando ***git config --global alias.updateAll '!git pull && git submodule update --init --recursive && git pull --recurse-submodules'***
 De tal forma que cuando se escriba el comando *git updateAll* realice un pull del proyecto principal y un pull de los submodulos
+
+
+### Desde Git Kraken
+
+https://support.gitkraken.com/working-with-repositories/submodules/#:~:text=To%20update%20submodules%2C%20navigate%20to,check%20out%20the%20referenced%20commit.
