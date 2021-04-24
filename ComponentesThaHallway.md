@@ -1,7 +1,11 @@
 # Del Motor se obtienen 
 - Render
 - Transform
-
+- Rigidbody
+- Collider
+- Trigger
+- Light
+- Camera
 ## Componentes de la entidad Player
 
 - PlayerMovement será la encargada de mover al jugador medianre WASD (si se pulsa Shift empieza a correr esto podria ser hecho en otra componente)
@@ -12,7 +16,7 @@
 
 - PlayerSound se encargara de gestionar los sonidos que realiza y que escucha el jugador
 
-- Health es la encargada de gestionar las vidas del jugador asi como de renderizar la UI
+- Health es la encargada de gestionar las vidas del jugador
 
 ## Comun entre los enemigos
 
@@ -24,16 +28,20 @@
 
 - FollowPlayer El enemigo debe estar en estado Following para usar esta componente se trata de una componente que hace que el enemigo siga al player
 
-### Sadico de Carglass
+### Sadico  y Rastreator
 
-- SadicMovement Se encarga de mover este enemigo y de pararlo si esta mirando hacia el jugador
+- RandomMovement Se mueven aleatoriamente hasta cierta condicion
 
 - SoundListener Se encargara de gestionar los sonidos que recibe 
 
+### Sadico
+
+Usará el estado para saber que movimiento usar y si le estan viendo no se mueve
+
 ### Rastreator (guau guau)
 
-- RastreatorMovement(¿Quizás podría ser como SadicMovement?)
+Usará el estado para saber que movimiento usar 
 
 ### Protector
 
-En principio no se cree que requiera más que las comunes
+- GuardianMovement Patron de movimiento protegiendo la palanca

@@ -10,5 +10,5 @@ void Lighter::charge(){
 }
 
 void Lighter::update(){
-    move();
+    charge();
 }
