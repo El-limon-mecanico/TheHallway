@@ -19,6 +19,18 @@
     <Filter Include="Archivos de origen\Player">
       <UniqueIdentifier>{36b22750-1d75-48b8-a16e-4ee6e84f6480}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Enemies">
+      <UniqueIdentifier>{920ba4c6-e148-4c32-84eb-f64098fd4c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Enemies\Protector">
+      <UniqueIdentifier>{0a5889bb-c0c2-4120-b1af-148c485be519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Enemies">
+      <UniqueIdentifier>{cf77b965-082d-4152-81f5-d08e289c5e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Enemies\Protector">
+      <UniqueIdentifier>{ca68f670-a3f5-4fb3-9e54-319ae3f1b79e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp">
@@ -30,6 +42,9 @@
     <ClCompile Include="..\..\Src\TheHallway\Player\PlayerMovement.cpp">
       <Filter>Archivos de origen\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\Enemies\Protector\LoopMovement.cpp">
+      <Filter>Archivos de origen\Enemies\Protector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\Player\Lighter.h">
@@ -37,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\Player\PlayerMovement.h">
       <Filter>Archivos de encabezado\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\Enemies\Protector\LoopMovement.h">
+      <Filter>Archivos de encabezado\Enemies\Protector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

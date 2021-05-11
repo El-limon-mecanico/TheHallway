@@ -161,11 +161,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\TheHallway\Enemies\Protector\LoopMovement.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Player\Lighter.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Player\PlayerMovement.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\TheHallway\Enemies\Protector\LoopMovement.h" />
     <ClInclude Include="..\..\Src\TheHallway\Player\Lighter.h" />
     <ClInclude Include="..\..\Src\TheHallway\Player\PlayerMovement.h" />
   </ItemGroup>
