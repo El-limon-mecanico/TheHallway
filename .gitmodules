@@ -1,3 +1,3 @@
-[submodule "TheHallwaySol\Quack-Engine"]
-	path = TheHallwaySol\Quack-Engine
+[submodule "TheHallwaySol/Quack-Engine"]
+	path = TheHallwaySol/Quack-Engine
 	url = https://github.com/El-limon-mecanico/Quack-Engine.git
