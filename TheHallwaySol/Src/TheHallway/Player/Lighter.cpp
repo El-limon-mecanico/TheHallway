@@ -1,14 +1,17 @@
 #include "Lighter.h"
 
-void Lighter::init(){
-    if(entity_->hasComponent("Transform"))
-        entity_->getComponent("Transform");
+
+bool Lighter::init(luabridge::LuaRef parameterTable)
+{
+	return true;
 }
 
-void Lighter::charge(){
+void Lighter::charge()
+{
 
 }
 
-void Lighter::update(){
-    charge();
+void Lighter::update()
+{
+
 }

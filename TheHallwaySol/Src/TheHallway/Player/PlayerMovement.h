@@ -1,16 +1,17 @@
 #include "Component.h"
-class Transform;
 
-class PlayerMovement: public Component{
+class PlayerMovement : public Component {
 protected:
 
 private:
-float speed_;
-Transform* tr_;
+	float speed_;
+
 public:
-PlayerMovement(){}
-~PlayerMovement(){}
-void init();
-void move();
-void update() override;
-}
+	PlayerMovement() {}
+	~PlayerMovement() {}
+
+	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
+
+	void move();
+	void update() override;
+};

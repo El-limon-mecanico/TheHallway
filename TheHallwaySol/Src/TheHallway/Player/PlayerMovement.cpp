@@ -1,12 +1,14 @@
 #include "PlayerMovement.h"
 
-void PlayerMovement::init(){
-    if(entity_->hasComponent("Transform"))
-        entity_->getComponent("Transform");
+
+
+bool PlayerMovement::init(luabridge::LuaRef parameterTable)
+{
+    return true;
 }
 
 void PlayerMovement::move(){
-    if(hayTeclaBajada){
+   /* if(hayTeclaBajada){
         switch(teclaBajada){
             case W:{
                 tr_->setPos(tr->getPos()+Vector3D(0,speed_,0));
@@ -27,7 +29,7 @@ void PlayerMovement::move(){
             default:
             break;
         }
-    }
+    }*/
 }
 
 void PlayerMovement::update(){
