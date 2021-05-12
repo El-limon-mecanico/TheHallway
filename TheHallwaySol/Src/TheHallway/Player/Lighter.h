@@ -1,5 +1,5 @@
 #include "Component.h"
-class Transform;
+
 
 class Lighter : public Component {
 protected:
