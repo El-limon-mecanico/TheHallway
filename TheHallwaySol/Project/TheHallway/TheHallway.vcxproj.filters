@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\Src\TheHallway\Player\PlayerMovement.cpp">
       <Filter>Archivos de origen\Player</Filter>
     </ClCompile>
+    <ClCompile Include="MazeCreator.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\Player\Lighter.h">
@@ -37,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\Player\PlayerMovement.h">
       <Filter>Archivos de encabezado\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeCreator.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

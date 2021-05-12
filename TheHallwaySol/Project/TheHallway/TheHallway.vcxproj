@@ -164,10 +164,12 @@
     <ClCompile Include="..\..\Src\TheHallway\Player\Lighter.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Player\PlayerMovement.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp" />
+    <ClCompile Include="MazeCreator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\Player\Lighter.h" />
     <ClInclude Include="..\..\Src\TheHallway\Player\PlayerMovement.h" />
+    <ClInclude Include="MazeCreator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
