@@ -70,14 +70,14 @@ void MazeCreator::kill(Vector2 pos)
 Vector2 MazeCreator::hunt()
 {
 	Vector2 huntedCell = invalidDir_;
-	std::vector<Vector2*>* neighbours;
+	std::vector<Vector2> neighbours = std::vector<Vector2>();
 	// search for the first unvisited cell with a visited neighbour cell
 	int i = 0, j;
 				//unvisited
-	while (i < visitedCells_.size() && neighbours->empty())
+	while (i < visitedCells_.size() && neighbours.empty())
 	{
 		j = 0;
-		while (j < visitedCells_[i].size() && neighbours->empty())
+		while (j < visitedCells_[i].size() && neighbours.empty())
 		{
 			if (!visitedCells_[i][j])
 			{
@@ -85,12 +85,12 @@ Vector2 MazeCreator::hunt()
 				for (int k = 0; k < DIRECTIONS.size(); k++)
 				{
 					// if the cell has been visited, it is added to the neighbours list
-					Vector2* possibleConnection;
-					possibleConnection->first = huntedCell.first + DIRECTIONS[k].first;
-					possibleConnection->second = huntedCell.second + DIRECTIONS[k].second;
+					Vector2 possibleConnection;
+					possibleConnection.first = huntedCell.first + DIRECTIONS[k].first;
+					possibleConnection.second = huntedCell.second + DIRECTIONS[k].second;
 
-					if (visitedCells_[possibleConnection->first][possibleConnection->second])
-						neighbours->push_back(possibleConnection);
+					if (visitedCells_[possibleConnection.first][possibleConnection.second])
+						neighbours.push_back(possibleConnection);
 				}
 
 			}
@@ -100,9 +100,9 @@ Vector2 MazeCreator::hunt()
 	}
 
 	// a random neighbour is used
-	if (neighbours->size() > 0)
+	if (neighbours.size() > 0)
 	{
-		Vector2 cell = *(neighbours->at(rand() % neighbours->size()));
+		Vector2 cell = (neighbours.at(rand() % neighbours.size()));
 		knockDownWall(huntedCell, cell);
 
 		// the "hunted" cell is visited
