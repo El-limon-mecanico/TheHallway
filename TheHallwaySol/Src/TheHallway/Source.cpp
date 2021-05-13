@@ -3,6 +3,7 @@
 #include "QuackEnginePro.h"
 ////////////////////////////Includes Agus///////////////////////////////////
 #define AGUS
+#include "SceneMng.h"
 #include "MeshRenderer.h"
 #include "QuackEntity.h"
 #include "Enemies/Protector/LoopMovement.h"
@@ -12,12 +13,20 @@ void pruebasAgus() {
 		QuackEntity* cube = new QuackEntity("Cubito");
 		MeshRenderer* r = cube->addComponent<MeshRenderer>();
 		r->setMeshByPrefab(PrefabType::PT_CUBE);
+		//r->setMaterial("cubooo");
 		std::vector<Vector3D> v;
-		v.push_back(Vector3D(0, 0, 0));
-		v.push_back(Vector3D(7, 7, 0));
-		v.push_back(Vector3D(9, 15, 0));
-		LoopMovement* lM = cube->addComponent<LoopMovement>(5.3,v);
+		v.push_back(Vector3D(-10, -3, 5));
+		v.push_back(Vector3D(-17, 6, -6));
+		v.push_back(Vector3D(7, -5, 4));
+		LoopMovement* lM = cube->addComponent<LoopMovement>(0.02,v);
+		cube->transform()->setLocalPosition({ 6,0,0 });
+		cube->transform()->Scale(Vector3D(8, 8, 8));
+		SceneMng::Instance()->getCurrentScene()->addEntity(cube);
+}
+void mainAgus() {
 
+	//QuackEnginePro::Instance()->update();
+		
 }
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -44,6 +53,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 	if (QuackEnginePro::Init()) {
 #ifdef AGUS
 		pruebasAgus();
+		QuackEnginePro::Instance()->start();
 #else
 		QuackEnginePro::Instance()->start();
 		

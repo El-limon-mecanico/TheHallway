@@ -7,37 +7,28 @@ bool LoopMovement::init(luabridge::LuaRef parameterTable)
     return true;
 }
 void LoopMovement::updateObjective() {
-    actualObjective = (actualObjective + 1) % (objectives.size());
+    bool update = false;
+
+     update = objectives_[actualObjective_].x-transform->position().x >= -1 && objectives_[actualObjective_].x- transform->position().x <= 1;
+     update = update && objectives_[actualObjective_].y-transform->position().y >= -1 && objectives_[actualObjective_].y- transform->position().y <= 1;
+   update = update && objectives_[actualObjective_].z- transform->position().z >= -1 &&  objectives_[actualObjective_].z- transform->position().z <= 1;
+
+    if (update) {
+        actualObjective_ = (actualObjective_ + 1) % (objectives_.size());
+        std::cout << "UPDATE" << std::endl;
+    std::cout << "(" << transform->position().x << "," << transform->position().y << "," << transform->position().z << ")" << std::endl;
+    }
 }
 void LoopMovement::moveWithPhysics(){
 
 }
 void LoopMovement::moveWithoutPhysics(){
-    transform->Translate(objectives[actualObjective],false);
+    Vector3D v = objectives_[actualObjective_] - transform->position();
+    v.z = objectives_[actualObjective_].z- transform->position().z;//Cuando se corriga el operator - se puede quitar esta linea
+    v = v.normalize()*speed_;
+    transform->Translate(v,false);
 }
 void LoopMovement::move(bool p){
-   /* if(hayTeclaBajada){
-        switch(teclaBajada){
-            case W:{
-                tr_->setPos(tr->getPos()+Vector3D(0,speed_,0));
-            }
-            break;
-            case S:{
-                tr_->setPos(tr->getPos()+Vector3D(0,-speed_,0));
-            }
-            break;
-            case A:{
-                tr_->setPos(tr->getPos()+Vector3D(speed_,0,0));
-            }
-            break;
-            case D:{
-                tr_->setPos(tr->getPos()+Vector3D(-speed_,0,0));
-            }
-            break;
-            default:
-            break;
-        }
-    }*/
     if (p) 
         moveWithPhysics();
     else
@@ -46,6 +37,6 @@ void LoopMovement::move(bool p){
 
 void LoopMovement::update(){
     move(false);
-    if (transform->position().x == objectives[actualObjective].x&& transform->position().y == objectives[actualObjective].y&& transform->position().z == objectives[actualObjective].z)
         updateObjective();
+        std::cout << "(" << transform->position().x << "," << transform->position().y << "," << transform->position().z << ")" << std::endl;
 }
