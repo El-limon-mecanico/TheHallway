@@ -27,10 +27,10 @@
     <ClCompile Include="..\..\Src\TheHallway\MazeCreator.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\TheHallway\PlayerMovement.cpp">
+    <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp">
       <Filter>Archivos de origen\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp">
+    <ClCompile Include="..\..\Src\TheHallway\PlayerMovement.cpp">
       <Filter>Archivos de origen\Player</Filter>
     </ClCompile>
   </ItemGroup>
