@@ -1,6 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include "QuackEnginePro.h"
+#include "FactoryManager.h"
+#include "MazeCreator.h"
+#include "Lighter.h"
+#include "PlayerMovement.h"
 
 #if (defined _DEBUG) //|| !(defined _WIN64)
 int main() {
@@ -26,6 +30,9 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 
 	// AQUI FALTA MANEJO DE ERRORES Y EXCEPCIONES
 	if (QuackEnginePro::Init()) {
+		FactoryManager::instance()->add<MazeCreator>();
+		FactoryManager::instance()->add<Lighter>();
+		FactoryManager::instance()->add<PlayerMovement>();
 		QuackEnginePro::Instance()->start();
 	}
 
