@@ -6,11 +6,16 @@
 #include "SceneMng.h"
 #include "MeshRenderer.h"
 #include "QuackEntity.h"
-#include "Enemies/Protector/LoopMovement.h"
+#include "LoopMovement.h"
 ///////////////////////////////////////////////////////////////////////////
+#include "FactoryManager.h"
+#include "MazeCreator.h"
+#include "Lighter.h"
+#include "PlayerMovement.h"
 #if (defined _DEBUG) //|| !(defined _WIN64)
 void pruebasAgus() {
-		QuackEntity* cube = new QuackEntity("Cubito");
+	FactoryManager::instance()->add<LoopMovement>();
+	QuackEntity* cube = new QuackEntity("Cubito");
 		MeshRenderer* r = cube->addComponent<MeshRenderer>();
 		r->setMeshByPrefab(PrefabType::PT_CUBE);
 		//r->setMaterial("cubooo");
@@ -53,11 +58,13 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 	if (QuackEnginePro::Init()) {
 #ifdef AGUS
 		pruebasAgus();
-		QuackEnginePro::Instance()->start();
 #else
-		QuackEnginePro::Instance()->start();
+		FactoryManager::instance()->add<MazeCreator>();
+		FactoryManager::instance()->add<Lighter>();
+		FactoryManager::instance()->add<PlayerMovement>();
 		
 #endif // AGUS
+		QuackEnginePro::Instance()->start();
 	}
 	return 0;
 }
