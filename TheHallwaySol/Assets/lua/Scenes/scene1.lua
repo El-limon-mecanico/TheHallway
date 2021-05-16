@@ -12,14 +12,16 @@ entidad1 = {
     },
 
     MeshRenderer = {
-        Mesh = "Cube",
+        Mesh = "Suzanne.mesh",
     },
 
     Rigidbody = {
         Type = "Hull",
         Mass = 1,
         Trigger = false,
-        Static = false
+        Static = false,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
     },
 
     Prueba = {
@@ -46,7 +48,9 @@ entidad2 = {
         Type = "Cube",
         Mass = 1,
         Trigger = false,
-        Static = true
+        Static = true,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
     }   
 }
 entidad3 = {
@@ -68,7 +72,7 @@ entidad3 = {
     }   
 }
 defaultCamera = {
-    Components = {"Transform", "Camera", "Prueba"},
+    Components = {"Transform", "Camera"},
 
     Transform = {
         Position = {10,10,10},
@@ -86,12 +90,6 @@ defaultCamera = {
         FarClipDistance = 100000,
         ProjectionType = "Perspective"
     },
-
-    Prueba = {
-        valor1 = 1,
-        valor2 = 3,
-        valor3 = "Quack"
-    }
 }
 
 sceneLight = {
@@ -113,4 +111,34 @@ sceneLight = {
         OuterAngle = 90,
         isOn = true
     }
+}
+
+UI = {
+    Components = {"Text1", "Image1", "Button1"},
+
+    Text1 = {
+        Type = "Text",
+        Name = "Texto",
+        Text = " Esto no es un boton, es solo texto, pero desde lua",
+        Position = {0.5,0.05},
+        Size = {405,50}
+    },
+
+    Image1 = {
+        Type = "Image",
+        Name = "Cuchao",
+        Image = "cuchao.png",
+        Position = {0.1,0.6},
+        Size = {300,200}
+    },
+
+    Button1 = {
+        Type = "Button",
+        Name = "Button",
+        Text = "Betis",
+        Position = {0.5,0.5},
+        Size = {100,100},
+        CallBackFunction = "botonPresionado"
+    },
+
 }
