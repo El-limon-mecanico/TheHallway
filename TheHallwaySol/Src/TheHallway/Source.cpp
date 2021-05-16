@@ -11,7 +11,6 @@
 #include "MazeCreator.h"
 #include "Lighter.h"
 #include "PlayerMovement.h"
-#if (defined _DEBUG) //|| !(defined _WIN64)
 void pruebasAgus() {
 	FactoryManager::instance()->add<LoopMovement>();
 	QuackEntity* cube = new QuackEntity("Cubito");
@@ -32,6 +31,7 @@ void mainAgus() {
 	//QuackEnginePro::Instance()->update();
 		
 }
+#if (defined _DEBUG) //|| !(defined _WIN64)
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #else
