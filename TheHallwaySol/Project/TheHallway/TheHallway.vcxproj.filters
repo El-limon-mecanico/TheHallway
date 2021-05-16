@@ -63,4 +63,9 @@
       <Filter>Archivos de encabezado\Enemies\Protector</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\lua\Scenes\scene1.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+  </ItemGroup>
 </Project>

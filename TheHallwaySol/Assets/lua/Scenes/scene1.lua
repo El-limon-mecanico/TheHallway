@@ -12,7 +12,7 @@ entidad1 = {
     },
 
     MeshRenderer = {
-        Mesh = "Suzanne.mesh",
+        Mesh = "Cube",
     },
 
     Rigidbody = {
@@ -81,7 +81,7 @@ sceneLight = {
     Components = {"Transform", "Light"},
 
     Transform = {
-        Position = {10,10,10},
+        Position = {-10,10,10},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -91,7 +91,7 @@ sceneLight = {
         DiffuseColor = {1,1,1},
         SpecularColor = {1,1,1},
         Direction = {0,0,0},
-        PowerLevel = 1,
+        Distance = 100,
         InnerAngle = 30,
         OuterAngle = 90,
         isOn = true

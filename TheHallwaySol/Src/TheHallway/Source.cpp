@@ -2,7 +2,6 @@
 #include <fstream>
 #include "QuackEnginePro.h"
 ////////////////////////////Includes Agus///////////////////////////////////
-#define AGUS
 #include "SceneMng.h"
 #include "MeshRenderer.h"
 #include "QuackEntity.h"
@@ -56,15 +55,13 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 
 	// AQUI FALTA MANEJO DE ERRORES Y EXCEPCIONES
 	if (QuackEnginePro::Init()) {
-#ifdef AGUS
-		pruebasAgus();
-#else
 		FactoryManager::instance()->add<MazeCreator>();
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<PlayerMovement>();
-		
+#ifdef AGUS
+		pruebasAgus();
 #endif // AGUS
-		QuackEnginePro::Instance()->start();
+		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
 	}
 	return 0;
 }

@@ -173,6 +173,9 @@
     <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h" />
     <ClInclude Include="..\..\Src\TheHallway\PlayerMovement.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Assets\lua\Scenes\scene1.lua" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
