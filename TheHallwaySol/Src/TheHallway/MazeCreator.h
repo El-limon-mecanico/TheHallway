@@ -12,14 +12,13 @@ typedef std::pair<int, int> Vector2;
 class MazeCreator: public Component
 {
 public:
-    MazeCreator() {}
+    MazeCreator();
     ~MazeCreator() {}
     virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
     virtual void start() override;
-    virtual void onEnable() override;
 
     Vector2 getArrayVector(Vector2 pos);
-    void setCell(char c, Vector2 pos) { map_[(int)(pos.first), (int)(pos.second)] = c; }
+    void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
     bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < height_); };
     static std::string GetName() { return "MazeCreator"; }
 
@@ -38,9 +37,9 @@ private:
     Vector2 invalidDir_;                                // por control
 
     std::string filename = "";
-    std::vector<std::string> map_;
-    char floorC_ = '.';            // luego los cambiamos
-    char wallC_ = 'W';             // o los leemos por archivo
+    std::vector<std::vector<char>> map_;
+    char floorC_ = '.';            
+    char wallC_ = 'W';             
     char playerC_ = 'P';
 
     // arriba, abajo, izquierda y derecha
@@ -107,7 +106,7 @@ private:
     void spawnPlayer()
     {
         // change the map file as to include the player
-        map_[1, 1] = playerC_;
+        map_[1][1] = playerC_;
     }
 
     QuackEntity* createPared();

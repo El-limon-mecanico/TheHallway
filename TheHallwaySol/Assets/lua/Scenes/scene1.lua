@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight", "UI"}
+    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight", "UI", "Maze"}
 }
 
 entidad1 = {
@@ -124,4 +124,17 @@ UI = {
         CallBackFunction = "botonPresionado"
     },
 
+}
+
+Maze = {
+    Components = {"Transform", "MazeCreator"},
+
+    Transform = {
+        Position = {-10,10,10},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
+    MazeCreator = {
+
+    }
 }

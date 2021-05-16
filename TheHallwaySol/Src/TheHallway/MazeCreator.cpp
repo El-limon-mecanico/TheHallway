@@ -6,45 +6,25 @@
 #include "SceneMng.h"
 
 
+MazeCreator::MazeCreator()
+{
+}
+
 bool MazeCreator::init(luabridge::LuaRef parameterTable)
 {
+	invalidDir_ = Vector2(-height_, -width_);
+	visitedCells_ = std::vector <std::vector<bool>>(height_, std::vector<bool>(width_, false));
+	map_ = std::vector<std::vector<char>>(height_ * 2 + 1, std::vector<char>(width_ * 2 + 1, wallC_));
 	return true;
 }
 
 void MazeCreator::start()
 {
 	createMaze(filename);
-	setEnable(false);
-}
-
-void MazeCreator::onEnable()
-{
-	createMaze(filename);
-	setEnable(false);
 }
 
 void MazeCreator::createMaze(std::string filename)
 {
-	// creacion desde cero
-	invalidDir_ = Vector2(-height_, -width_);
-	map_ = std::vector<std::string>(height_ * 2 + 1);
-
-	// todo el laberinto son paredes al principio
-	for (int i = 0; i < 2 * height_ + 1; i++)
-	{
-		for (int j = 0; j < 2 * width_ + 1; j++)
-			setCell(wallC_, Vector2(i, j));
-	}
-
-	// no hay celdas visitadas al principio
-	for (int i = 0; i < height_; i++)
-	{
-		for (int j = 0; j < width_; j++)
-		{
-			visitedCells_[i][j] = false;
-		}
-	}
-
 	huntAndKill();      // algoritmo de hunt n kill
 
 	eraseColumns();     // borramos las columnas que hayan podido quedar
@@ -68,11 +48,12 @@ void MazeCreator::kill(Vector2 pos)
 
 	do
 	{
+		
 		nextCell.first = pos.first + DIRECTIONS[(i + loops) % DIRECTIONS.size()].first;
 		nextCell.second = pos.second + DIRECTIONS[(i + loops) % DIRECTIONS.size()].second;
 		loops++;
 
-	} while (loops < DIRECTIONS.size() && visitedCells_[nextCell.first][nextCell.second]);
+	} while (loops < DIRECTIONS.size() && (!validDir(nextCell) || visitedCells_[nextCell.first][nextCell.second]));
 
 	if (validDir(nextCell) && !visitedCells_[nextCell.first][nextCell.second])
 	{
@@ -106,12 +87,12 @@ Vector2 MazeCreator::hunt()
 					possibleConnection.first = huntedCell.first + DIRECTIONS[k].first;
 					possibleConnection.second = huntedCell.second + DIRECTIONS[k].second;
 
-					if (visitedCells_[possibleConnection.first][possibleConnection.second])
+					if (validDir(possibleConnection) && visitedCells_[possibleConnection.first][possibleConnection.second])
 						neighbours.push_back(possibleConnection);
 				}
 
 			}
-
+			j++;
 		}
 		i++;
 	}
@@ -179,26 +160,26 @@ void MazeCreator::createGaps()
 
 void MazeCreator::writeMap(std::string file)
 {
-//{
-//	std::string path = "Assets/maps/" + file + ".lua";
-//	std::ofstream f;
-//	f.open(path);
-//	int n = height_ * 2 + 1;
-//	//f << n << "\n";           // altura para leerlo despues
-//	n = width_ * 2 + 1;
-//	//f << n << "\n";           // ancho para leerlo despues
+	//// para pruebas solo
+	//std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\CPP.map";
+	//std::ofstream f;
+	//f.open(path);
+	//int n = height_ * 2 + 1;
+	////f << n << "\n";           // altura para leerlo despues
+	//n = width_ * 2 + 1;
+	////f << n << "\n"; 
 	
-
 	//TODO meter datos sobre el jugador, enemigos, numero de palancas.. lo necesario, antes de dibujar el mapa
 	for (int i = 0; i < 2 * height_ + 1; i++)
 	{
 		for (int j = 0; j < 2 * width_ + 1; j++)
 		{
+			//f << map_[i][j];
 			if (map_[i][j] == wallC_)
 			{
-				QuackEntity* pared = createPared();
-				pared->transform()->setGlobalPosition(Vector3D(i * WALL_SCALE, 0, j * WALL_SCALE));
-				pared->transform()->Scale(Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE));
+				//QuackEntity* pared = createPared();
+				//pared->transform()->setGlobalPosition(Vector3D(i * WALL_SCALE, 0, j * WALL_SCALE));
+				//pared->transform()->Scale(Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE));
 			}
 				//crear una entidad dentro de la escena
 			else if (map_[i][j] == playerC_)
@@ -214,11 +195,7 @@ void MazeCreator::writeMap(std::string file)
 		}
 		//f << "\n";
 	}
-
-	//signature
-	/*f << "Maze algorithm implemented by Ana Martin Sanchez" << "\n";
-	f << "The Mechanic Lemon, QuackEngine :)" << "\n";
-	f.close();*/
+	//f.close();
 }
 
 void MazeCreator::eraseColumns()

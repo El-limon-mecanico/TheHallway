@@ -40,6 +40,8 @@ int WINAPI
 WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow) {
 #endif
 
+	srand(time(NULL));
+
 	//esto es una prueba de los recursos
 	std::ifstream f("Assets/fichero.txt");
 	if (f.is_open())
