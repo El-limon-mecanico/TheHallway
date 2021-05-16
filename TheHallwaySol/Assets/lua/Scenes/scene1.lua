@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight"}
+    entities = {"defaultCamera","entidad1", "entidad2", "entidad3", "sceneLight"}
 }
 
 entidad1 = {
@@ -49,7 +49,24 @@ entidad2 = {
         Static = true
     }   
 }
+entidad3 = {
+    Components = {"Transform", "MeshRenderer", "LoopMovement"},
 
+    Transform = {
+        Position = {0,-3,0},
+        Scale = {1,1,1},
+        Rotation = {-90,0,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Cube",
+    },
+
+    LoopMovement = {
+        Speed=0.01,
+        Objectives={{-10,1,-5},{3,3,3},{-4,-4,-4}}
+    }   
+}
 defaultCamera = {
     Components = {"Transform", "Camera", "Prueba"},
 
