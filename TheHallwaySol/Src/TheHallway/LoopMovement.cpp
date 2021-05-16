@@ -18,6 +18,7 @@ bool LoopMovement::init(luabridge::LuaRef parameterTable)
     }
     return true;
 }
+
 void LoopMovement::updateObjective() {
     bool update = false;
 
@@ -29,26 +30,14 @@ void LoopMovement::updateObjective() {
         actualObjective_ = (actualObjective_ + 1) % (objectives_.size());
     }
 }
-void LoopMovement::moveWithPhysics(){
 
-}
-void LoopMovement::moveWithoutPhysics(){
+void LoopMovement::move(){
     Vector3D v = objectives_[actualObjective_] - transform->position();
-    v.y = 0;
     v = v.normalize()*speed_;
-    std::cout<<"POS " << transform->position() << "\n";
-    std::cout<<"V " << v << "\n";
-    transform->Translate(v,false);
-    std::cout << "POS After Translate " << transform->position() << "\n";
-}
-void LoopMovement::move(bool p){
-    if (p) 
-        moveWithPhysics();
-    else
-    moveWithoutPhysics();
+    transform->Translate(v, true);
 }
 
 void LoopMovement::update(){
-    move(false);
-        updateObjective();
+    move();
+    updateObjective();
 }

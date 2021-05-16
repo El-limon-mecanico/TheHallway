@@ -59,7 +59,7 @@ entidad3 = {
     Transform = {
         Position = {0,-3,0},
         Scale = {1,1,1},
-        Rotation = {-90,0,0}
+        Rotation = {45,45,0}
     },
 
     MeshRenderer = {
@@ -67,8 +67,8 @@ entidad3 = {
     },
 
     LoopMovement = {
-        Speed=0.01,
-        Objectives={{-10,1,-5},{3,3,3},{-4,-4,-4}}
+        Speed=0.1,
+        Objectives={{-10,1,-5},{3,3,3},{-4,-4,-4},{0,0,0}}
     }   
 }
 defaultCamera = {
