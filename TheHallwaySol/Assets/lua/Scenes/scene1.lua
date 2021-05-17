@@ -1,64 +1,12 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight", "UI"}
-}
-
-entidad1 = {
-    Components = {"Transform", "MeshRenderer", "Rigidbody", "Prueba"},
-
-    Transform = {
-        Position = {0,5,0},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-
-    MeshRenderer = {
-        Mesh = "Suzanne.mesh",
-    },
-
-    Rigidbody = {
-        Type = "Hull",
-        Mass = 1,
-        Trigger = false,
-        Static = false,
-        PositionConstrains = {0,0,0},
-        RotationConstrains = {0,0,0}
-    },
-
-    Prueba = {
-        valor1 = 1,
-        valor2 = 3,
-        valor3 = "Quack"
-    }
-}
-
-entidad2 = {
-    Components = {"Transform", "MeshRenderer", "Rigidbody"},
-
-    Transform = {
-        Position = {0,-3,0},
-        Scale = {5,5,1},
-        Rotation = {-90,0,0}
-    },
-
-    MeshRenderer = {
-        Mesh = "Plane",
-    },
-
-    Rigidbody = {
-        Type = "Cube",
-        Mass = 1,
-        Trigger = false,
-        Static = true,
-        PositionConstrains = {0,0,0},
-        RotationConstrains = {0,0,0}
-    }   
+    entities = {"defaultCamera", "sceneLight", "Maze"}
 }
 
 defaultCamera = {
     Components = {"Transform", "Camera"},
 
     Transform = {
-        Position = {10,10,10},
+        Position = {25, 75,25},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -66,7 +14,7 @@ defaultCamera = {
     Camera = {
         Name = "MainCam",
         Background = {1,1,0},
-        LookAt = {0,0,0},
+        LookAt = {25,0,25},
         Width = 0,
         Height = 0,
         NearClipDistance = 1,
@@ -96,32 +44,16 @@ sceneLight = {
     }
 }
 
-UI = {
-    Components = {"Text1", "Image1", "Button1"},
+Maze = {
+    Components = {"Transform", "MazeCreator"},
 
-    Text1 = {
-        Type = "Text",
-        Name = "Texto",
-        Text = " Esto no es un boton, es solo texto, pero desde lua",
-        Position = {0.5,0.05},
-        Size = {405,50}
+    Transform = {
+        Position = {0,0,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
     },
-
-    Image1 = {
-        Type = "Image",
-        Name = "Cuchao",
-        Image = "cuchao.png",
-        Position = {0.1,0.6},
-        Size = {300,200}
-    },
-
-    Button1 = {
-        Type = "Button",
-        Name = "Button",
-        Text = "Betis",
-        Position = {0.5,0.5},
-        Size = {100,100},
-        CallBackFunction = "botonPresionado"
-    },
-
+    MazeCreator = {
+        Size = 25,
+        Holes = 25
+    }
 }
