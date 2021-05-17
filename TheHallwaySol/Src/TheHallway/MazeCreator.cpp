@@ -12,6 +12,10 @@ MazeCreator::MazeCreator()
 
 bool MazeCreator::init(luabridge::LuaRef parameterTable)
 {
+	width_ = readVariable<int>(parameterTable, "Width");
+	height_ = readVariable<int>(parameterTable, "Height");
+	additionalPaths_ = readVariable<int>(parameterTable, "Holes");
+	
 	invalidDir_ = Vector2(-height_, -width_);
 	visitedCells_ = std::vector <std::vector<bool>>(height_, std::vector<bool>(width_, false));
 	map_ = std::vector<std::vector<char>>(height_ * 2 + 1, std::vector<char>(width_ * 2 + 1, wallC_));
@@ -140,7 +144,7 @@ void MazeCreator::huntAndKill()
 		kill(cell);
 	} while ((cell = hunt()) != invalidDir_);
 
-	//createGaps();
+	createGaps();
 }
 
 void MazeCreator::createGaps()
@@ -172,7 +176,7 @@ void MazeCreator::writeMap(std::string file)
 	createOuterWalls();
 
 	// para pruebas solo
-	std::string path = "C:\\Users\\jorge\\OneDrive\\Escritorio\\ESTUDIOS\\3V\\mapa.map";
+	std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
 	std::ofstream f;
 	f.open(path);
 	for (int i = 0; i < 2 * height_ + 1; i++)
