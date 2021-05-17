@@ -101,6 +101,7 @@ UI = {
 
     Text1 = {
         Type = "Text",
+        Style= "TaharezLook/StaticText",
         Name = "Texto",
         Text = " Esto no es un boton, es solo texto, pero desde lua",
         Position = {0.5,0.05},
@@ -109,6 +110,7 @@ UI = {
 
     Image1 = {
         Type = "Image",
+        Style= "WindowsLook/StaticImage",
         Name = "Cuchao",
         Image = "cuchao.png",
         Position = {0.1,0.6},
@@ -117,6 +119,7 @@ UI = {
 
     Button1 = {
         Type = "Button",
+        Style= "WindowsLook/Button",
         Name = "Button",
         Text = "Betis",
         Position = {0.5,0.5},
