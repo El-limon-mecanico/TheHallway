@@ -6,7 +6,7 @@
 #include "Component.h"
 
 class QuackEntity;
-const float WALL_SCALE = 5;
+const float WALL_SCALE = 1;
 
 typedef std::pair<int, int> Vector2;
 class MazeCreator: public Component
@@ -110,7 +110,7 @@ private:
     }
 
     QuackEntity* createPared();
-
+    void createOuterWalls();
     // ------------------------------------------------------------------------------------- //
 };
 
