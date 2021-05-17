@@ -175,7 +175,7 @@ void MazeCreator::writeMap(std::string file)
 	createOuterWalls();
 
 	// para pruebas solo
-	std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
+	std::string path = "Neter aqui vuestra ruta ejemplo-->";//"C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
 	std::ofstream f;
 	f.open(path);
 	for (int i = 0; i < 2 * width_ + 1; i++)
