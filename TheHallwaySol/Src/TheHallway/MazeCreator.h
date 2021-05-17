@@ -20,7 +20,7 @@ public:
 
     Vector2 getArrayVector(Vector2 pos);
     void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
-    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < height_); };
+    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < width_); };
     static std::string GetName() { return "MazeCreator"; }
 
 
@@ -31,7 +31,7 @@ public:
 
 
 private:
-    int width_ = 20, height_ = 20;                      // ancho y alto del laberinto
+    int width_ = 20;                                    // ancho y alto del laberinto
     size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
 
     std::vector < std::vector<bool>> visitedCells_;     // para llevar un registro de las celdas que ya son parte del laberinto

@@ -53,8 +53,7 @@ Maze = {
         Rotation = {0,0,0}
     },
     MazeCreator = {
-        Width = 20,
-        Height = 20,
+        Size = 25,
         Holes = 25
     }
 }
