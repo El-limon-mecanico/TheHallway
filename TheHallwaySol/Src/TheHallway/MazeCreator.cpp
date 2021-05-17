@@ -172,7 +172,7 @@ void MazeCreator::writeMap(std::string file)
 	createOuterWalls();
 
 	// para pruebas solo
-	std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\CPP.map";
+	std::string path = "C:\\Users\\jorge\\OneDrive\\Escritorio\\ESTUDIOS\\3V\\mapa.map";
 	std::ofstream f;
 	f.open(path);
 	for (int i = 0; i < 2 * height_ + 1; i++)
@@ -185,13 +185,18 @@ void MazeCreator::writeMap(std::string file)
 	}
 	f.close();
 	//TODO meter datos sobre el jugador, enemigos, numero de palancas.. lo necesario, antes de dibujar el mapa
+	
+	// creamos el suelo
+	QuackEntity* floor = createObject(Vector3D(width_ * WALL_SCALE, 0, height_ * WALL_SCALE),
+		Vector3D(width_ * WALL_SCALE, height_ * WALL_SCALE, 1), "PT_PLANE", Vector3D(-90, 0, 0));
+	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
 	for (int i = 1; i < 2 * height_; i++)
 	{
 		int j = 1;
 		while(j < 2 * width_)
 		{
 			//Para optimizar la creación de muros, si el muro es de tamaño >1 en la x o la z, alargaremos su escala
-			int hor = 0, ver = 0;
+			int hor = 1, ver = 1;
 			int horInd = j + 1, verInd = i + 1;
 
 			if (map_[i][j] == wallC_)
@@ -206,8 +211,7 @@ void MazeCreator::writeMap(std::string file)
 					verInd++; ver++;
 				}
 				bool horizontal = hor >= ver;
-				int numBloquesPared = horizontal ? hor : ver; numBloquesPared++;
-				QuackEntity* pared = createPared();
+				int numBloquesPared = horizontal ? hor : ver;
 				if (horizontal)
 				{
 					//quitamos las paredes, para que no se instancien varias veces
@@ -215,9 +219,9 @@ void MazeCreator::writeMap(std::string file)
 						map_[i][k] = floorC_;
 
 					// creamos la pared con la escala y posicion correctas
-					float pos = (j + numBloquesPared * 0.5) * WALL_SCALE;
-					pared->transform()->setGlobalPosition(Vector3D(pos, 0, i * WALL_SCALE));
-					pared->transform()->Scale(Vector3D(WALL_SCALE * numBloquesPared, WALL_SCALE, WALL_SCALE));
+					float pos = (j + (numBloquesPared-1) * 0.5) * WALL_SCALE;
+					QuackEntity* pared = createObject(Vector3D(pos, 0, i * WALL_SCALE), 
+						Vector3D(WALL_SCALE * numBloquesPared, WALL_SCALE, WALL_SCALE));
 					j = horInd;
 				}
 				else
@@ -227,9 +231,9 @@ void MazeCreator::writeMap(std::string file)
 						map_[k][j] = floorC_;
 
 					// creamos la pared con la escala y posicion correctas
-					float pos = (i + numBloquesPared * 0.5) * WALL_SCALE;
-					pared->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 0, pos));
-					pared->transform()->Scale(Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * numBloquesPared));
+					float pos = (i + (numBloquesPared-1) * 0.5) * WALL_SCALE;
+					QuackEntity* pared = createObject(Vector3D(j * WALL_SCALE, 0, pos), 
+						Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * numBloquesPared));
 				}
 			}
 			else
@@ -278,36 +282,35 @@ void MazeCreator::eraseColumns()
 	}
 }
 
-QuackEntity* MazeCreator::createPared()
+QuackEntity* MazeCreator::createObject(Vector3D pos, Vector3D scale, std::string name, Vector3D rot)
 {
-	QuackEntity* cube = new QuackEntity();
-	MeshRenderer* r = cube->addComponent<MeshRenderer>();
-	r->setMeshByPrefab(PrefabType::PT_CUBE); 
-	Rigidbody* rb = cube->addComponent<Rigidbody>();
+	QuackEntity* object = new QuackEntity();
+	MeshRenderer* r = object->addComponent<MeshRenderer>();
+
+	if (name == "PT_PLANE") r->setMeshByPrefab(PrefabType::PT_PLANE);
+	else if (name == "PT_CUBE") r->setMeshByPrefab(PrefabType::PT_CUBE);
+	else r->setMeshByName(name);
+	object->transform()->setGlobalPosition(pos);
+	object->transform()->Scale(scale);
+	object->transform()->setGlobalRotation(rot);
+
+	Rigidbody* rb = object->addComponent<Rigidbody>();
 	rb->setRigidbody(1, ColliderType::CT_BOX, false, true);
 
-	SceneMng::Instance()->getCurrentScene()->addEntity(cube);
-	return cube;
+	SceneMng::Instance()->getCurrentScene()->addEntity(object);
+	return object;
 }
 
 void MazeCreator::createOuterWalls()
 {
 
-	QuackEntity* pared = createPared();
-	pared->transform()->setGlobalPosition(Vector3D(WALL_SCALE * width_, 0, 0));
-	pared->transform()->Scale(Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
+	// horizontales
+	QuackEntity* pared = createObject(Vector3D(WALL_SCALE * width_, 0, 0), Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
+	QuackEntity* pared2 = createObject(Vector3D(WALL_SCALE * width_, 0, WALL_SCALE * (height_ * 2)), Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
 
-	QuackEntity* pared2 = createPared();
-	pared2->transform()->setGlobalPosition(Vector3D(WALL_SCALE * width_, 0, WALL_SCALE * (height_ * 2)));
-	pared2->transform()->Scale(Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
-
-	QuackEntity* pared3 = createPared();
-	pared3->transform()->setGlobalPosition(Vector3D(0, 0, WALL_SCALE * height_));
-	pared3->transform()->Scale(Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (height_ * 2 - 1)));
-
-	QuackEntity* pared4 = createPared();
-	pared4->transform()->setGlobalPosition(Vector3D(WALL_SCALE * (width_ * 2), 0, WALL_SCALE * height_));
-	pared4->transform()->Scale(Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (height_ * 2 - 1)));
+	// verticales
+	QuackEntity* pared3 = createObject(Vector3D(0, 0, WALL_SCALE * height_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (height_ * 2 - 1)));
+	QuackEntity* pared4 = createObject(Vector3D(WALL_SCALE * (width_ * 2), 0, WALL_SCALE * height_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (height_ * 2 - 1)));
 }
 
 

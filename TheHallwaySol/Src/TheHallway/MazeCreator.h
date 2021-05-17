@@ -6,6 +6,7 @@
 #include "Component.h"
 
 class QuackEntity;
+enum PrefabType;
 const float WALL_SCALE = 1;
 
 typedef std::pair<int, int> Vector2;
@@ -109,7 +110,7 @@ private:
         map_[1][1] = playerC_;
     }
 
-    QuackEntity* createPared();
+    QuackEntity* createObject(Vector3D pos, Vector3D scale, std::string name = "PT_CUBE", Vector3D rot = Vector3D(0, 0, 0));
     void createOuterWalls();
     // ------------------------------------------------------------------------------------- //
 };
