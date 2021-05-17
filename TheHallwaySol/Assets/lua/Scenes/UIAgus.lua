@@ -2,36 +2,35 @@ scene1 = {
     entities = {"defaultCamera", "sceneLight", "UI"}
 }
 UI = {
-    Components = {"Prueba","Text1", "Image1", "Button1"},
+    Components = {"Prueba","Text1", "CtrlButton", "StartButton"},
     Prueba={
         Type="Scheme",
-        Scheme="UITRY.scheme"
+        Scheme="UITry.scheme"
     },
     Text1 = {
         Type = "Text",
-        Style= "AlfiskoSkinLook/StaticText",
+        Style= "UITry/StaticText",
         Name = "Texto",
         Text = "THE HALLWAY",
-        Position = {0,0},
-        Size = {405,50}
+        Position = {0.25,-0.1  },
+        Size = {600,250}
     },
-
-    Image1 = {
-        Type = "Image",
-        Style= "AlfiskoSkinLook/StaticImage",
-        Name = "Cuchao",
-        Image = "cuchao.png",
-        Position = {0.1,0.6},
-        Size = {300,200}
-    },
-
-    Button1 = {
+    CtrlButton = {
         Type = "Button",
-        Style= "AlfiskoSkinLook/Button",
-        Name = "Button",
-        Text = "Betis",
-        Position = {0.5,0.5},
-        Size = {100,100},
+        Style= "UITry/Button",
+        Name = "CtrlButton",
+        Text = "Controles",
+        Position = {0.3,0.65},
+        Size = {400,100},
+        CallBackFunction = "botonPresionado"
+    },
+    StartButton = {
+        Type = "Button",
+        Style= "UITry/Button",
+        Name = "StartButton",
+        Text = "Empezar",
+        Position = {0.3,0.35},
+        Size = {400,100},
         CallBackFunction = "botonPresionado"
     },
 
@@ -67,7 +66,7 @@ defaultCamera = {
 
     Camera = {
         Name = "MainCam",
-        Background = {1,1,0},
+        Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
         Width = 0,
         Height = 0,

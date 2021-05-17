@@ -1,32 +1,52 @@
-
-
 <?xml version="1.0" ?>
-<GUIScheme version="5" name="AlfiskoSkin">
-    <Font filename="AngelWish-12.font" />
-    <Imageset filename="AlfiskoSkin.imageset" />
-    <LookNFeel filename="AlfiskoSkin.looknfeel" />
-    <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+<GUIScheme version="5" name="UITry">
+	<Imageset filename="TaharezLook.imageset" />
+	<Font filename="AngelWish-60.font" />
+	<LookNFeel filename="TaharezLook.looknfeel" />
+	<WindowRendererSet filename="CEGUICoreWindowRendererSet" />
 
-    <FalagardMapping windowType="AlfiskoSkin/Label" targetType="DefaultWindow" renderer="Core/Default" lookNFeel="AlfiskoSkin/Label" />
-    <FalagardMapping windowType="AlfiskoSkin/Button" targetType="CEGUI/PushButton" renderer="Core/Button" lookNFeel="AlfiskoSkin/Button" />
-    <FalagardMapping windowType="AlfiskoSkin/ImageButton" targetType="CEGUI/PushButton" renderer="Core/Button" lookNFeel="AlfiskoSkin/ImageButton" />
-    <FalagardMapping windowType="AlfiskoSkin/RadioButton" targetType="CEGUI/RadioButton" renderer="Core/ToggleButton" lookNFeel="AlfiskoSkin/RadioButton" />
-    <FalagardMapping windowType="AlfiskoSkin/Checkbox" targetType="CEGUI/ToggleButton" renderer="Core/ToggleButton" lookNFeel="AlfiskoSkin/Checkbox" />
-    <FalagardMapping windowType="AlfiskoSkin/Titlebar" targetType="CEGUI/Titlebar" renderer="Core/Titlebar" lookNFeel="AlfiskoSkin/Titlebar" />
-    <FalagardMapping windowType="AlfiskoSkin/FrameWindow" targetType="CEGUI/FrameWindow" renderer="Core/FrameWindow" lookNFeel="AlfiskoSkin/FrameWindow" />
-    <FalagardMapping windowType="AlfiskoSkin/Editbox" targetType="CEGUI/Editbox" renderer="Core/Editbox" lookNFeel="AlfiskoSkin/Editbox" />
-	<FalagardMapping windowType="AlfiskoSkin/VerticalScrollbarThumb" targetType="CEGUI/Thumb" renderer="Core/Button" lookNFeel="AlfiskoSkin/VerticalScrollbarThumb" />
-	<FalagardMapping windowType="AlfiskoSkin/VerticalScrollbar" targetType="CEGUI/Scrollbar" renderer="Core/Scrollbar" lookNFeel="AlfiskoSkin/VerticalScrollbar" />
-	<FalagardMapping windowType="AlfiskoSkin/HorizontalScrollbarThumb" targetType="CEGUI/Thumb" renderer="Core/Button" lookNFeel="AlfiskoSkin/HorizontalScrollbarThumb" />
-	<FalagardMapping windowType="AlfiskoSkin/HorizontalScrollbar" targetType="CEGUI/Scrollbar" renderer="Core/Scrollbar" lookNFeel="AlfiskoSkin/HorizontalScrollbar" />
-	<FalagardMapping windowType="AlfiskoSkin/MultiLineEditbox" targetType="CEGUI/MultiLineEditbox" renderer="Core/MultiLineEditbox" lookNFeel="AlfiskoSkin/MultiLineEditbox" />
-	<FalagardMapping windowType="AlfiskoSkin/ProgressBar" targetType="CEGUI/ProgressBar" renderer="Core/ProgressBar" lookNFeel="AlfiskoSkin/ProgressBar" />
-	<FalagardMapping windowType="AlfiskoSkin/HorizontalSliderThumb" targetType="CEGUI/Thumb" renderer="Core/Button" lookNFeel="AlfiskoSkin/HorizontalSliderThumb" />
-	<FalagardMapping windowType="AlfiskoSkin/HorizontalSlider" targetType="CEGUI/Slider" renderer="Core/Slider" lookNFeel="AlfiskoSkin/HorizontalSlider" />
-	<FalagardMapping windowType="AlfiskoSkin/VerticalSliderThumb" targetType="CEGUI/Thumb" renderer="Core/Button" lookNFeel="AlfiskoSkin/VerticalSliderThumb" />
-	<FalagardMapping windowType="AlfiskoSkin/VerticalSlider" targetType="CEGUI/Slider" renderer="Core/Slider" lookNFeel="AlfiskoSkin/VerticalSlider" />
-
-	<FalagardMapping windowType="AlfiskoSkin/MenuItem" targetType="CEGUI/MenuItem" renderer="Core/MenuItem" lookNFeel="AlfiskoSkin/MenuItem" />
-
-
+	<FalagardMapping windowType="UITry/Label"       targetType="DefaultWindow"     renderer="Core/Default"      lookNFeel="TaharezLook/Label" />
+	<FalagardMapping windowType="UITry/Button"      targetType="CEGUI/PushButton"  renderer="Core/Button"       lookNFeel="TaharezLook/Button" />
+	<FalagardMapping windowType="UITry/Checkbox"    targetType="CEGUI/ToggleButton"    renderer="Core/ToggleButton" lookNFeel="TaharezLook/Checkbox" />
+	<FalagardMapping windowType="UITry/ImageButton" targetType="CEGUI/PushButton"  renderer="Core/Button"       lookNFeel="TaharezLook/ImageButton" />
+	<FalagardMapping windowType="UITry/RadioButton" targetType="CEGUI/RadioButton" renderer="Core/ToggleButton" lookNFeel="TaharezLook/RadioButton" />
+	<FalagardMapping windowType="UITry/FrameWindow"  targetType="CEGUI/FrameWindow" renderer="Core/FrameWindow"  lookNFeel="TaharezLook/FrameWindow" />
+	<FalagardMapping windowType="UITry/Titlebar"     targetType="CEGUI/Titlebar"    renderer="Core/Titlebar"     lookNFeel="TaharezLook/Titlebar" />
+	<FalagardMapping windowType="UITry/Editbox"          targetType="CEGUI/Editbox"          renderer="Core/Editbox"          lookNFeel="TaharezLook/Editbox" />
+	<FalagardMapping windowType="UITry/MultiLineEditbox" targetType="CEGUI/MultiLineEditbox" renderer="Core/MultiLineEditbox" lookNFeel="TaharezLook/MultiLineEditbox" />
+	<FalagardMapping windowType="UITry/Menubar"   targetType="CEGUI/Menubar"   renderer="Core/Menubar"   lookNFeel="TaharezLook/Menubar" />
+	<FalagardMapping windowType="UITry/PopupMenu" targetType="CEGUI/PopupMenu" renderer="Core/PopupMenu" lookNFeel="TaharezLook/PopupMenu" />
+	<FalagardMapping windowType="UITry/MenuItem"  targetType="CEGUI/MenuItem"  renderer="Core/MenuItem"  lookNFeel="TaharezLook/MenuItem" />
+	<FalagardMapping windowType="UITry/AlternateProgressBar" targetType="CEGUI/ProgressBar" renderer="Core/ProgressBar" lookNFeel="TaharezLook/AltProgressBar" />
+	<FalagardMapping windowType="UITry/ProgressBar"          targetType="CEGUI/ProgressBar" renderer="Core/ProgressBar" lookNFeel="TaharezLook/ProgressBar" />
+	<FalagardMapping windowType="UITry/VUMeter"              targetType="CEGUI/ProgressBar" renderer="Core/ProgressBar" lookNFeel="TaharezLook/VUMeter" />
+	<FalagardMapping windowType="UITry/VerticalScrollbar"   targetType="CEGUI/Scrollbar" renderer="Core/Scrollbar" lookNFeel="TaharezLook/VerticalScrollbar" />
+	<FalagardMapping windowType="UITry/HorizontalScrollbar" targetType="CEGUI/Scrollbar" renderer="Core/Scrollbar" lookNFeel="TaharezLook/HorizontalScrollbar" />
+	<FalagardMapping windowType="UITry/VerticalScrollbarThumb"   targetType="CEGUI/Thumb" renderer="Core/Button" lookNFeel="TaharezLook/VerticalScrollbarThumb" />
+	<FalagardMapping windowType="UITry/HorizontalScrollbarThumb" targetType="CEGUI/Thumb" renderer="Core/Button" lookNFeel="TaharezLook/HorizontalScrollbarThumb" />
+	<FalagardMapping windowType="UITry/LargeVerticalScrollbar"      targetType="CEGUI/Scrollbar" renderer="Core/Scrollbar" lookNFeel="TaharezLook/LargeVerticalScrollbar" />
+	<FalagardMapping windowType="UITry/LargeVerticalScrollbarThumb" targetType="CEGUI/Thumb"     renderer="Core/Button"    lookNFeel="TaharezLook/LargeVerticalScrollbarThumb" />
+	<FalagardMapping windowType="UITry/TabButton"  targetType="CEGUI/TabButton"  renderer="Core/TabButton"  lookNFeel="TaharezLook/TabButton" />
+	<FalagardMapping windowType="UITry/TabControl" targetType="CEGUI/TabControl" renderer="Core/TabControl" lookNFeel="TaharezLook/TabControl" />
+	<FalagardMapping windowType="UITry/TabContentPane"    targetType="DefaultWindow"    renderer="Core/Default"    lookNFeel="TaharezLook/TabContentPane" />
+	<FalagardMapping windowType="UITry/TabButtonPane"    targetType="DefaultWindow"    renderer="Core/Default"    lookNFeel="TaharezLook/TabButtonPane" />
+	<FalagardMapping windowType="UITry/ComboDropList" targetType="CEGUI/ComboDropList" renderer="Core/Listbox" lookNFeel="TaharezLook/ComboDropList" />
+	<FalagardMapping windowType="UITry/ComboEditbox"  targetType="CEGUI/Editbox"	 renderer="Core/Editbox" lookNFeel="TaharezLook/ComboEditbox" />
+	<FalagardMapping windowType="UITry/Combobox" targetType="CEGUI/Combobox"	 renderer="Core/Default" lookNFeel="TaharezLook/Combobox" />
+	<FalagardMapping windowType="UITry/Listbox"           targetType="CEGUI/Listbox"           renderer="Core/Listbox"           lookNFeel="TaharezLook/Listbox" />
+	<FalagardMapping windowType="UITry/ListHeader"        targetType="CEGUI/ListHeader"        renderer="Core/ListHeader"        lookNFeel="TaharezLook/ListHeader" />
+	<FalagardMapping windowType="UITry/ListHeaderSegment" targetType="CEGUI/ListHeaderSegment" renderer="Core/ListHeaderSegment" lookNFeel="TaharezLook/ListHeaderSegment" />
+	<FalagardMapping windowType="UITry/MultiColumnList"   targetType="CEGUI/MultiColumnList"   renderer="Core/MultiColumnList"   lookNFeel="TaharezLook/MultiColumnList" />
+	<FalagardMapping windowType="UITry/Slider"      targetType="CEGUI/Slider"      renderer="Core/Slider"  lookNFeel="TaharezLook/Slider" />
+	<FalagardMapping windowType="UITry/SliderThumb" targetType="CEGUI/Thumb" renderer="Core/Button"  lookNFeel="TaharezLook/SliderThumb" />
+	<FalagardMapping windowType="UITry/ScrollablePane" targetType="CEGUI/ScrollablePane" renderer="Core/ScrollablePane" lookNFeel="TaharezLook/ScrollablePane" />
+	<FalagardMapping windowType="UITry/Spinner" targetType="CEGUI/Spinner" renderer="Core/Default" lookNFeel="TaharezLook/Spinner" />
+	<FalagardMapping windowType="UITry/Tooltip" targetType="CEGUI/Tooltip" renderer="Core/Tooltip" lookNFeel="TaharezLook/Tooltip" />
+	<FalagardMapping windowType="UITry/StaticImage" targetType="DefaultWindow" renderer="Core/StaticImage" lookNFeel="TaharezLook/StaticImage" />
+	<FalagardMapping windowType="UITry/StaticText"  targetType="DefaultWindow" renderer="Core/StaticText"  lookNFeel="TaharezLook/StaticText" />
+	<FalagardMapping windowType="UITry/ItemListbox" targetType="CEGUI/ItemListbox" renderer="Core/ItemListbox" lookNFeel="TaharezLook/ItemListbox" />
+	<FalagardMapping windowType="UITry/ListboxItem" targetType="CEGUI/ItemEntry"   renderer="Core/ItemEntry"   lookNFeel="TaharezLook/ListboxItem" />
+	<FalagardMapping windowType="UITry/GroupBox" targetType="DefaultWindow"   renderer="Core/Default"   lookNFeel="TaharezLook/GroupBox" />
+      <FalagardMapping windowType="UITry/Tree" targetType="CEGUI/Tree"   renderer="Core/Tree"   lookNFeel="TaharezLook/Tree" />
 </GUIScheme>
+
