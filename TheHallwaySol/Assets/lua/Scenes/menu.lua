@@ -1,5 +1,5 @@
-﻿scene1 = {
-    entities = {"defaultCamera", "sceneLight", "Maze"}
+﻿menuPrincipal = {
+    entities = {"defaultCamera", "UI"}
 }
 
 defaultCamera = {
@@ -23,12 +23,12 @@ defaultCamera = {
         NearClipDistance = 1,
         FarClipDistance = 100000,
         ProjectionType = "Perspective"
-    },
+    }
 }
 
-sceneLight = {
+UI = {
     Active = true,
-    Components = {"Transform", "Light"},
+    Components = {"Transform", "Light", "Button"},
 
     Transform = {
         Active = true,
@@ -47,29 +47,20 @@ sceneLight = {
         InnerAngle = 30,
         OuterAngle = 90,
         isOn = true
-    }
-}
+    },
 
-Maze = {
-    Active = true,
-    Components = {"Transform", "MazeCreator", "Lever", "Exit"},
-
-    Transform = {
+    Button = {
         Active = true,
-        Position = {0,0,0},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-    MazeCreator = {
-        Active = true,
-        Size = 5,
-        Holes = 25,
-        Levers = 8
-    },
-    Lever = {
-
-    },
-    Exit = {
-
+        Enable = true,
+        Style = "WindowsLook/Button",
+        Name  = "NuevaPartidaBoton",
+        Text  = "Nueva Partida",
+        TLColor = "FF000000",
+        TRColor = "FF000000",
+        BLColor = "FF000000",
+        BRColor = "FF000000",
+        Position = {0.5,0.5},
+        Size = {100,100},
+        CallBackFunction = "botonPresionado"
     }
 }

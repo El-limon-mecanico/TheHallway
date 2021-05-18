@@ -7,7 +7,7 @@
 
 class QuackEntity;
 enum PrefabType;
-const float WALL_SCALE = 1;
+const float WALL_SCALE = 5.75;
 
 typedef std::pair<int, int> Vector2;
 class MazeCreator: public Component
@@ -24,15 +24,11 @@ public:
     static std::string GetName() { return "MazeCreator"; }
 
 
-    /// <summary>
-    /// Actualiza la lista de celdas visitadas
-    /// </summary>
-    void VisitCell(Vector2 pos) { visitedCells_[pos.first][pos.second] = true; };
-
 
 private:
     int width_ = 20;                                    // ancho y alto del laberinto
     size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
+    size_t numLevers = 0;                               // numero de manivelas por nivel
 
     std::vector < std::vector<bool>> visitedCells_;     // para llevar un registro de las celdas que ya son parte del laberinto
     Vector2 invalidDir_;                                // por control
@@ -112,6 +108,11 @@ private:
 
     QuackEntity* createObject(Vector3D pos, Vector3D scale, std::string name = "PT_CUBE", Vector3D rot = Vector3D(0, 0, 0));
     void createOuterWalls();
+
+    /// <summary>
+    /// Actualiza la lista de celdas visitadas
+    /// </summary>
+    void VisitCell(Vector2 pos) { visitedCells_[pos.first][pos.second] = true; };
     // ------------------------------------------------------------------------------------- //
 };
 

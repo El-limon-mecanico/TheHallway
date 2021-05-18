@@ -5,6 +5,9 @@
 #include "MazeCreator.h"
 #include "Lighter.h"
 #include "PlayerMovement.h"
+#include "Lever.h"
+#include "Exit.h"
+
 #if (defined _DEBUG) //|| !(defined _WIN64)
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -32,7 +35,9 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 	if (QuackEnginePro::Init()) {
 		FactoryManager::instance()->add<MazeCreator>();
 		FactoryManager::instance()->add<Lighter>();
-		FactoryManager::instance()->add<PlayerMovement>();	
+		FactoryManager::instance()->add<PlayerMovement>();
+		FactoryManager::instance()->add<Lever>();
+		FactoryManager::instance()->add<Exit>();
 		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
 	}
 	return 0;

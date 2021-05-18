@@ -13,7 +13,8 @@ MazeCreator::MazeCreator()
 bool MazeCreator::init(luabridge::LuaRef parameterTable)
 {
 	width_ = readVariable<int>(parameterTable, "Size");
-	additionalPaths_ = readVariable<int>(parameterTable, "Holes");
+	additionalPaths_ = readVariable<size_t>(parameterTable, "Holes");
+	numLevers = readVariable<size_t>(parameterTable, "Levers");
 	
 	invalidDir_ = Vector2(-width_, -width_);
 	visitedCells_ = std::vector <std::vector<bool>>(width_, std::vector<bool>(width_, false));
@@ -225,7 +226,7 @@ void MazeCreator::writeMap(std::string file)
 					float pos = (j + (numBloquesPared-1) * 0.5) * WALL_SCALE;
 					QuackEntity* pared = createObject(Vector3D(pos, 0, i * WALL_SCALE), 
 						Vector3D(WALL_SCALE * numBloquesPared, WALL_SCALE, WALL_SCALE));
-					j = horInd;
+					j = horInd - 1;
 				}
 				else
 				{
@@ -239,14 +240,12 @@ void MazeCreator::writeMap(std::string file)
 						Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * numBloquesPared));
 				}
 			}
-			else
-				j++;
 			//	//instaciamos el jugador
 			//else if(map[i][j] == enemy1)
 			//	//instanciamos el enemigo de tipo 1
 			//else if(map[i][j] == enemy1)
 			//	//instanciamos el enemigo de tipo 1
-			
+			j++;
 		}
 	}
 }
