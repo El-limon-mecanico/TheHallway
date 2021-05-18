@@ -1,16 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include "QuackEnginePro.h"
-////////////////////////////Includes Agus///////////////////////////////////
-#include "SceneMng.h"
-#include "MeshRenderer.h"
-#include "QuackEntity.h"
-#include "LoopMovement.h"
-///////////////////////////////////////////////////////////////////////////
 #include "FactoryManager.h"
 #include "MazeCreator.h"
 #include "Lighter.h"
 #include "PlayerMovement.h"
+#include "LoopMovement.h"
 #if (defined _DEBUG) //|| !(defined _WIN64)
 int main() {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -19,6 +14,8 @@ int main() {
 int WINAPI
 WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow) {
 #endif
+
+	srand(time(NULL));
 
 	//esto es una prueba de los recursos
 	std::ifstream f("Assets/fichero.txt");
@@ -31,7 +28,6 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 	{
 		std::cerr << "ERROR: el fichero no se ha abierto\n";
 	}
-
 
 	// AQUI FALTA MANEJO DE ERRORES Y EXCEPCIONES
 	if (QuackEnginePro::Init()) {

@@ -1,8 +1,9 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","entidad1", "entidad2", "entidad3", "sceneLight"}
+    entities = {"defaultCamera", "entidad3", "sceneLight"}
 }
 
 entidad1 = {
+    Active=true,
     Components = {"Transform", "MeshRenderer", "Rigidbody", "Prueba"},
 
     Transform = {
@@ -32,6 +33,7 @@ entidad1 = {
 }
 
 entidad2 = {
+    Active=true,
     Components = {"Transform", "MeshRenderer", "Rigidbody"},
 
     Transform = {
@@ -51,9 +53,10 @@ entidad2 = {
         Static = true,
         PositionConstrains = {0,0,0},
         RotationConstrains = {0,0,0}
-    }   
+    }  
 }
 entidad3 = {
+    Active=true,
     Components = {"Transform", "MeshRenderer", "LoopMovement"},
 
     Transform = {
@@ -72,10 +75,11 @@ entidad3 = {
     }   
 }
 defaultCamera = {
+    Active=true,
     Components = {"Transform", "Camera"},
 
     Transform = {
-        Position = {10,10,10},
+        Position = {10, 10,10},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -93,6 +97,7 @@ defaultCamera = {
 }
 
 sceneLight = {
+    Active=true,
     Components = {"Transform", "Light"},
 
     Transform = {
@@ -113,32 +118,16 @@ sceneLight = {
     }
 }
 
-UI = {
-    Components = {"Text1", "Image1", "Button1"},
+Maze = {
+    Components = {"Transform", "MazeCreator"},
 
-    Text1 = {
-        Type = "Text",
-        Name = "Texto",
-        Text = " Esto no es un boton, es solo texto, pero desde lua",
-        Position = {0.5,0.05},
-        Size = {405,50}
+    Transform = {
+        Position = {0,0,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
     },
-
-    Image1 = {
-        Type = "Image",
-        Name = "Cuchao",
-        Image = "cuchao.png",
-        Position = {0.1,0.6},
-        Size = {300,200}
-    },
-
-    Button1 = {
-        Type = "Button",
-        Name = "Button",
-        Text = "Betis",
-        Position = {0.5,0.5},
-        Size = {100,100},
-        CallBackFunction = "botonPresionado"
-    },
-
+    MazeCreator = {
+        Size = 25,
+        Holes = 25
+    }
 }
