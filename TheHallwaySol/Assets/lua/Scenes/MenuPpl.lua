@@ -1,15 +1,15 @@
-scene1 = {
+menuppl = {
     entities = {"defaultCamera", "sceneLight", "UI"}
 }
 UI = {
-    Components = {"Prueba","Text1", "CtrlButton", "StartButton"},
-    Prueba={
+    Components = {"Scheme","Text1", "CtrlButton", "StartButton","QuackImage"},
+    Scheme={
         Type="Scheme",
-        Scheme="UITry.scheme"
+        Scheme="TheHallway.scheme"
     },
     Text1 = {
         Type = "Text",
-        Style= "UITry/StaticText",
+        Style= "TheHallway/StaticText",
         Name = "Texto",
         Text = "THE HALLWAY",
         Position = {0.25,-0.1  },
@@ -17,23 +17,30 @@ UI = {
     },
     CtrlButton = {
         Type = "Button",
-        Style= "UITry/Button",
+        Style= "TheHallway/Button",
         Name = "CtrlButton",
         Text = "Controles",
         Position = {0.3,0.65},
         Size = {400,100},
-        CallBackFunction = "botonPresionado"
+        CallBackFunction = "menupplToControls"
     },
     StartButton = {
         Type = "Button",
-        Style= "UITry/Button",
+        Style= "TheHallway/Button",
         Name = "StartButton",
         Text = "Empezar",
         Position = {0.3,0.35},
         Size = {400,100},
-        CallBackFunction = "botonPresionado"
+        CallBackFunction = "menupplToGame"
     },
-
+    QuackImage={
+        Type = "Image",
+        Style= "TheHallway/StaticImage",
+        Name = "QuackEngine",
+        Image = "quackEngine.png",
+        Position = {0.85,0.8},
+        Size = {100,100}
+    },
 }
 sceneLight = {
     Components = {"Transform", "Light"},
