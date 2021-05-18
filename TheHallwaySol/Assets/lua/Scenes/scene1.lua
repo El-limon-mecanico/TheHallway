@@ -3,7 +3,7 @@
 }
 
 entidad1 = {
-    Active=true,
+    Active = true,
     Components = {"Transform", "MeshRenderer", "Rigidbody", "Prueba"},
 
     Transform = {
@@ -33,7 +33,7 @@ entidad1 = {
 }
 
 entidad2 = {
-    Active=true,
+    Active = true,
     Components = {"Transform", "MeshRenderer", "Rigidbody"},
 
     Transform = {
@@ -57,25 +57,33 @@ entidad2 = {
 }
 entidad3 = {
     Active=true,
-    Components = {"Transform", "MeshRenderer", "LoopMovement"},
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody"},
 
     Transform = {
-        Position = {0,-3,0},
-        Scale = {1,1,1},
-        Rotation = {45,45,0}
+        Position = {0,0,0},
+        Scale = {700,700,700},
+        Rotation = {90,40,0}
     },
 
     MeshRenderer = {
-        Mesh = "Cube",
+        Mesh = "Icosphere.mesh",
     },
 
     LoopMovement = {
-        Speed=0.1,
-        Objectives={{-10,1,-5},{3,3,3},{-4,-4,-4},{0,0,0}}
-    }   
+        Speed=10,
+        Objectives={{-30,-10,-20},{0,0,0},{0,25,0}}
+    }  ,
+    Rigidbody = {
+        Type = "Hull",
+        Mass = 1,
+        Trigger = true,
+        Static = false,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
+    } 
 }
 defaultCamera = {
-    Active=true,
+    Active = true,
     Components = {"Transform", "Camera"},
 
     Transform = {
@@ -97,7 +105,7 @@ defaultCamera = {
 }
 
 sceneLight = {
-    Active=true,
+    Active = true,
     Components = {"Transform", "Light"},
 
     Transform = {
@@ -120,7 +128,6 @@ sceneLight = {
 
 Maze = {
     Components = {"Transform", "MazeCreator"},
-
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
@@ -130,4 +137,26 @@ Maze = {
         Size = 25,
         Holes = 25
     }
+}
+UI = {
+    Active = true,
+    Components = {"Text1", "Image1", "Button1"},
+
+    Text1 = {
+        Type = "Text",
+        Name = "Texto",
+        Text = " Esto no es un boton, es solo texto, pero desde lua",
+        Position = {0.5,0.05},
+        Size = {405,50}
+    },
+
+    Image1 = {
+        Type = "Image",
+        Name = "Cuchao",
+        Image = "cuchao.png",
+        Position = {0.1,0.6},
+        Size = {300,200}
+    },
+
+
 }

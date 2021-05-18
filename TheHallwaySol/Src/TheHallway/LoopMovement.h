@@ -13,6 +13,8 @@ private:
 	int actualObjective_;
 	/// actualiza el objetivo
 	void updateObjective();
+	//Ctualiza el valor de velocity
+	void updateVelocity();
 public:
 	///Constructor por defecto y con argumentos
 	LoopMovement(float speed=0,std::vector<Vector3D>objectives=std::vector<Vector3D>(),int next=0):speed_(speed),objectives_(objectives),actualObjective_(next) {}
@@ -20,8 +22,8 @@ public:
 	~LoopMovement() {}
 	///Posibilita leer la componente desde lua
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
-	///Mueve el objeto en posiciones globales hacia el siguiente objetivo
-	void move();
+	//Pone al objeto mirando al lugar adecuado y setea la gravedad a 0
+	void start() override;
 	//LLama a los metodos move y updateObjective
 	void update() override;
 	//devuelve el nombre de la componente

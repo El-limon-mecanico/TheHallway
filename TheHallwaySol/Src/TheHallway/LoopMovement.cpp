@@ -1,7 +1,7 @@
 #include "LoopMovement.h"
 #include "Transform.h"
-
-
+#include "QuackEntity.h"
+#include "Rigidbody.h"
 bool LoopMovement::init(luabridge::LuaRef parameterTable)
 {
     LuaRef speed = readVariable<LuaRef>(parameterTable, "Speed");
@@ -22,22 +22,29 @@ bool LoopMovement::init(luabridge::LuaRef parameterTable)
 void LoopMovement::updateObjective() {
     bool update = false;
 
-     update = objectives_[actualObjective_].x-transform->position().x >= -speed_ && objectives_[actualObjective_].x- transform->position().x <= speed_;
-     update = update && objectives_[actualObjective_].y-transform->position().y >= -speed_ && objectives_[actualObjective_].y- transform->position().y <= speed_;
-     update = update && objectives_[actualObjective_].z- transform->position().z >= -speed_ &&  objectives_[actualObjective_].z- transform->position().z <= speed_;
+     update = objectives_[actualObjective_].x-transform->position().x >= -1 && objectives_[actualObjective_].x- transform->position().x <= 1;
+     update = update && objectives_[actualObjective_].y-transform->position().y >= -1 && objectives_[actualObjective_].y- transform->position().y <= 1;
+     update = update && objectives_[actualObjective_].z- transform->position().z >= -1 &&  objectives_[actualObjective_].z- transform->position().z <= 1;
 
     if (update) {
         actualObjective_ = (actualObjective_ + 1) % (objectives_.size());
+        transform->lookAt(objectives_[actualObjective_]);
+        updateVelocity();
     }
 }
 
-void LoopMovement::move(){
-    Vector3D v = objectives_[actualObjective_] - transform->position();
-    v = v.normalize()*speed_;
-    transform->Translate(v, true);
+void LoopMovement::updateVelocity()
+{
+    if (entity_->hasComponent<Rigidbody>())
+        entity_->getComponent<Rigidbody>()->setVelocity(transform->forward * speed_);
 }
-
+void LoopMovement::start()
+{
+    if (entity_->hasComponent<Rigidbody>())
+        entity_->getComponent<Rigidbody>()->setGravity({ 0,0,0 });
+    transform->lookAt(objectives_[actualObjective_]);
+    updateVelocity();
+}
 void LoopMovement::update(){
-    move();
     updateObjective();
 }
