@@ -1,37 +1,51 @@
 #include "PlayerMovement.h"
-
-
+#include "InputManager.h"
+#include "Transform.h"
+#include "QuackEnginePro.h  "
 
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
+    walkingSpeed_ = readVariable<LuaRef>(parameterTable, "WalkingSpeed");
+    runningSpeed_ = readVariable<LuaRef>(parameterTable, "RunningSpeed");
+    cameraXSpeed_ = readVariable<LuaRef>(parameterTable, "cameraXSpeed");
+    cameraYSpeed_ = readVariable<LuaRef>(parameterTable, "cameraYSpeed");
+
+
     return true;
 }
 
-void PlayerMovement::move(){
-   /* if(hayTeclaBajada){
-        switch(teclaBajada){
-            case W:{
-                tr_->setPos(tr->getPos()+Vector3D(0,speed_,0));
-            }
-            break;
-            case S:{
-                tr_->setPos(tr->getPos()+Vector3D(0,-speed_,0));
-            }
-            break;
-            case A:{
-                tr_->setPos(tr->getPos()+Vector3D(speed_,0,0));
-            }
-            break;
-            case D:{
-                tr_->setPos(tr->getPos()+Vector3D(-speed_,0,0));
-            }
-            break;
-            default:
-            break;
-        }
-    }*/
+void PlayerMovement::rotate()
+{
+    mouseDeltaX_ = InputManager::Instance()->getMousePosition().x - mousePosX_;
+    mouseDeltaY_ = InputManager::Instance()->getMousePosition().y - mousePosY_;
+
+    mousePosX_ = InputManager::Instance()->getMousePosition().x;
+    mousePosY_ = InputManager::Instance()->getMousePosition().y;
+
+    transform->Rotate(Vector3D(mouseDeltaY_ * 0.0 * cameraYSpeed_, mouseDeltaX_ * 0.1 * cameraXSpeed_, 0));
+
+    //if (transform->rotation().x > 80) transform->setGlobalRotation(Vector3D(80, transform->rotation().y, 0));
+    //if (transform->rotation().x < 280) transform->setGlobalRotation(Vector3D(280, transform->rotation().y, 0));
 }
 
-void PlayerMovement::update(){
+void PlayerMovement::move() {
+
+    float speed_;
+
+    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_LSHIFT)) speed_ = runningSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
+    else speed_ = walkingSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
+
+
+    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_A)) transform->Translate(Vector3D(transform->right.x * speed_, 0, transform->right.z * speed_), true);
+
+    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_D)) transform->Translate(Vector3D(transform->right.x * -speed_, 0, transform->right.z * -speed_), true);
+
+    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_S)) transform->Translate(Vector3D(transform->forward.x * -speed_, 0, transform->forward.z * -speed_), true);
+
+    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_W)) transform->Translate(Vector3D(transform->forward.x * speed_, 0, transform->forward.z * speed_), true);
+}
+
+void PlayerMovement::update() {
+    rotate();
     move();
 }

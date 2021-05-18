@@ -6,7 +6,7 @@ class PlayerMovement : public Component {
 protected:
 
 private:
-	float speed_;
+	float walkingSpeed_, runningSpeed_, cameraXSpeed_, cameraYSpeed_, mousePosX_, mousePosY_, mouseDeltaX_ = 0, mouseDeltaY_ = 0;
 
 public:
 	PlayerMovement() {}
@@ -14,8 +14,9 @@ public:
 
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 
-	static std::string GetName() { return "PlaterMovement"; }
+	static std::string GetName() { return "PlayerMovement"; }
 
+	void rotate();
 	void move();
 	void update() override;
 };

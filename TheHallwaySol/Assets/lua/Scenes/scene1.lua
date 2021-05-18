@@ -1,9 +1,9 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight", "UI"}
+    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight"}
 }
 
 entidad1 = {
-    Components = {"Transform", "MeshRenderer", "Rigidbody", "Prueba"},
+    Components = {"Transform", "MeshRenderer", "Prueba", "PlayerMovement"},
 
     Transform = {
         Position = {0,5,0},
@@ -15,19 +15,18 @@ entidad1 = {
         Mesh = "Suzanne.mesh",
     },
 
-    Rigidbody = {
-        Type = "Hull",
-        Mass = 1,
-        Trigger = false,
-        Static = false,
-        PositionConstrains = {0,0,0},
-        RotationConstrains = {0,0,0}
-    },
-
     Prueba = {
         valor1 = 1,
         valor2 = 3,
         valor3 = "Quack"
+    },
+
+    PlayerMovement = 
+    {
+        WalkingSpeed = 10,
+        RunningSpeed = 15,
+        cameraXSpeed = 1,
+        cameraYSpeed = 0.75
     }
 }
 
@@ -94,34 +93,4 @@ sceneLight = {
         OuterAngle = 90,
         isOn = true
     }
-}
-
-UI = {
-    Components = {"Text1", "Image1", "Button1"},
-
-    Text1 = {
-        Type = "Text",
-        Name = "Texto",
-        Text = " Esto no es un boton, es solo texto, pero desde lua",
-        Position = {0.5,0.05},
-        Size = {405,50}
-    },
-
-    Image1 = {
-        Type = "Image",
-        Name = "Cuchao",
-        Image = "cuchao.png",
-        Position = {0.1,0.6},
-        Size = {300,200}
-    },
-
-    Button1 = {
-        Type = "Button",
-        Name = "Button",
-        Text = "Betis",
-        Position = {0.5,0.5},
-        Size = {100,100},
-        CallBackFunction = "botonPresionado"
-    },
-
 }
