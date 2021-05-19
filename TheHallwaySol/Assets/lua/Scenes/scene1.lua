@@ -81,7 +81,6 @@ player = {
 Maze = {
     Active = true,
     Components = {"Transform", "MazeCreator"},
-
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
