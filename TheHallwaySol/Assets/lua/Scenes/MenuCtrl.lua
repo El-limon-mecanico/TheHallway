@@ -3,30 +3,60 @@ menuctrl = {
 }
 
 UI = {
-    Components = {"Scheme","QuackImage","BackButton"},
-    Scheme={
-        Type="Scheme",
-        Scheme="TheHallway.scheme"
+    Active=true,
+    Components = {"Transform"},
+    Transform = {
+        Position = {0,0,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
     },
-    QuackImage={
-        Type = "Image",
-        Style= "TheHallway/StaticImage",
-        Name = "MenuCtrlImage",
-        Image = "MenuCtrl.png",
-        Position = {0,0},
-        Size = {1000,700}
-    },
-    BackButton = {
-        Type = "Button",
-        Style= "TheHallway/Button",
-        Name = "volverButton",
-        Text = "<-",
-        Position = {0.001,0.01},
-        Size = {100,50},
-        CallBackFunction = "controlsToMenuppl"
-    },
+    Children={
+        entities={"CtrlImage","BackButton"},
+        CtrlImage={
+            Active= true,
+            Components={"Image", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Image={
+                Active = true,
+                Style= "TheHallway/StaticImage",
+                Name = "MenuCtrlImage",
+                Image = "MenuCtrl.png",
+                Position = {0,0},
+                Size = {1000,700}
+                },
+        },
+        BackButton = {
+            Active =true,
+            Components={"Button", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Button={
+            Active = true,
+            Enable = true, 
+            Type = "Button",
+            Style= "TheHallway/Button",
+            Name = "backButton",
+            Text = "<-",
+            TLColor = "FFA20410",
+            TRColor = "FFA20410",
+            BLColor = "FFA20410",
+            BRColor = "FFA20410",
+            Position = {0.001,0.01},
+            Size = {100,50},
+            CallBackFunction = "controlsToMenuppl"
+        },
+    }
+}
 }
 sceneLight = {
+    Active = true,
     Components = {"Transform", "Light"},
 
     Transform = {
@@ -47,6 +77,7 @@ sceneLight = {
     }
 }
 defaultCamera = {
+    Active = true,
     Components = {"Transform", "Camera"},
 
     Transform = {
@@ -56,7 +87,7 @@ defaultCamera = {
     },
 
     Camera = {
-        Name = "MainCam",
+        Name = "MenuCtrl",
         Background = {0,0,1},
         LookAt = {0,0,0},
         Width = 0,

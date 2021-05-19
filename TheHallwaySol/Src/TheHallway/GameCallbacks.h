@@ -3,9 +3,11 @@ class GameCallbacks{
 private:
 	static std::unique_ptr<GameCallbacks> instance_;
 	void initCallbacks();
-	static void fromMainMenuToGame();
-
+	static void ToEZGame();
+	static void toMedGame();
+	static void hardGame();
 	static void fromMainMenuToControls();
+	static void fromMainMenuToLvlSelector();
 	static void fromControlsToMain();
 public:
 	GameCallbacks() {};
