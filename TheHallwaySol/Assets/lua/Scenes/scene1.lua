@@ -3,7 +3,7 @@
 }
 
 entidad1 = {
-    Components = {"Transform", "MeshRenderer", "Prueba", "PlayerMovement"},
+    Components = {"Transform", "MeshRenderer", "Prueba", "Rigidbody", "PlayerMovement"},
 
     Transform = {
         Position = {0,5,0},
@@ -21,13 +21,23 @@ entidad1 = {
         valor3 = "Quack"
     },
 
+    Rigidbody = {
+        Type = "Cube",
+        Mass = 1,
+        Trigger = false,
+        Static = false,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
+    },
+
     PlayerMovement = 
     {
-        WalkingSpeed = 10,
-        RunningSpeed = 15,
+        WalkingSpeed = 100,
+        RunningSpeed = 500,
         cameraXSpeed = 1,
         cameraYSpeed = 0.75
     }
+
 }
 
 entidad2 = {
