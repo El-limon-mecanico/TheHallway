@@ -1,10 +1,13 @@
 #include "Component.h"
 #include <vector>
 #include "Vector3D.h"
+class Rigidbody;
 class LoopMovement : public Component {
 protected:
 
 private:
+	//Puntero al rigidbody
+	Rigidbody* rb_;
 	//velocidad a la que se mueve
 	float speed_;
 	//vector con los posibles objetivos

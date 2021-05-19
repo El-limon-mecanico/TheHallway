@@ -14,6 +14,7 @@ int main() {
 int WINAPI
 WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow) {
 #endif
+	srand(time(NULL));
 	// AQUI FALTA MANEJO DE ERRORES Y EXCEPCIONES
 	if (QuackEnginePro::Init()) {
 		FactoryManager::instance()->add<LoopMovement>();
