@@ -38,12 +38,14 @@ void Lighter::update() {
 				actualCharge_ = 0;
 		}
 	}
-	light_->setDistance(1000 * actualCharge_);
+	light_->setDistance(distance_* actualCharge_);
+	std::cout << light_->getDistance()<<std::endl;
 	std::cout << "CARGA DE LA LINTERNA: " << actualCharge_ * 100 << "%\n";
 }
 
 void Lighter::start()
 {
 	light_ = entity_->getComponent<Light>();
+	distance_ = light_->getDistance();
 	pM_ = entity_->getComponent<PlayerMovement>();
 }

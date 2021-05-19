@@ -8,6 +8,7 @@ private:
 	float chargeSpeed_;
 	float dischargeSpeed_;
 	float actualCharge_; //de 0 a 1
+	float distance_; 
 	Light* light_;
 	PlayerMovement* pM_;
 

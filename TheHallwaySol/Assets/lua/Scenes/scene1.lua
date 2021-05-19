@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","player","sceneLight","Maze"}
+    entities = {"defaultCamera","sceneLight","player","Maze"}
 }
 
 defaultCamera = {
@@ -27,7 +27,7 @@ defaultCamera = {
 
 sceneLight = {
     Active = true,
-    Components = {"Transform", "Light", "Lighter"},
+    Components = {"Transform", "Light"},
 
     Transform = {
         Position = {-10,10,10},
@@ -36,18 +36,14 @@ sceneLight = {
     },
 
     Light = {
-        LightType = 2,
-        DiffuseColor = {1,1,1},
+        LightType = 1,
+        DiffuseColor = {0.1,0,0},
         SpecularColor = {1,1,1},
         Direction = {0,0,0},
-        Distance = 50,
+        Distance = 1,
         InnerAngle = 30,
         OuterAngle = 90,
         isOn = true
-    },
-    Lighter ={
-        ChargeSpeed = 0.01,
-        DischargeSpeed = 0.03
     }
 }
 
@@ -56,24 +52,24 @@ player = {
     Components = {"Transform", "Light", "Lighter"},
 
     Transform = {
-        Position = {0,0,0},
+        Position = {10,10,10},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     Light = {
-        LightType = 0,
-        DiffuseColor = {0,0,1},
+        LightType = 2,
+        DiffuseColor = {1,1,1},
         SpecularColor = {0,0,1},
-        Direction = {-1,-1,0},
-        Distance = 100,
+        Direction = {1,0,1},
+        Distance = 9000,
         InnerAngle = 35,
         OuterAngle = 50,
         isOn = true
     },
     Lighter ={
-        ChargeSpeed = 0.01,
-        DischargeSpeed = 0.03
+        ChargeSpeed = 0.15,
+        DischargeSpeed = 0.08
     }
 
 }
