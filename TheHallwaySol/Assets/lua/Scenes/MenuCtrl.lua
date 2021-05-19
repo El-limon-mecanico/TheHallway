@@ -88,7 +88,7 @@ defaultCamera = {
 
     Camera = {
         Name = "MenuCtrl",
-        Background = {0,0,1},
+        Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
         Width = 0,
         Height = 0,
