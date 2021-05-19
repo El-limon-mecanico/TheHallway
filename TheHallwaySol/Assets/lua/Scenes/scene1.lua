@@ -27,7 +27,7 @@ defaultCamera = {
 
 sceneLight = {
     Active = true,
-    Components = {"Transform", "Light"},
+    Components = {"Transform", "Light", "Lighter"},
 
     Transform = {
         Position = {-10,10,10},
@@ -36,14 +36,18 @@ sceneLight = {
     },
 
     Light = {
-        LightType = 1,
+        LightType = 2,
         DiffuseColor = {1,1,1},
         SpecularColor = {1,1,1},
         Direction = {0,0,0},
         Distance = 50,
-        InnerAngle = 20,
-        OuterAngle = 60,
+        InnerAngle = 30,
+        OuterAngle = 90,
         isOn = true
+    },
+    Lighter ={
+        ChargeSpeed = 0.01,
+        DischargeSpeed = 0.03
     }
 }
 
@@ -58,13 +62,13 @@ player = {
     },
 
     Light = {
-        LightType = 2,
-        DiffuseColor = {1,1,1},
-        SpecularColor = {1,1,1},
-        Direction = {0,0,0},
-        Distance = 2,
-        InnerAngle = 20,
-        OuterAngle = 60,
+        LightType = 0,
+        DiffuseColor = {0,0,1},
+        SpecularColor = {0,0,1},
+        Direction = {-1,-1,0},
+        Distance = 100,
+        InnerAngle = 35,
+        OuterAngle = 50,
         isOn = true
     },
     Lighter ={
