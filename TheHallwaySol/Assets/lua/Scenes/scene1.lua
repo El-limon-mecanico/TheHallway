@@ -3,6 +3,7 @@
 }
 
 defaultCamera = {
+    Active = true,
     Components = {"Transform", "Camera"},
 
     Transform = {
@@ -24,6 +25,7 @@ defaultCamera = {
 }
 
 sceneLight = {
+     Active = true,
     Components = {"Transform", "Light"},
 
     Transform = {
@@ -45,6 +47,7 @@ sceneLight = {
 }
 
 Maze = {
+    Active = true,
     Components = {"Transform", "MazeCreator"},
 
     Transform = {
