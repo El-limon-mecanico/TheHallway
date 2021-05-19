@@ -127,6 +127,7 @@ sceneLight = {
 }
 
 Maze = {
+    Active = true,
     Components = {"Transform", "MazeCreator"},
     Transform = {
         Position = {0,0,0},
