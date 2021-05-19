@@ -31,7 +31,7 @@ UI = {
                     TRColor = "FFA20410",
                     BLColor = "FFA20410",
                     BRColor = "FFA20410",
-                    Position = {0.5,-0.1  },
+                    Position = {0.3,-0.1  },
                     Size = {600,250}
                 }
             },
@@ -54,8 +54,8 @@ UI = {
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
-            Position = {0.5,0.25},
-            Size = {100,50},
+            Position = {0.35,0.25},
+            Size = {300,100},
             CallBackFunction = "ToEzGame"
         },
     },
@@ -78,8 +78,8 @@ UI = {
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
-            Position = {0.5,0.5},
-            Size = {100,50},
+            Position = {0.35,0.5},
+            Size = {300,100},
             CallBackFunction = "ToMedGame"
         },},
         HardGame = {
@@ -101,8 +101,8 @@ UI = {
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
-            Position = {0.5,0.75},
-            Size = {100,50},
+            Position = {0.35,0.75},
+            Size = {300,100},
             CallBackFunction = "ToHardGame"
         },
     }
