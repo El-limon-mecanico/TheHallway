@@ -25,7 +25,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<PlayerMovement>();
 		UIElement::addScheme("TheHallway.scheme");
-		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "menuppl");
+		QuackEnginePro::Instance()->start("Scenes/WinScene.lua", "winScene");
 		//QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
 	}
 	return 0;

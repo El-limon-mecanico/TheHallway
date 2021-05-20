@@ -9,6 +9,8 @@ private:
 	static void fromMainMenuToControls();
 	static void fromMainMenuToLvlSelector();
 	static void fromControlsToMain();
+	static void fromGameOverToLvlSelector();
+	static void fromGameOverToMain();
 public:
 	GameCallbacks() {};
 	~GameCallbacks() {};
