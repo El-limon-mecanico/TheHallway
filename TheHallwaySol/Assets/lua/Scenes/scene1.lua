@@ -3,6 +3,9 @@
 }
 
 entidad1 = {
+
+    Active = true,
+
     Components = {"Transform", "MeshRenderer", "Prueba", "Rigidbody", "PlayerMovement"},
 
     Transform = {
@@ -33,14 +36,17 @@ entidad1 = {
     PlayerMovement = 
     {
         WalkingSpeed = 100,
-        RunningSpeed = 500,
-        cameraXSpeed = 1,
+        RunningSpeed = 100000,
+        cameraXSpeed = 10,
         cameraYSpeed = 0.75
     }
 
 }
 
 entidad2 = {
+
+    Active = true,
+
     Components = {"Transform", "MeshRenderer", "Rigidbody"},
 
     Transform = {
@@ -64,6 +70,9 @@ entidad2 = {
 }
 
 defaultCamera = {
+
+    Active = true,
+
     Components = {"Transform", "Camera"},
 
     Transform = {
@@ -85,6 +94,9 @@ defaultCamera = {
 }
 
 sceneLight = {
+
+    Active = true,
+
     Components = {"Transform", "Light"},
 
     Transform = {

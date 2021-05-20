@@ -1,12 +1,12 @@
 #include "Component.h"
-#include "Rigidbody.h"
 
+class Rigidbody;
 
 class PlayerMovement : public Component {
 protected:
 
 private:
-	float walkingSpeed_, runningSpeed_, cameraXSpeed_, cameraYSpeed_, mousePosX_, mousePosY_, mouseDeltaX_ = 0, mouseDeltaY_ = 0;
+	float walkingSpeed_, runningSpeed_, cameraXSpeed_, cameraYSpeed_, mouseDeltaX_ = 0, mouseDeltaY_ = 0;
 	Rigidbody* rb_;
 
 public:
@@ -17,6 +17,7 @@ public:
 
 	static std::string GetName() { return "PlayerMovement"; }
 
+	void start() override;
 	void rotate();
 	void move();
 	void update() override;

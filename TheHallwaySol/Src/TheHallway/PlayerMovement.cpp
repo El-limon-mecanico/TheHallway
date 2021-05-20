@@ -15,18 +15,17 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 
     rb_ = entity_->getComponent<Rigidbody>();
 
+    InputManager::Instance()->captureMouse();
+
     return true;
 }
 
 void PlayerMovement::rotate()
 {
-    mouseDeltaX_ = InputManager::Instance()->getMousePosition().x - mousePosX_;
-    mouseDeltaY_ = InputManager::Instance()->getMousePosition().y - mousePosY_;
+    mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
+    mouseDeltaY_ = InputManager::Instance()->getMousePositionRelative().y - 0.5;
 
-    mousePosX_ = InputManager::Instance()->getMousePosition().x;
-    mousePosY_ = InputManager::Instance()->getMousePosition().y;
-
-    transform->Rotate(Vector3D(mouseDeltaY_ * 0.0 * cameraYSpeed_, -mouseDeltaX_ * 0.1 * cameraXSpeed_, 0));
+    transform->Rotate(Vector3D(mouseDeltaY_ * 0.0 * cameraYSpeed_, -mouseDeltaX_ * 1 * cameraXSpeed_, 0));
 
     //if (transform->rotation().x > 70) transform->setLocalRotation(Vector3D(70, transform->rotation().y, 0));
     //if (transform->rotation().x < -80) transform->setLocalRotation(Vector3D(-80, transform->rotation().y, 0));
@@ -38,17 +37,17 @@ void PlayerMovement::move() {
 
     float speed_;
 
-    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_LSHIFT)) speed_ = runningSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
+    if (InputManager::Instance()->getKey(SDL_SCANCODE_LSHIFT)) speed_ = runningSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
     else speed_ = walkingSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
 
 
-    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_A)) rb_->setVelocity(Vector3D(transform->right.x * speed_, 0, transform->right.z * speed_));
+    if (InputManager::Instance()->getKey(SDL_SCANCODE_A)) rb_->setVelocity(Vector3D(transform->right.x * speed_, 0, transform->right.z * speed_));
 
-    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_D)) rb_->setVelocity(Vector3D(transform->right.x * -speed_, 0, transform->right.z * -speed_));
+    if (InputManager::Instance()->getKey(SDL_SCANCODE_D)) rb_->setVelocity(Vector3D(transform->right.x * -speed_, 0, transform->right.z * -speed_));
 
-    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_S)) rb_->setVelocity(Vector3D(transform->forward.x * -speed_, 0, transform->forward.z * -speed_));
+    if (InputManager::Instance()->getKey(SDL_SCANCODE_S)) rb_->setVelocity(Vector3D(transform->forward.x * -speed_, 0, transform->forward.z * -speed_));
 
-    if (InputManager::Instance()->isKeyDown(SDL_SCANCODE_W)) rb_->setVelocity(Vector3D(transform->forward.x * speed_, 0, transform->forward.z * speed_));
+    if (InputManager::Instance()->getKey(SDL_SCANCODE_W)) rb_->setVelocity(Vector3D(transform->forward.x * speed_, 0, transform->forward.z * speed_));
 }
 
 void PlayerMovement::update() {
