@@ -8,6 +8,7 @@ protected:
 private:
 	float walkingSpeed_, runningSpeed_, cameraXSpeed_, cameraYSpeed_, mouseDeltaX_ = 0, mouseDeltaY_ = 0;
 	Rigidbody* rb_;
+	bool moving_ = false;
 
 public:
 	PlayerMovement() {}

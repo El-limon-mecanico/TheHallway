@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","entidad1", "entidad2", "sceneLight"}
+    entities = {"defaultCamera","entidad1", "entidad2", "entidad3", "sceneLight"}
 }
 
 entidad1 = {
@@ -9,7 +9,7 @@ entidad1 = {
     Components = {"Transform", "MeshRenderer", "Prueba", "Rigidbody", "PlayerMovement"},
 
     Transform = {
-        Position = {0,5,0},
+        Position = {0,1,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -35,10 +35,40 @@ entidad1 = {
 
     PlayerMovement = 
     {
-        WalkingSpeed = 100,
-        RunningSpeed = 100000,
+        WalkingSpeed = 500,
+        RunningSpeed = 1000,
         cameraXSpeed = 10,
         cameraYSpeed = 0.75
+    },
+
+    Children={
+        entities={"defaultCamera"},  
+
+        defaultCamera = {
+
+            Active = true,
+            
+            Components = {"Transform", "Camera", "CameraController"},
+            
+            Transform = {
+                Position = {0,0,-5},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+
+            Camera = {
+                Name = "MainCam",
+                Background = {1,1,0},
+                LookAt = {0,0,0},
+                Width = 0,
+                Height = 0,
+                NearClipDistance = 1,
+                FarClipDistance = 100000,
+                ProjectionType = "Perspective"
+            },
+
+            CameraController = {},
+        }
     }
 
 }
@@ -50,7 +80,7 @@ entidad2 = {
     Components = {"Transform", "MeshRenderer", "Rigidbody"},
 
     Transform = {
-        Position = {0,-3,0},
+        Position = {0,-2,0},
         Scale = {5,5,1},
         Rotation = {-90,0,0}
     },
@@ -66,31 +96,24 @@ entidad2 = {
         Static = true,
         PositionConstrains = {0,0,0},
         RotationConstrains = {0,0,0}
-    }   
+    }
 }
 
-defaultCamera = {
-
+entidad3 = 
+{
     Active = true,
 
-    Components = {"Transform", "Camera"},
+    Components = {"Transform", "MeshRenderer"},
 
     Transform = {
-        Position = {10,10,10},
+        Position = {0,0,4},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
-    Camera = {
-        Name = "MainCam",
-        Background = {1,1,0},
-        LookAt = {0,0,0},
-        Width = 0,
-        Height = 0,
-        NearClipDistance = 1,
-        FarClipDistance = 100000,
-        ProjectionType = "Perspective"
-    },
+    MeshRenderer = {
+        Mesh = "Suzanne.mesh",
+    }
 }
 
 sceneLight = {

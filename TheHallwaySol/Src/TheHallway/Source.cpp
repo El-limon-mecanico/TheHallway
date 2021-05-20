@@ -11,6 +11,7 @@
 #include "MazeCreator.h"
 #include "Lighter.h"
 #include "PlayerMovement.h"
+#include "CameraController.h"
 void pruebasAgus() {
 	FactoryManager::instance()->add<LoopMovement>();
 	QuackEntity* cube = new QuackEntity("Cubito");
@@ -58,6 +59,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<MazeCreator>();
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<PlayerMovement>();
+		FactoryManager::instance()->add<CameraController>();
 #ifdef AGUS
 		pruebasAgus();
 #endif // AGUS

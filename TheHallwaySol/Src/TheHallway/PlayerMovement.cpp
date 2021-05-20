@@ -20,15 +20,14 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
     return true;
 }
 
+void PlayerMovement::start(){}
+
 void PlayerMovement::rotate()
 {
     mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
     mouseDeltaY_ = InputManager::Instance()->getMousePositionRelative().y - 0.5;
 
-    transform->Rotate(Vector3D(mouseDeltaY_ * 0.0 * cameraYSpeed_, -mouseDeltaX_ * 1 * cameraXSpeed_, 0));
-
-    //if (transform->rotation().x > 70) transform->setLocalRotation(Vector3D(70, transform->rotation().y, 0));
-    //if (transform->rotation().x < -80) transform->setLocalRotation(Vector3D(-80, transform->rotation().y, 0));
+    transform->Rotate(Vector3D(0, -mouseDeltaX_ * 1 * cameraXSpeed_, 0));
 
     std::cout << "Rotation: " << transform->rotation() << "\n";
 }
@@ -41,7 +40,7 @@ void PlayerMovement::move() {
     else speed_ = walkingSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
 
 
-    if (InputManager::Instance()->getKey(SDL_SCANCODE_A)) rb_->setVelocity(Vector3D(transform->right.x * speed_, 0, transform->right.z * speed_));
+    if (InputManager::Instance()->getKey(SDL_SCANCODE_A)) rb_->setVelocity(Vector3D(transform->right.x * speed_, 0, rb_->velocity().z + transform->right.z * speed_));
 
     if (InputManager::Instance()->getKey(SDL_SCANCODE_D)) rb_->setVelocity(Vector3D(transform->right.x * -speed_, 0, transform->right.z * -speed_));
 
