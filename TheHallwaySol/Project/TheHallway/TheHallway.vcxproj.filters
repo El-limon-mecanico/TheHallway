@@ -36,7 +36,7 @@
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\TheHallway\MazeCreator.cpp">
+    <ClCompile Include="..\..\Src\TheHallway\MazeManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp">
@@ -56,7 +56,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h">
+    <ClInclude Include="..\..\Src\TheHallway\MazeManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\Lighter.h">

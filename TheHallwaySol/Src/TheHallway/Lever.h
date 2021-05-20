@@ -1,29 +1,36 @@
 #pragma once
 #include "Component.h"
-#include "InputManager.h"
+
+class MazeManager;
 
 class Lever : public Component
 {
 private:
     float total_ = 10;
     float progress_ = 0;
-    bool player_ = true;
-    bool charged_ = true;
-    SDL_Scancode chargingButton_ = SDL_SCANCODE_SPACE;
+    float chargingVel_ = 1;
+    float unchargingVel_ = 1;
 
+    bool player_ = false;
+    bool charged_ = false;
+
+    MazeManager* mazeMng_ = nullptr;
 
 public:
     Lever() {}
     ~Lever() {}
 
-    void setButton(SDL_Scancode b) { chargingButton_ = b; }
     void setTotal(float t) { total_ = t; }
     float getProgress() const { return progress_; }
+    void setChargingVel(float v) { chargingVel_ = v; }
+    void setUnchargingVel(float v) { unchargingVel_ = v; }
+    void setMazeMng(MazeManager* mng) { mazeMng_ = mng; }
 
     virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) { return true; }
     virtual void update();
-    virtual void onCollisionEnter(QuackEntity* other, Vector3D point);
-    virtual void onCollisionExit(QuackEntity* other, Vector3D point);
+    virtual void onTriggerEnter(QuackEntity* other, Vector3D point);
+    virtual void onTriggerExit(QuackEntity* other, Vector3D point);
+    virtual void onDisable();
 
     static std::string GetName() { return "Lever"; }
 };

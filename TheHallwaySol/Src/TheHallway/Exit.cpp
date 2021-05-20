@@ -5,7 +5,7 @@
 #include "SceneMng.h"
 #include "InputManager.h"
 
-void Exit::onCollisionEnter(QuackEntity* other, Vector3D point)
+void Exit::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
 	{

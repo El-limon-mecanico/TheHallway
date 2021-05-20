@@ -1,35 +1,16 @@
 #include "PlayerMovement.h"
-
-
+#include "InputManager.h"
+#include "Transform.h"
+#include "QuackEntity.h"
+#include "Rigidbody.h"
 
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
     return true;
 }
 
-void PlayerMovement::move(){
-   /* if(hayTeclaBajada){
-        switch(teclaBajada){
-            case W:{
-                tr_->setPos(tr->getPos()+Vector3D(0,speed_,0));
-            }
-            break;
-            case S:{
-                tr_->setPos(tr->getPos()+Vector3D(0,-speed_,0));
-            }
-            break;
-            case A:{
-                tr_->setPos(tr->getPos()+Vector3D(speed_,0,0));
-            }
-            break;
-            case D:{
-                tr_->setPos(tr->getPos()+Vector3D(-speed_,0,0));
-            }
-            break;
-            default:
-            break;
-        }
-    }*/
+void PlayerMovement::move() {
+    entity_->getComponent<Rigidbody>()->setVelocity(Vector3D(InputManager::Instance()->getAxis(Horizontal) * 50, 0, InputManager::Instance()->getAxis(Vertical)*50));
 }
 
 void PlayerMovement::update(){
