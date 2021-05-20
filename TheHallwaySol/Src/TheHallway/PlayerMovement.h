@@ -6,9 +6,12 @@ class PlayerMovement : public Component {
 protected:
 
 private:
-	float walkingSpeed_, runningSpeed_, cameraXSpeed_, cameraYSpeed_, mouseDeltaX_ = 0, mouseDeltaY_ = 0;
+	float walkingSpeed_;
+	float runningSpeed_;
+	float cameraSpeed_;
 	Rigidbody* rb_;
 	bool moving_ = false;
+	bool running = false;
 
 public:
 	PlayerMovement() {}

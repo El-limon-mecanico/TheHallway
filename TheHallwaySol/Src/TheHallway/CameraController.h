@@ -7,6 +7,7 @@ protected:
 private:
 	Vector3D deltaPos;
 	float wheelPos = 0;
+	float cameraSpeed_;
 
 public:
 	CameraController() {}
@@ -18,4 +19,5 @@ public:
 
 	void start() override;
 	void update() override;
+	void setCameraSpeed(float speed);
 };

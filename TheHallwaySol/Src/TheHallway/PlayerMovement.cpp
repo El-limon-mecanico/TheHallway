@@ -4,51 +4,51 @@
 #include "Rigidbody.h"
 #include "QuackEntity.h"
 #include "QuackEnginePro.h"
+#include "CameraController.h"
 #include <iostream>
 
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
-    walkingSpeed_ = readVariable<LuaRef>(parameterTable, "WalkingSpeed");
-    runningSpeed_ = readVariable<LuaRef>(parameterTable, "RunningSpeed");
-    cameraXSpeed_ = readVariable<LuaRef>(parameterTable, "cameraXSpeed");
-    cameraYSpeed_ = readVariable<LuaRef>(parameterTable, "cameraYSpeed");
+	walkingSpeed_ = readVariable<LuaRef>(parameterTable, "WalkingSpeed");
+	runningSpeed_ = readVariable<LuaRef>(parameterTable, "RunningSpeed");
+	cameraSpeed_ = readVariable<LuaRef>(parameterTable, "CameraSpeed");
 
-    rb_ = entity_->getComponent<Rigidbody>();
+	rb_ = entity_->getComponent<Rigidbody>();
 
-    InputManager::Instance()->captureMouse();
+	InputManager::Instance()->captureMouse();
 
-    return true;
+	return true;
 }
 
-void PlayerMovement::start(){}
+void PlayerMovement::start() {
+	transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_);
+}
 
 void PlayerMovement::rotate()
 {
-    mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
+    float mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
 
-    transform->Rotate(Vector3D(0, -mouseDeltaX_ * 1 * cameraXSpeed_, 0));
-
-    std::cout << "Rotation: " << transform->rotation() << "\n";
+    transform->Rotate(Vector3D(0, -mouseDeltaX_ * 1 * cameraSpeed_, 0));
 }
 
 void PlayerMovement::move() {
 
-    float speed_;
 
-    if (InputManager::Instance()->getKey(SDL_SCANCODE_LSHIFT)) speed_ = runningSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
-    else speed_ = walkingSpeed_ * QuackEnginePro::Instance()->time()->deltaTime();
+	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_LSHIFT))
+		running = true;
+	else if (InputManager::Instance()->getKeyUp(SDL_SCANCODE_LSHIFT))
+		running = false;
 
+	float VelocityX = (InputManager::Instance()->getAxis(Horizontal));
+	float VelocityY = (InputManager::Instance()->getAxis(Vertical));
+	Vector3D hor = transform->right * -VelocityX;
+	Vector3D ver = transform->forward * VelocityY;
+	Vector3D vel = (hor + ver);
 
-    if (InputManager::Instance()->getKey(SDL_SCANCODE_A)) rb_->setVelocity(Vector3D(transform->right.x * speed_, 0, rb_->velocity().z + transform->right.z * speed_));
-
-    if (InputManager::Instance()->getKey(SDL_SCANCODE_D)) rb_->setVelocity(Vector3D(transform->right.x * -speed_, 0, transform->right.z * -speed_));
-
-    if (InputManager::Instance()->getKey(SDL_SCANCODE_S)) rb_->setVelocity(Vector3D(transform->forward.x * -speed_, 0, transform->forward.z * -speed_));
-
-    if (InputManager::Instance()->getKey(SDL_SCANCODE_W)) rb_->setVelocity(Vector3D(transform->forward.x * speed_, 0, transform->forward.z * speed_));
+	rb_->setVelocity(vel * (walkingSpeed_ + runningSpeed_ * running));
 }
 
 void PlayerMovement::update() {
-    rotate();
-    move();
+	rotate();
+	move();
 }

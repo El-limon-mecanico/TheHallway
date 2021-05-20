@@ -9,7 +9,7 @@ entidad1 = {
     Components = {"Transform", "MeshRenderer", "Rigidbody", "PlayerMovement"},
 
     Transform = {
-        Position = {0,0,0},
+        Position = {0,1,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -21,18 +21,17 @@ entidad1 = {
     Rigidbody = {
         Type = "Cube",
         Mass = 1,
-        Trigger = false,
+        Trigger = true,
         Static = false,
-        PositionConstrains = {0,0,0},
-        RotationConstrains = {0,0,0}
+        PositionConstrains = {0,1,0},
+        RotationConstrains = {1,1,1}
     },
 
     PlayerMovement = 
     {
-        WalkingSpeed = 500,
-        RunningSpeed = 1000,
-        cameraXSpeed = 100,
-        cameraYSpeed = 0.75
+        WalkingSpeed = 10,
+        RunningSpeed = 10,
+        CameraSpeed = 100
     },
 
     Children={
