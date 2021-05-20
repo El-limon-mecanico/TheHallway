@@ -25,7 +25,6 @@ void PlayerMovement::start(){}
 void PlayerMovement::rotate()
 {
     mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
-    mouseDeltaY_ = InputManager::Instance()->getMousePositionRelative().y - 0.5;
 
     transform->Rotate(Vector3D(0, -mouseDeltaX_ * 1 * cameraXSpeed_, 0));
 

@@ -42,7 +42,7 @@ entidad1 = {
 
             Active = true,
             
-            Components = {"Transform", "Camera"},
+            Components = {"Transform", "Camera", "CameraController"},
             
             Transform = {
                 Position = {0,0,2},
@@ -59,7 +59,9 @@ entidad1 = {
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
                 ProjectionType = "Perspective"
-            }
+            },
+
+            CameraController = {}
         }
     }
 

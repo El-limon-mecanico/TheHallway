@@ -17,6 +17,5 @@ public:
 	static std::string GetName() { return "CameraController"; }
 
 	void start() override;
-	void updateLookAt();
 	void update() override;
 };
