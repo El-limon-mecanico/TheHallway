@@ -56,7 +56,6 @@ void LoopMovement::update() {
 	updateObjective();
 	// si estamos cerca del jugador, empezamos a perseguirle
 	float distance = (transform->position() - playerTr_->position()).magnitude();
-	std::cout << distance << "\n";
 	if (distance < playerTriggerDistance_)
 	{
 		setEnable(false);
