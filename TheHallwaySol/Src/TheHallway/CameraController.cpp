@@ -12,7 +12,7 @@ bool CameraController::init(luabridge::LuaRef parameterTable)
 
 void CameraController::start()
 {
-	transform->lookAt(transform->getParent()->getComponent<Transform>()->position());
+	//transform->lookAt(transform->getParent()->getComponent<Transform>()->position());
 }
 
 void CameraController::updateLookAt()
@@ -26,6 +26,6 @@ void CameraController::update()
 	wheelPos = InputManager::Instance()->getMouseWheel().y;
 	std::cout << wheelPos;
 
-	transform->setGlobalRotation(Vector3D(transform->rotation().x, transform->rotation().z, transform->getParent()->getComponent<Transform>()->rotation().z));
-	updateLookAt();
+	//transform->setGlobalRotation(Vector3D(transform->rotation().x, transform->rotation().y, transform->getParent()->getComponent<Transform>()->rotation().z));
+	//updateLookAt();
 }

@@ -6,22 +6,16 @@ entidad1 = {
 
     Active = true,
 
-    Components = {"Transform", "MeshRenderer", "Prueba", "Rigidbody", "PlayerMovement"},
+    Components = {"Transform", "MeshRenderer", "Rigidbody", "PlayerMovement"},
 
     Transform = {
-        Position = {0,1,0},
+        Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     MeshRenderer = {
         Mesh = "Suzanne.mesh",
-    },
-
-    Prueba = {
-        valor1 = 1,
-        valor2 = 3,
-        valor3 = "Quack"
     },
 
     Rigidbody = {
@@ -37,7 +31,7 @@ entidad1 = {
     {
         WalkingSpeed = 500,
         RunningSpeed = 1000,
-        cameraXSpeed = 10,
+        cameraXSpeed = 100,
         cameraYSpeed = 0.75
     },
 
@@ -48,10 +42,10 @@ entidad1 = {
 
             Active = true,
             
-            Components = {"Transform", "Camera", "CameraController"},
+            Components = {"Transform", "Camera"},
             
             Transform = {
-                Position = {0,0,-5},
+                Position = {0,0,2},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
@@ -59,15 +53,13 @@ entidad1 = {
             Camera = {
                 Name = "MainCam",
                 Background = {1,1,0},
-                LookAt = {0,0,0},
+                LookAt = {0,0,4},
                 Width = 0,
                 Height = 0,
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
                 ProjectionType = "Perspective"
-            },
-
-            CameraController = {},
+            }
         }
     }
 
@@ -81,7 +73,7 @@ entidad2 = {
 
     Transform = {
         Position = {0,-2,0},
-        Scale = {5,5,1},
+        Scale = {60,60,1},
         Rotation = {-90,0,0}
     },
 
