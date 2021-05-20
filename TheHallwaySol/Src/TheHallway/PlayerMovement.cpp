@@ -21,14 +21,14 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 }
 
 void PlayerMovement::start() {
-	transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_);
+	transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
 }
 
 void PlayerMovement::rotate()
 {
     float mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
 
-    transform->Rotate(Vector3D(0, -mouseDeltaX_ * 1 * cameraSpeed_, 0));
+    rb_->setAngularVelocity(Vector3D(0, -mouseDeltaX_ * cameraSpeed_, 0));
 }
 
 void PlayerMovement::move() {
@@ -50,5 +50,5 @@ void PlayerMovement::move() {
 
 void PlayerMovement::update() {
 	rotate();
-	move();
+	if(moving_) move();
 }

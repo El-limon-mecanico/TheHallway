@@ -10,7 +10,7 @@ private:
 	float runningSpeed_;
 	float cameraSpeed_;
 	Rigidbody* rb_;
-	bool moving_ = false;
+	bool moving_ = true;
 	bool running = false;
 
 public:
@@ -25,4 +25,5 @@ public:
 	void rotate();
 	void move();
 	void update() override;
+	void moving(bool m) { moving_ = m; };
 };
