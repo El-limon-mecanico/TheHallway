@@ -164,6 +164,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\TheHallway\CameraController.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\GameCallbacks.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\ChasePlayer.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\LoopMovement.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\MazeCreator.cpp" />
@@ -172,6 +174,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\CameraController.h" />
+    <ClInclude Include="..\..\Src\TheHallway\GameCallbacks.h" />
+    <ClInclude Include="..\..\Src\TheHallway\ChasePlayer.h" />
     <ClInclude Include="..\..\Src\TheHallway\Lighter.h" />
     <ClInclude Include="..\..\Src\TheHallway\LoopMovement.h" />
     <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h" />
