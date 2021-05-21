@@ -1,6 +1,7 @@
 #include "PlayerMovement.h"
 #include "InputManager.h"
 #include "Transform.h"
+
 #include "Rigidbody.h"
 #include "QuackEntity.h"
 #include "QuackEnginePro.h"
@@ -14,7 +15,6 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 	cameraSpeed_ = readVariable<LuaRef>(parameterTable, "CameraSpeed");
 
 	rb_ = entity_->getComponent<Rigidbody>();
-
 	InputManager::Instance()->captureMouse();
 
 	return true;
@@ -32,6 +32,7 @@ void PlayerMovement::rotate()
 }
 
 void PlayerMovement::move() {
+
 
 
 	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_LSHIFT))

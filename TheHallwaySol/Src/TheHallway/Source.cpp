@@ -6,6 +6,11 @@
 #include "Light.h"
 #include "PlayerMovement.h"
 #include "CameraController.h"
+#include "MazeManager.h"
+#include "Lighter.h"
+#include "Light.h"
+#include "Lever.h"
+#include "Exit.h"
 #include "GameCallbacks.h"
 #include "QuackUI.h"
 #include "LoopMovement.h"
@@ -25,8 +30,14 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		GameCallbacks::Init();
 		FactoryManager::instance()->add<LoopMovement>();
 		FactoryManager::instance()->add<Lighter>();
-		FactoryManager::instance()->add<PlayerMovement>();
 		FactoryManager::instance()->add<CameraController>();
+		FactoryManager::instance()->add<MazeManager>();
+		FactoryManager::instance()->add<Lighter>();
+		FactoryManager::instance()->add<PlayerMovement>();
+		FactoryManager::instance()->add<Lever>();
+		FactoryManager::instance()->add<Exit>();
+		FactoryManager::instance()->add<LoopMovement>();
+		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<ChasePlayer>();
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));

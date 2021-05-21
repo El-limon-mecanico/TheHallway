@@ -40,7 +40,6 @@ Enemy = {
     ChasePlayer = {
         Speed = 10
     }
-
 }
 
 sceneLight = {
@@ -48,12 +47,14 @@ sceneLight = {
     Components = {"Transform", "Light"},
 
     Transform = {
+        Active = true,
         Position = {-10,10,10},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     Light = {
+        Active = true,
         LightType = 1,
         DiffuseColor = {0.1,0,0},
         SpecularColor = {1,1,1},
@@ -123,14 +124,19 @@ Player = {
 
 Maze = {
     Active = true,
-    Components = {"Transform", "MazeCreator"},
+    Components = {"Transform", "MazeManager"},
     Transform = {
+        Active = true,
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
-    MazeCreator = {
-        Size = 15,
-        Holes = 5
+    MazeManager = {
+        Active = true,
+        Size = 5,
+        Holes = 200,
+        Levers = 1,
+        ChargeVel = 5,
+        UnchargeVel = 2,
     }
 }
