@@ -1,5 +1,7 @@
 #include "Health.h"
 #include "QuackEntity.h"
+#include "SceneMng.h"
+#include "Scene.h"
 bool Health::init(luabridge::LuaRef parameterTable)
 {
 	lives_ = readVariable<int>(parameterTable, "MaxLives");
@@ -9,6 +11,9 @@ bool Health::init(luabridge::LuaRef parameterTable)
 void Health::start()
 {
 	initialPos_ = entity_->transform()->position();
+	for (int i = 0; i < lives_; i++) {
+		
+	}
 }
 
 void Health::hit()
@@ -19,7 +24,7 @@ void Health::hit()
 		//quitar una de las tres vidas de la UI
 	}
 	else {
-		//pasar a pantalla de game Over
+		SceneMng::Instance()->loadScene("Scenes/GameOver.lua", "gameover");
 	}
 
 }
