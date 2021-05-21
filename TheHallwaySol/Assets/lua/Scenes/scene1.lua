@@ -1,14 +1,47 @@
 ﻿scene1 = {
-    entities = {"defaultCamera", "sceneLight", "Maze", "Player"}
+    entities = {"defaultCamera", "Enemy", "sceneLight", "Maze", "Player"}
+}
+
+Enemy = {
+    Active=true,
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
+
+    Transform = {
+        Position = {-10,0,0},
+        Scale = {700,700,700},
+        Rotation = {90,40,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Icosphere.mesh",
+    },
+
+    LoopMovement = {
+        Speed=10,
+        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
+        Distance = 15
+    },
+    Rigidbody = {
+        Type = "Hull",
+        Mass = 1,
+        Trigger = true,
+        Static = false,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
+    },
+
+    ChasePlayer = {
+        Speed = 10
+    }
 }
 
 defaultCamera = {
     Active = true,
+
     Components = {"Transform", "Camera"},
 
     Transform = {
-        Active = true,
-        Position = {5.75 * 20, 300,5.75*20},
+        Position = {25,75,25},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -40,20 +73,46 @@ sceneLight = {
     Light = {
         Active = true,
         LightType = 1,
-        DiffuseColor = {1,1,1},
+        DiffuseColor = {0.1,0,0},
         SpecularColor = {1,1,1},
         Direction = {0,0,0},
-        Distance = 100,
+        Distance = 1,
         InnerAngle = 30,
         OuterAngle = 90,
         isOn = true
     }
 }
 
+Player = {
+    Active = true,
+    Components = {"Transform", "Light", "Lighter"},
+
+    Transform = {
+        Position = {10,10,10},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
+
+    Light = {
+        LightType = 2,
+        DiffuseColor = {1,1,1},
+        SpecularColor = {0,0,1},
+        Direction = {1,0,1},
+        Distance = 9000,
+        InnerAngle = 35,
+        OuterAngle = 50,
+        isOn = true
+    },
+    Lighter ={
+        ChargeSpeed = 0.15,
+        DischargeSpeed = 0.08
+    }
+
+}
+
 Maze = {
     Active = true,
     Components = {"Transform", "MazeManager"},
-
     Transform = {
         Active = true,
         Position = {0,0,0},
@@ -68,31 +127,4 @@ Maze = {
         ChargeVel = 5,
         UnchargeVel = 2,
     }
-}
-Player = 
-{
-    Active = true,
-    Components = {"Transform", "MeshRenderer", "PlayerMovement", "Rigidbody" },
-    
-    Transform = {
-        Active = true,
-        Position = {6.5,0,6.5},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-    MeshRenderer = {
-        Mesh = "Suzanne.mesh"
-    },
-    PlayerMovement = {
-
-    },
-    Rigidbody = {
-        Type = "Hull",
-        Mass = 1,
-        Trigger = false,
-        Static = false,
-        PositionConstrains = {0,1,0},
-        RotationConstrains = {1,1,1}
-    },
-
 }

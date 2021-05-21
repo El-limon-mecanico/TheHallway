@@ -45,9 +45,9 @@
     ***************************************************
     -->
     <WidgetLook name="TaharezLook/Button">
-        <PropertyDefinition name="NormalTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" type="ColourRect"/>
+        <PropertyDefinition name="NormalTextColour" initialValue="FFA20410" redrawOnWrite="true" type="ColourRect"/>
         <PropertyDefinition name="HoverTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" type="ColourRect"/>
-        <PropertyDefinition name="PushedTextColour" initialValue="FFFFFFFF" redrawOnWrite="true" type="ColourRect"/>
+        <PropertyDefinition name="PushedTextColour" initialValue="FFFF00FF" redrawOnWrite="true" type="ColourRect"/>
         <PropertyDefinition name="DisabledTextColour" initialValue="FF7F7F7F" redrawOnWrite="true" type="ColourRect"/>
         <PropertyDefinition name="VertLabelFormatting" initialValue="CentreAligned" type="VerticalTextFormatting"/>
         <PropertyDefinition name="HorzLabelFormatting" initialValue="CentreAligned" type="HorizontalTextFormatting"/>
@@ -1979,8 +1979,8 @@
         <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" type="ColourRect"/>
         <PropertyDefinition name="VertFormatting" initialValue="Stretched" redrawOnWrite="true" type="VerticalFormatting"/>
         <PropertyDefinition name="HorzFormatting" initialValue="Stretched" redrawOnWrite="true" type="HorizontalFormatting"/>
-        <Property name="BackgroundEnabled" value="true" />
-        <Property name="FrameEnabled" value="true" />
+        <Property name="BackgroundEnabled" value="false" />
+        <Property name="FrameEnabled" value="false" />
         <Property name="Size" value="{{0, 128}, {0, 128}}" />
         <ImagerySection name="image_withframe">
             <ImageryComponent>
@@ -2066,7 +2066,7 @@
     <WidgetLook name="TaharezLook/StaticText">
         <PropertyDefinition name="FrameColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" type="ColourRect"/>
         <PropertyDefinition name="BackgroundColours" initialValue="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" redrawOnWrite="true" type="ColourRect"/>
-
+         <Property name="TextColours" value="tl:FFFF0000 tr:FFFF0000 bl:FFFF0000 br:FFFF0000" />
         <PropertyLinkDefinition name="HorzScrollPosition" widget="__auto_hscrollbar__" targetProperty="ScrollPosition" type="float" />
         <PropertyLinkDefinition name="HorzScrollPageSize" widget="__auto_hscrollbar__" targetProperty="PageSize" type="float" />
         <PropertyLinkDefinition name="HorzScrollDocumentSize" widget="__auto_hscrollbar__" targetProperty="DocumentSize" type="float" />
@@ -2075,8 +2075,8 @@
         <PropertyLinkDefinition name="VertScrollPageSize" widget="__auto_vscrollbar__" targetProperty="PageSize" type="float" />
         <PropertyLinkDefinition name="VertScrollDocumentSize" widget="__auto_vscrollbar__" targetProperty="DocumentSize" type="float" />
 
-        <Property name="FrameEnabled" value="true" />
-        <Property name="BackgroundEnabled" value="true" />
+        <Property name="FrameEnabled" value="false" />
+        <Property name="BackgroundEnabled" value="false" />
         <Property name="Size" value="{{0, 256}, {0, 128}}" />
         <NamedArea name="WithFrameTextRenderArea">
             <Area>
