@@ -20,8 +20,8 @@ void Lighter::update() {
 		//cargas si se puede hacer
 		if (actualCharge_ < 1) {
 			//desactivas el movimiento
-			/*if (pM_->isEnable())
-				pM_->setEnable(false);*/
+			if (pM_->getMoving())
+				pM_->setMoving(false);
 			actualCharge_ += QuackEnginePro::Instance()->time()->deltaTime() * chargeSpeed_;
 			if (actualCharge_ > 1) //si llega al máximo, setea
 				actualCharge_ = 1;
@@ -29,8 +29,8 @@ void Lighter::update() {
 	}
 	else {
 		//activa el movimiento si fuese necesario
-		/*if (!pM_->isEnable())
-			pM_->setEnable(true);*/
+		if (!pM_->getMoving())
+			pM_->setMoving(true);
 		//descargas
 		if (actualCharge_ >0) {
 			actualCharge_ -= QuackEnginePro::Instance()->time()->deltaTime() * dischargeSpeed_;
@@ -39,8 +39,6 @@ void Lighter::update() {
 		}
 	}
 	light_->setDistance(distance_* actualCharge_);
-	std::cout << light_->getDistance()<<std::endl;
-	std::cout << "CARGA DE LA LINTERNA: " << actualCharge_ * 100 << "%\n";
 }
 
 void Lighter::start()

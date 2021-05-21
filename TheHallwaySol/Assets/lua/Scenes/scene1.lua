@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"Enemy", "sceneLight", "Maze", "Player"}
+    entities = {"Enemy", "UI", "sceneLight", "Maze", "Player"}
 }
 
 Enemy = {
@@ -28,13 +28,6 @@ Enemy = {
         Static = false,
         PositionConstrains = {0,1,0},
         RotationConstrains = {1,1,1}
-    },
-
-    PlayerMovement = 
-    {
-        WalkingSpeed = 10,
-        RunningSpeed = 10,
-        CameraSpeed = 100
     },
 
     ChasePlayer = {
@@ -68,12 +61,25 @@ sceneLight = {
 
 Player = {
     Active = true,
-    Components = {"Transform", "Light", "Lighter"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","Light", "Lighter", "PlayerMovement"},
 
     Transform = {
         Position = {10,10,10},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Suzanne.mesh",
+    },
+
+    Rigidbody = {
+        Type = "Cube",
+        Mass = 1,
+        Trigger = true,
+        Static = false,
+        PositionConstrains = {0,1,0},
+        RotationConstrains = {1,1,1}
     },
 
     Light = {
@@ -91,6 +97,14 @@ Player = {
         DischargeSpeed = 0.08
     },
     
+    
+    PlayerMovement = 
+    {
+        WalkingSpeed = 10,
+        RunningSpeed = 10,
+        CameraSpeed = 100
+    },
+
     Children={
         entities={"defaultCamera"},  
 
@@ -138,5 +152,13 @@ Maze = {
         Levers = 1,
         ChargeVel = 5,
         UnchargeVel = 2,
+    }
+}
+
+UI = {
+    Active = true,
+    Components = {"Health"},
+    Health={
+        MaxLives = 3
     }
 }

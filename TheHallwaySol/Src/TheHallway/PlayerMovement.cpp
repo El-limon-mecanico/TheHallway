@@ -14,13 +14,13 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 	runningSpeed_ = readVariable<LuaRef>(parameterTable, "RunningSpeed");
 	cameraSpeed_ = readVariable<LuaRef>(parameterTable, "CameraSpeed");
 
-	rb_ = entity_->getComponent<Rigidbody>();
 	InputManager::Instance()->captureMouse();
 
 	return true;
 }
 
 void PlayerMovement::start() {
+	rb_ = entity_->getComponent<Rigidbody>();
 	transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
 }
 

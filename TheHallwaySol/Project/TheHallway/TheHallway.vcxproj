@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\TheHallway\Health.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\CameraController.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Exit.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Lever.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\TheHallway\Health.h" />
     <ClInclude Include="..\..\Src\TheHallway\CameraController.h" />
     <ClInclude Include="..\..\Src\TheHallway\Exit.h" />
     <ClInclude Include="..\..\Src\TheHallway\Lever.h" />
