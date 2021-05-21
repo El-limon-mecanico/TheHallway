@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"defaultCamera", "Enemy", "sceneLight", "Maze", "Player"}
+    entities = {"Enemy", "sceneLight", "Maze", "Player"}
 }
 
 Enemy = {
@@ -22,41 +22,24 @@ Enemy = {
         Distance = 15
     },
     Rigidbody = {
-        Type = "Hull",
+        Type = "Cube",
         Mass = 1,
         Trigger = true,
         Static = false,
-        PositionConstrains = {0,0,0},
-        RotationConstrains = {0,0,0}
+        PositionConstrains = {0,1,0},
+        RotationConstrains = {1,1,1}
+    },
+
+    PlayerMovement = 
+    {
+        WalkingSpeed = 10,
+        RunningSpeed = 10,
+        CameraSpeed = 100
     },
 
     ChasePlayer = {
         Speed = 10
     }
-}
-
-defaultCamera = {
-    Active = true,
-
-    Components = {"Transform", "Camera"},
-
-    Transform = {
-        Position = {25,75,25},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-
-    Camera = {
-        Active = true,
-        Name = "MainCam",
-        Background = {1,1,0},
-        LookAt = {5.75*20,0,5.75*20},
-        Width = 0,
-        Height = 0,
-        NearClipDistance = 1,
-        FarClipDistance = 100000,
-        ProjectionType = "Perspective"
-    },
 }
 
 sceneLight = {
@@ -106,7 +89,36 @@ Player = {
     Lighter ={
         ChargeSpeed = 0.15,
         DischargeSpeed = 0.08
-    }
+    },
+    
+    Children={
+        entities={"defaultCamera"},  
+
+        defaultCamera = {
+
+            Active = true,
+            
+            Components = {"Transform", "Camera", "CameraController"},
+            
+            Transform = {
+                Position = {0,0,2},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+
+            Camera = {
+                Name = "MainCam",
+                Background = {1,1,0},
+                LookAt = {0,0,4},
+                Width = 0,
+                Height = 0,
+                NearClipDistance = 1,
+                FarClipDistance = 100000,
+                ProjectionType = "Perspective"
+            },
+
+            CameraController = {}
+        }
 
 }
 

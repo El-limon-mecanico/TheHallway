@@ -114,7 +114,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine\;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\CEGUI;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\cegui\include;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\build\cegui\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +151,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine\;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\CEGUI;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\cegui\include;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\build\cegui\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -161,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\TheHallway\CameraController.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Exit.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Lever.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\GameCallbacks.cpp" />
@@ -172,6 +175,7 @@
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\TheHallway\CameraController.h" />
     <ClInclude Include="..\..\Src\TheHallway\Exit.h" />
     <ClInclude Include="..\..\Src\TheHallway\Lever.h" />
     <ClInclude Include="..\..\Src\TheHallway\GameCallbacks.h" />

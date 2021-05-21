@@ -2,10 +2,13 @@
 #include <fstream>
 #include "QuackEnginePro.h"
 #include "FactoryManager.h"
-#include "MazeManager.h"
 #include "Lighter.h"
 #include "Light.h"
 #include "PlayerMovement.h"
+#include "CameraController.h"
+#include "MazeManager.h"
+#include "Lighter.h"
+#include "Light.h"
 #include "Lever.h"
 #include "Exit.h"
 #include "GameCallbacks.h"
@@ -25,6 +28,9 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 	// AQUI FALTA MANEJO DE ERRORES Y EXCEPCIONES
 	if (QuackEnginePro::Init("The Hallway")) {
 		GameCallbacks::Init();
+		FactoryManager::instance()->add<LoopMovement>();
+		FactoryManager::instance()->add<Lighter>();
+		FactoryManager::instance()->add<CameraController>();
 		FactoryManager::instance()->add<MazeManager>();
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<PlayerMovement>();

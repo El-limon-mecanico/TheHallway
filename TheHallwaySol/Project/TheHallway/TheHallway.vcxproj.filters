@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\Src\TheHallway\LoopMovement.cpp">
       <Filter>Archivos de origen\Enemies\Protector</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\CameraController.cpp">
+      <Filter>Archivos de origen\Player</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Src\TheHallway\Lever.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\LoopMovement.h">
       <Filter>Archivos de encabezado\Enemies\Protector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\CameraController.h">
+      <Filter>Archivos de encabezado\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\Lever.h">
       <Filter>Archivos de encabezado</Filter>
