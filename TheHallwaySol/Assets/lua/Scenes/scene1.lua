@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"defaultCamera", "entidad3", "sceneLight"}
+    entities = {"defaultCamera", "entidad3", "sceneLight", "Maze", "Player"}
 }
 
 entidad1 = {
@@ -57,10 +57,10 @@ entidad2 = {
 }
 entidad3 = {
     Active=true,
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody"},
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
 
     Transform = {
-        Position = {0,0,0},
+        Position = {-10,0,0},
         Scale = {700,700,700},
         Rotation = {90,40,0}
     },
@@ -71,8 +71,9 @@ entidad3 = {
 
     LoopMovement = {
         Speed=10,
-        Objectives={{-30,-10,-20},{0,0,0},{0,25,0}}
-    }  ,
+        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
+        Distance = 15
+    },
     Rigidbody = {
         Type = "Hull",
         Mass = 1,
@@ -80,14 +81,18 @@ entidad3 = {
         Static = false,
         PositionConstrains = {0,0,0},
         RotationConstrains = {0,0,0}
-    } 
+    },
+
+    ChasePlayer = {
+        Speed = 10
+    }
 }
 defaultCamera = {
     Active = true,
     Components = {"Transform", "Camera"},
 
     Transform = {
-        Position = {10, 10,10},
+        Position = {25,75,25},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -95,7 +100,7 @@ defaultCamera = {
     Camera = {
         Name = "MainCam",
         Background = {1,1,0},
-        LookAt = {0,0,0},
+        LookAt = {25,0,25},
         Width = 0,
         Height = 0,
         NearClipDistance = 1,
@@ -158,6 +163,23 @@ UI = {
         Position = {0.1,0.6},
         Size = {300,200}
     },
+}
 
+Player = {
+    Active = true,
+    Components = {"Transform", "PlayerMovement", "MeshRenderer"},
+    
+    Transform = {
+        Position = {30,0,10},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
 
+    PlayerMovement = {
+
+    },
+    
+    MeshRenderer = {
+        Mesh = "Suzanne.mesh"
+    },
 }

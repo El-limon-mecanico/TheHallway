@@ -51,6 +51,9 @@
     <ClCompile Include="..\..\Src\TheHallway\GameCallbacks.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\ChasePlayer.cpp">
+      <Filter>Archivos de origen\Enemies\Protector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\GameCallbacks.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\ChasePlayer.h">
+      <Filter>Archivos de encabezado\Enemies\Protector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

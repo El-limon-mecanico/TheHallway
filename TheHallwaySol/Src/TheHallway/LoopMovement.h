@@ -6,8 +6,10 @@ class LoopMovement : public Component {
 protected:
 
 private:
+	float playerTriggerDistance_ = 15;
+	Transform* playerTr_ = nullptr;
 	//Puntero al rigidbody
-	Rigidbody* rb_;
+	Rigidbody* rb_ = nullptr;
 	//velocidad a la que se mueve
 	float speed_;
 	//vector con los posibles objetivos
@@ -31,4 +33,7 @@ public:
 	void update() override;
 	//devuelve el nombre de la componente
 	static std::string GetName() { return "LoopMovement"; }
+
+	virtual void onEnable();
+	virtual void onDisable();
 };
