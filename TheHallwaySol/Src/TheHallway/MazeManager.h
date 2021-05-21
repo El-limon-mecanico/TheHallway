@@ -7,52 +7,39 @@
 
 class QuackEntity;
 enum PrefabType;
-const float WALL_SCALE = 1;
+const float WALL_SCALE = 5.75;
 
 typedef std::pair<int, int> Vector2;
-class MazeCreator: public Component
+class MazeManager: public Component
 {
-public:
-    MazeCreator();
-    ~MazeCreator() {}
-    virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
-    virtual void start() override;
-
-    Vector2 getArrayVector(Vector2 pos);
-    void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
-    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < width_); };
-    static std::string GetName() { return "MazeCreator"; }
-
-
-    /// <summary>
-    /// Actualiza la lista de celdas visitadas
-    /// </summary>
-    void VisitCell(Vector2 pos) { visitedCells_[pos.first][pos.second] = true; };
-
-
 private:
     int width_ = 20;                                    // ancho y alto del laberinto
     size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
+    int numLevers_ = 0;                               // numero de manivelas por nivel
 
     std::vector < std::vector<bool>> visitedCells_;     // para llevar un registro de las celdas que ya son parte del laberinto
     Vector2 invalidDir_;                                // por control
+    Vector2 exit_;
 
-    std::string filename = "";
+    // para las manivelas que va a crear
+    float chargeVel_ = 1;
+    float unchargeVel_ = 1;
+
     std::vector<std::vector<char>> map_;
-    char floorC_ = '.';            
-    char wallC_ = 'W';             
+    char floorC_ = '.';
+    char wallC_ = 'W';
     char playerC_ = 'P';
+    char leverC = 'L';
+    char doorC = 'D';
 
     // arriba, abajo, izquierda y derecha
     std::vector<Vector2> DIRECTIONS{ Vector2(0,-1), Vector2(0,1),  Vector2(-1,0), Vector2(1,0) };
-
-    // ----------------------------------- MAZE CREATION ----------------------------------- //
 
     /// <summary>
     /// Creamos un laberinto con el algoritmo Hunt n Kill.
     /// Lo guardamos en un archivo de nombre filename.
     /// </summary>
-    void createMaze(std::string filename);
+    void createMaze();
 
     /// <summary>
     /// Parte de "kill" del algoritmo.
@@ -86,32 +73,49 @@ private:
     void createGaps();
 
     /// <summary>
+    /// Escribe las manivelas en el mapa.
+    /// Escribe la posicion que tendra la puerta cuando se active
+    /// </summary>
+    void createInteractables();
+
+    /// <summary>
     /// Guarda un file con el mapa para poder leerlo despues.
     /// </summary>
-    void writeMap(std::string file);
+    void writeMap();
 
     /// <summary>
     /// Borra las columnas que haya en el mapa (paredes que no tienen paredes vecinas)
     /// </summary>
     void eraseColumns();
 
-    // ------------------------------------------------------------------------------------- //
-
-
-    // --------------------------------- AUXILIARY METHODS --------------------------------- //
-
-    //TODO: Que no sea siempre en el mismo punto
     /// <summary>
-    /// Situa al jugador en el mapa
+    /// Situa al jugador en el mapa en una de las cuatro esquinas, aleatoriamente
     /// </summary>
-    void spawnPlayer()
-    {
-        // change the map file as to include the player
-        map_[1][1] = playerC_;
-    }
+    void spawnPlayer();
 
-    QuackEntity* createObject(Vector3D pos, Vector3D scale, std::string name = "PT_CUBE", Vector3D rot = Vector3D(0, 0, 0));
+    QuackEntity* createObject(std::string tag, Vector3D pos, Vector3D scale, std::string name = "PT_CUBE", bool trig = false, Vector3D rot = Vector3D(0, 0, 0));
     void createOuterWalls();
+
+    /// <summary>
+    /// Actualiza la lista de celdas visitadas
+    /// </summary>
+    void VisitCell(Vector2 pos) { visitedCells_[pos.first][pos.second] = true; };
+
+
+public:
+    MazeManager();
+    ~MazeManager() {}
+    virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
+    virtual void start() override;
+    static std::string GetName() { return "MazeManager"; }
+
+    Vector2 getArrayVector(Vector2 pos);
+    void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
+    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < width_); };
+    void activateLever();
+
+
+
     // ------------------------------------------------------------------------------------- //
 };
 

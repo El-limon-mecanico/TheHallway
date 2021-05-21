@@ -1,19 +1,22 @@
-#include "MazeCreator.h"
+#include "MazeManager.h"
 #include "Rigidbody.h"
 #include "MeshRenderer.h"
-//#include "Transform.h"
 #include "QuackEntity.h"
 #include "SceneMng.h"
+#include "Lever.h"
+#include "Exit.h"
 
-
-MazeCreator::MazeCreator()
+MazeManager::MazeManager()
 {
 }
 
-bool MazeCreator::init(luabridge::LuaRef parameterTable)
+bool MazeManager::init(luabridge::LuaRef parameterTable)
 {
 	width_ = readVariable<int>(parameterTable, "Size");
-	additionalPaths_ = readVariable<int>(parameterTable, "Holes");
+	additionalPaths_ = readVariable<size_t>(parameterTable, "Holes");
+	numLevers_ = readVariable<size_t>(parameterTable, "Levers");
+	chargeVel_ = readVariable<float>(parameterTable, "ChargeVel");
+	unchargeVel_ = readVariable<float>(parameterTable, "UnchargeVel");
 	
 	invalidDir_ = Vector2(-width_, -width_);
 	visitedCells_ = std::vector <std::vector<bool>>(width_, std::vector<bool>(width_, false));
@@ -21,22 +24,24 @@ bool MazeCreator::init(luabridge::LuaRef parameterTable)
 	return true;
 }
 
-void MazeCreator::start()
+void MazeManager::start()
 {
-	createMaze(filename);
+	createMaze();
 }
 
-void MazeCreator::createMaze(std::string filename)
+void MazeManager::createMaze()
 {
 	huntAndKill();      // algoritmo de hunt n kill
 
-	eraseColumns();     // borramos las columnas que hayan podido quedar
 	spawnPlayer();      // spawneamos el jugador
+	createInteractables();		// metemos las palancas
 
-	writeMap(filename); // lo guardamos en el archivo
+	eraseColumns();     // borramos las columnas que hayan podido quedar
+
+	writeMap(); // lo guardamos en el archivo
 }
 
-void MazeCreator::kill(Vector2 pos)
+void MazeManager::kill(Vector2 pos)
 {
 	VisitCell(pos);
 	setCell(floorC_, getArrayVector(pos));
@@ -67,7 +72,7 @@ void MazeCreator::kill(Vector2 pos)
 	}
 }
 
-Vector2 MazeCreator::hunt()
+Vector2 MazeManager::hunt()
 {
 	Vector2 huntedCell = invalidDir_;
 	std::vector<Vector2> neighbours = std::vector<Vector2>();
@@ -112,7 +117,7 @@ Vector2 MazeCreator::hunt()
 	return huntedCell;
 }
 
-bool MazeCreator::knockDownWall(Vector2 hunted, Vector2 other)
+bool MazeManager::knockDownWall(Vector2 hunted, Vector2 other)
 {
 	//direccion (hunted POV)
 	Vector2 direccion;
@@ -131,7 +136,7 @@ bool MazeCreator::knockDownWall(Vector2 hunted, Vector2 other)
 	return true;
 }
 
-void MazeCreator::huntAndKill()
+void MazeManager::huntAndKill()
 {
 	// empezamos en un punto aleatorio
 	size_t x = rand() % width_, y = rand() % width_;
@@ -146,7 +151,7 @@ void MazeCreator::huntAndKill()
 	createGaps();
 }
 
-void MazeCreator::createGaps()
+void MazeManager::createGaps()
 {
 	int tries = 0;
 	while (additionalPaths_ > 0)
@@ -169,13 +174,58 @@ void MazeCreator::createGaps()
 	}
 }
 
-void MazeCreator::writeMap(std::string file)
+void MazeManager::createInteractables()
+{
+	int i = 0, tries = 0;
+	// creamos las manivelas necesarias
+	while (i < numLevers_)
+	{
+		Vector2 cell = Vector2(rand() % width_, rand() % width_);
+
+		// si se tira la pared, hay un additionalpath menos que crear
+		// hay un numero de intentos definido (3) para tirar una pared: si no, esto podria ser un bucle infinito
+		if (validDir(cell))
+		{
+			cell = getArrayVector(cell);
+			if (map_[cell.first][cell.second] != leverC && map_[cell.first][cell.second] != playerC_)
+			{
+				setCell(leverC, cell);
+				i++; tries = 0;
+			}
+		}
+		// si no se puede tirar la pared, se le da otro intento
+		else
+		{
+			assert(tries < width_* width_);
+			tries++;			
+		}
+	}
+
+	bool door = false;
+	// creamos una puerta
+	while (!door)
+	{
+		Vector2 cell = Vector2(rand() % width_, rand() % width_);
+		if (validDir(cell))
+		{
+			cell = getArrayVector(cell);
+			if (map_[cell.first][cell.second] == floorC_)
+			{
+				setCell(doorC, cell);
+				exit_ = cell;
+				door = true;
+			}
+		}
+	}
+}
+
+void MazeManager::writeMap()
 {
 	// creamos los bordes como un solo cubo para ahorrar please
 	createOuterWalls();
 
 	// para pruebas solo
-	std::string path = "Neter aqui vuestra ruta ejemplo-->";//"C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
+	std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
 	std::ofstream f;
 	f.open(path);
 	for (int i = 0; i < 2 * width_ + 1; i++)
@@ -188,10 +238,11 @@ void MazeCreator::writeMap(std::string file)
 	}
 	f.close();
 	//TODO meter datos sobre el jugador, enemigos, numero de palancas.. lo necesario, antes de dibujar el mapa
-	
+	//		QuackEntity* qe = new QuackEntity("Nombre", active, "TAG");
+
 	// creamos el suelo
-	QuackEntity* floor = createObject(Vector3D(width_ * WALL_SCALE, 0, width_ * WALL_SCALE),
-		Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", Vector3D(-90, 0, 0));
+	QuackEntity* floor = createObject("Suelo", Vector3D(width_ * WALL_SCALE, 0, width_ * WALL_SCALE),
+		Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
 	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
 	for (int i = 1; i < 2 * width_; i++)
 	{
@@ -202,6 +253,7 @@ void MazeCreator::writeMap(std::string file)
 			int hor = 1, ver = 1;
 			int horInd = j + 1, verInd = i + 1;
 
+			// si es pared, intentamos optimizar, juntandola con otras paredes adyacentes
 			if (map_[i][j] == wallC_)
 			{
 				//comprobamos si el muro es más largo en horizontal o vertical
@@ -222,10 +274,10 @@ void MazeCreator::writeMap(std::string file)
 						map_[i][k] = floorC_;
 
 					// creamos la pared con la escala y posicion correctas
-					float pos = (j + (numBloquesPared-1) * 0.5) * WALL_SCALE;
-					QuackEntity* pared = createObject(Vector3D(pos, 0, i * WALL_SCALE), 
+					float pos = (j + (numBloquesPared - 1) * 0.5) * WALL_SCALE;
+					QuackEntity* pared = createObject("Pared", Vector3D(pos, 0, i * WALL_SCALE),
 						Vector3D(WALL_SCALE * numBloquesPared, WALL_SCALE, WALL_SCALE));
-					j = horInd;
+					j = horInd - 1;
 				}
 				else
 				{
@@ -234,24 +286,27 @@ void MazeCreator::writeMap(std::string file)
 						map_[k][j] = floorC_;
 
 					// creamos la pared con la escala y posicion correctas
-					float pos = (i + (numBloquesPared-1) * 0.5) * WALL_SCALE;
-					QuackEntity* pared = createObject(Vector3D(j * WALL_SCALE, 0, pos), 
+					float pos = (i + (numBloquesPared - 1) * 0.5) * WALL_SCALE;
+					QuackEntity* pared = createObject("Pared", Vector3D(j * WALL_SCALE, 0, pos),
 						Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * numBloquesPared));
 				}
 			}
-			else
-				j++;
-			//	//instaciamos el jugador
-			//else if(map[i][j] == enemy1)
-			//	//instanciamos el enemigo de tipo 1
-			//else if(map[i][j] == enemy1)
-			//	//instanciamos el enemigo de tipo 1
-			
+
+			// si es una manivela, la creamos 
+			if (map_[i][j] == leverC)
+			{
+				QuackEntity* boton = createObject("Manivela", Vector3D(j * WALL_SCALE, 0, i * WALL_SCALE), Vector3D(100, 100, 100), "CuboPrueba.mesh", true);
+				(boton->addComponent<Lever>())->setMazeMng(this);
+				boton->getComponent<Lever>()->setChargingVel(chargeVel_);
+				boton->getComponent<Lever>()->setUnchargingVel(unchargeVel_);
+			}
+
+			j++;
 		}
 	}
 }
 
-void MazeCreator::eraseColumns()
+void MazeManager::eraseColumns()
 {
 	int loops;
 	bool wall;
@@ -279,15 +334,37 @@ void MazeCreator::eraseColumns()
 			}
 
 			// si es columna, pasa a ser suelo
-			if (!wall)
+			if (!wall && map_[dir.first][dir.second] == wallC_)
 				map_[dir.first][dir.second] = floorC_;
 		}
 	}
 }
 
-QuackEntity* MazeCreator::createObject(Vector3D pos, Vector3D scale, std::string name, Vector3D rot)
+void MazeManager::spawnPlayer()
 {
-	QuackEntity* object = new QuackEntity();
+	int corner = rand() % 3;
+	Vector2 cell = Vector2(1, 1);
+	switch (corner)
+	{
+	case 0:
+		cell = Vector2(2 * width_ - 1, 1);
+		break;
+	case 1:
+		cell = Vector2(2 * width_ - 1, 2 * width_ - 1);
+		break;
+	case 2:
+		cell = Vector2(1, 2 * width_ - 1);
+		break;
+	default:
+		break;
+	}
+
+	setCell(playerC_, cell);
+}
+
+QuackEntity* MazeManager::createObject(std::string tag, Vector3D pos, Vector3D scale, std::string name, bool trig, Vector3D rot)
+{
+	QuackEntity* object = new QuackEntity(tag);
 	MeshRenderer* r = object->addComponent<MeshRenderer>();
 
 	if (name == "PT_PLANE") r->setMeshByPrefab(PrefabType::PT_PLANE);
@@ -298,30 +375,40 @@ QuackEntity* MazeCreator::createObject(Vector3D pos, Vector3D scale, std::string
 	object->transform()->setGlobalRotation(rot);
 
 	Rigidbody* rb = object->addComponent<Rigidbody>();
-	rb->setRigidbody(1, ColliderType::CT_BOX, false, true);
+	rb->setRigidbody(1, ColliderType::CT_BOX, trig, true);
 
 	SceneMng::Instance()->getCurrentScene()->addEntity(object);
 	return object;
 }
 
-void MazeCreator::createOuterWalls()
+void MazeManager::createOuterWalls()
 {
-
 	// horizontales
-	QuackEntity* pared = createObject(Vector3D(WALL_SCALE * width_, 0, 0), Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
-	QuackEntity* pared2 = createObject(Vector3D(WALL_SCALE * width_, 0, WALL_SCALE * (width_ * 2)), Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
+	QuackEntity* pared = createObject("Pared", Vector3D(WALL_SCALE * width_, 0, 0), Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
+	QuackEntity* pared2 = createObject("Pared", Vector3D(WALL_SCALE * width_, 0, WALL_SCALE * (width_ * 2)), Vector3D(WALL_SCALE * (width_ * 2 + 1), WALL_SCALE, WALL_SCALE));
 
 	// verticales
-	QuackEntity* pared3 = createObject(Vector3D(0, 0, WALL_SCALE * width_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (width_ * 2 - 1)));
-	QuackEntity* pared4 = createObject(Vector3D(WALL_SCALE * (width_ * 2), 0, WALL_SCALE * width_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (width_ * 2 - 1)));
+	QuackEntity* pared3 = createObject("Pared", Vector3D(0, 0, WALL_SCALE * width_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (width_ * 2 - 1)));
+	QuackEntity* pared4 = createObject("Pared", Vector3D(WALL_SCALE * (width_ * 2), 0, WALL_SCALE * width_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (width_ * 2 - 1)));
 }
 
 
-Vector2 MazeCreator::getArrayVector(Vector2 pos)
+Vector2 MazeManager::getArrayVector(Vector2 pos)
 {
 	Vector2 realPos = pos;
 	realPos.first *= 2; realPos.second *= 2;
 	realPos.first += 1; realPos.second += 1;
 
 	return realPos;
+}
+
+void MazeManager::activateLever()
+{
+	if (--numLevers_ <= 0)
+	{
+		//creamos una puerta
+		QuackEntity* salida = createObject("Salida", Vector3D(exit_.first * WALL_SCALE, 0, exit_.second * WALL_SCALE), Vector3D(100, 100, 100), "CuboPrueba.mesh", true, Vector3D(180, 0, 0));
+		salida->addComponent<Exit>();
+
+	}
 }

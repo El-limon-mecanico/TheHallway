@@ -36,7 +36,7 @@
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\TheHallway\MazeCreator.cpp">
+    <ClCompile Include="..\..\Src\TheHallway\MazeManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp">
@@ -51,9 +51,24 @@
     <ClCompile Include="..\..\Src\TheHallway\Health.cpp">
       <Filter>Archivos de origen\Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\CameraController.cpp">
+      <Filter>Archivos de origen\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\Lever.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\Exit.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\GameCallbacks.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\ChasePlayer.cpp">
+      <Filter>Archivos de origen\Enemies\Protector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h">
+    <ClInclude Include="..\..\Src\TheHallway\MazeManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\Lighter.h">
@@ -68,9 +83,51 @@
     <ClInclude Include="..\..\Src\TheHallway\Health.h">
       <Filter>Archivos de encabezado\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\CameraController.h">
+      <Filter>Archivos de encabezado\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\Lever.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\Exit.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\GameCallbacks.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\ChasePlayer.h">
+      <Filter>Archivos de encabezado\Enemies\Protector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Assets\lua\Scenes\HardGame.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\LvlSelector.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\MedGame.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\menu.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\MenuCtrl.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\MenuPpl.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
     <None Include="..\..\Assets\lua\Scenes\scene1.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\WinScene.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\EZGame.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\GameOver.lua">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

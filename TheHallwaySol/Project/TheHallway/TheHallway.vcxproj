@@ -114,7 +114,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\CEGUI;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\cegui\include;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\build\cegui\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +151,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\CEGUI;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\cegui\include;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\CEGUI\cegui-0.8.7\build\cegui\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,21 +164,40 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\TheHallway\Health.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\CameraController.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\Exit.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\Lever.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\GameCallbacks.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\ChasePlayer.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\LoopMovement.cpp" />
-    <ClCompile Include="..\..\Src\TheHallway\MazeCreator.cpp" />
+    <ClCompile Include="..\..\Src\TheHallway\MazeManager.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\PlayerMovement.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\Health.h" />
+    <ClInclude Include="..\..\Src\TheHallway\CameraController.h" />
+    <ClInclude Include="..\..\Src\TheHallway\Exit.h" />
+    <ClInclude Include="..\..\Src\TheHallway\Lever.h" />
+    <ClInclude Include="..\..\Src\TheHallway\GameCallbacks.h" />
+    <ClInclude Include="..\..\Src\TheHallway\ChasePlayer.h" />
     <ClInclude Include="..\..\Src\TheHallway\Lighter.h" />
     <ClInclude Include="..\..\Src\TheHallway\LoopMovement.h" />
-    <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h" />
+    <ClInclude Include="..\..\Src\TheHallway\MazeManager.h" />
     <ClInclude Include="..\..\Src\TheHallway\PlayerMovement.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Assets\lua\Scenes\EZGame.lua" />
+    <None Include="..\..\Assets\lua\Scenes\GameOver.lua" />
+    <None Include="..\..\Assets\lua\Scenes\HardGame.lua" />
+    <None Include="..\..\Assets\lua\Scenes\LvlSelector.lua" />
+    <None Include="..\..\Assets\lua\Scenes\MedGame.lua" />
+    <None Include="..\..\Assets\lua\Scenes\menu.lua" />
+    <None Include="..\..\Assets\lua\Scenes\MenuCtrl.lua" />
+    <None Include="..\..\Assets\lua\Scenes\MenuPpl.lua" />
     <None Include="..\..\Assets\lua\Scenes\scene1.lua" />
+    <None Include="..\..\Assets\lua\Scenes\WinScene.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
