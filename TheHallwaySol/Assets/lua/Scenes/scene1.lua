@@ -1,21 +1,106 @@
 ﻿scene1 = {
-    entities = {"defaultCamera","sceneLight","player","Maze"}
+    entities = {"defaultCamera", "entidad3", "sceneLight", "Maze", "Player"}
 }
 
+entidad1 = {
+    Active = true,
+    Components = {"Transform", "MeshRenderer", "Rigidbody", "Prueba"},
+
+    Transform = {
+        Position = {0,5,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Suzanne.mesh",
+    },
+
+    Rigidbody = {
+        Type = "Hull",
+        Mass = 1,
+        Trigger = false,
+        Static = false,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
+    },
+
+    Prueba = {
+        valor1 = 1,
+        valor2 = 3,
+        valor3 = "Quack"
+    }
+}
+
+entidad2 = {
+    Active = true,
+    Components = {"Transform", "MeshRenderer", "Rigidbody"},
+
+    Transform = {
+        Position = {0,-3,0},
+        Scale = {5,5,1},
+        Rotation = {-90,0,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Plane",
+    },
+
+    Rigidbody = {
+        Type = "Cube",
+        Mass = 1,
+        Trigger = false,
+        Static = true,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
+    }  
+}
+entidad3 = {
+    Active=true,
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
+
+    Transform = {
+        Position = {-10,0,0},
+        Scale = {700,700,700},
+        Rotation = {90,40,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Icosphere.mesh",
+    },
+
+    LoopMovement = {
+        Speed=10,
+        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
+        Distance = 15
+    },
+    Rigidbody = {
+        Type = "Hull",
+        Mass = 1,
+        Trigger = true,
+        Static = false,
+        PositionConstrains = {0,0,0},
+        RotationConstrains = {0,0,0}
+    },
+
+    ChasePlayer = {
+        Speed = 10
+    }
+}
 defaultCamera = {
     Active = true,
 
     Components = {"Transform", "Camera"},
 
     Transform = {
-        Position = {25, 80,25},
+        Position = {25,75,25},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     Camera = {
         Name = "MainCam",
-        Background = {0,0,0},
+        Background = {1,1,0},
         LookAt = {25,0,25},
         Width = 0,
         Height = 0,
@@ -47,7 +132,7 @@ sceneLight = {
     }
 }
 
-player = {
+Player = {
     Active = true,
     Components = {"Transform", "Light", "Lighter"},
 

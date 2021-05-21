@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quack-Engine\QuackEngineSol\Src\LuaBridge;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Lua\$(Platform);$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\LuaBridge\src;$(SolutionDir)Quack-Engine\QuackEngineSol\Src\QuackEngine\;$(SolutionDir)Quack-Engine\QuackEngineSol\dependencies\Ogre\build\Dependencies\include\SDL2</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\TheHallway\ChasePlayer.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\Lighter.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\LoopMovement.cpp" />
     <ClCompile Include="..\..\Src\TheHallway\MazeCreator.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\TheHallway\ChasePlayer.h" />
     <ClInclude Include="..\..\Src\TheHallway\Lighter.h" />
     <ClInclude Include="..\..\Src\TheHallway\LoopMovement.h" />
     <ClInclude Include="..\..\Src\TheHallway\MazeCreator.h" />
