@@ -4,6 +4,7 @@
 #include "FactoryManager.h"
 #include "MazeCreator.h"
 #include "Lighter.h"
+#include "Light.h"
 #include "PlayerMovement.h"
 #include "GameCallbacks.h"
 #include "QuackUI.h"
@@ -28,6 +29,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<PlayerMovement>();
 		UIElement::addScheme("TheHallway.scheme");
 		FactoryManager::instance()->add<ChasePlayer>();
+		Light::setAmbientLight(Vector3D(0, 0, 0));
 		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
 	}
 	return 0;
