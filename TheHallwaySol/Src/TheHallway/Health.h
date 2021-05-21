@@ -15,6 +15,5 @@ public:
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 	static std::string GetName() { return "Health"; }
 	virtual void start();
-	virtual void update();
 	void hit();
 };
