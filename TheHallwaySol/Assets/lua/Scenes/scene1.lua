@@ -1,13 +1,13 @@
 ﻿scene1 = {
-    entities = {"defaultCamera", "entidad3", "sceneLight"}
+    entities = {"defaultCamera", "UI","Player", "entidad2", "sceneLight"}
 }
 
-entidad1 = {
+Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer", "Rigidbody", "Prueba"},
+    Components = {"Transform", "MeshRenderer"},
 
     Transform = {
-        Position = {0,5,0},
+        Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -18,17 +18,11 @@ entidad1 = {
 
     Rigidbody = {
         Type = "Hull",
-        Mass = 1,
+        Mass = 0,
         Trigger = false,
         Static = false,
         PositionConstrains = {0,0,0},
         RotationConstrains = {0,0,0}
-    },
-
-    Prueba = {
-        valor1 = 1,
-        valor2 = 3,
-        valor3 = "Quack"
     }
 }
 
@@ -55,33 +49,7 @@ entidad2 = {
         RotationConstrains = {0,0,0}
     }  
 }
-entidad3 = {
-    Active=true,
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody"},
 
-    Transform = {
-        Position = {0,0,0},
-        Scale = {700,700,700},
-        Rotation = {90,40,0}
-    },
-
-    MeshRenderer = {
-        Mesh = "Icosphere.mesh",
-    },
-
-    LoopMovement = {
-        Speed=10,
-        Objectives={{-30,-10,-20},{0,0,0},{0,25,0}}
-    }  ,
-    Rigidbody = {
-        Type = "Hull",
-        Mass = 1,
-        Trigger = true,
-        Static = false,
-        PositionConstrains = {0,0,0},
-        RotationConstrains = {0,0,0}
-    } 
-}
 defaultCamera = {
     Active = true,
     Components = {"Transform", "Camera"},
@@ -126,38 +94,13 @@ sceneLight = {
     }
 }
 
-Maze = {
-    Active = true,
-    Components = {"Transform", "MazeCreator"},
-    Transform = {
-        Position = {0,0,0},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-    MazeCreator = {
-        Size = 25,
-        Holes = 25
-    }
-}
 UI = {
     Active = true,
-    Components = {"Text1", "Image1", "Button1"},
+    Components = {"Health"},
 
-    Text1 = {
-        Type = "Text",
-        Name = "Texto",
-        Text = " Esto no es un boton, es solo texto, pero desde lua",
-        Position = {0.5,0.05},
-        Size = {405,50}
-    },
-
-    Image1 = {
-        Type = "Image",
-        Name = "Cuchao",
-        Image = "cuchao.png",
-        Position = {0.1,0.6},
-        Size = {300,200}
-    },
+    Health = {
+        MaxLives = 2
+    }
 
 
 }
