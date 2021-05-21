@@ -5,6 +5,8 @@
 #include "MazeCreator.h"
 #include "Lighter.h"
 #include "PlayerMovement.h"
+#include "GameCallbacks.h"
+#include "QuackUI.h"
 #include "LoopMovement.h"
 #include "ChasePlayer.h"
 
@@ -18,11 +20,13 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 #endif
 	srand(time(NULL));
 	// AQUI FALTA MANEJO DE ERRORES Y EXCEPCIONES
-	if (QuackEnginePro::Init()) {
+	if (QuackEnginePro::Init("The Hallway")) {
+		GameCallbacks::Init();
 		FactoryManager::instance()->add<LoopMovement>();
 		FactoryManager::instance()->add<MazeCreator>();
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<PlayerMovement>();
+		UIElement::addScheme("TheHallway.scheme");
 		FactoryManager::instance()->add<ChasePlayer>();
 		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
 	}

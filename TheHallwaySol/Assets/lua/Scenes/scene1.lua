@@ -140,8 +140,8 @@ Maze = {
         Rotation = {0,0,0}
     },
     MazeCreator = {
-        Size = 25,
-        Holes = 25
+        Size = 10,
+        Holes = 15
     }
 }
 UI = {
