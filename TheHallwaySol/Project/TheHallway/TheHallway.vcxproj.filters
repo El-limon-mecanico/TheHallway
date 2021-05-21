@@ -85,7 +85,7 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\Exit.h">
       <Filter>Archivos de encabezado</Filter>
-     </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\..\Src\TheHallway\GameCallbacks.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -94,7 +94,34 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Assets\lua\Scenes\HardGame.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\LvlSelector.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\MedGame.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\menu.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\MenuCtrl.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\MenuPpl.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
     <None Include="..\..\Assets\lua\Scenes\scene1.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\WinScene.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\EZGame.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Scenes\GameOver.lua">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

@@ -48,15 +48,18 @@ sceneLight = {
 
 Maze = {
     Active = true,
-    Components = {"Transform", "MazeCreator"},
+    Components = {"Transform", "MazeManager"},
 
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
-    MazeCreator = {
+    MazeManager = {
         Size = 30,
-        Holes = 5
+        Holes = 5,
+        Levers = 3,
+        ChargeVel = 1,
+        UnchargeVel = 2
     }
 }

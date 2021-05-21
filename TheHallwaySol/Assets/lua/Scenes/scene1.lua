@@ -119,7 +119,7 @@ Player = {
 
             CameraController = {}
         }
-
+    }
 }
 
 Maze = {

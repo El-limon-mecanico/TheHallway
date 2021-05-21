@@ -7,7 +7,6 @@
 #include "PlayerMovement.h"
 #include "CameraController.h"
 #include "MazeManager.h"
-#include "Lighter.h"
 #include "Light.h"
 #include "Lever.h"
 #include "Exit.h"
@@ -29,10 +28,8 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 	if (QuackEnginePro::Init("The Hallway")) {
 		GameCallbacks::Init();
 		FactoryManager::instance()->add<LoopMovement>();
-		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<CameraController>();
 		FactoryManager::instance()->add<MazeManager>();
-		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<PlayerMovement>();
 		FactoryManager::instance()->add<Lever>();
 		FactoryManager::instance()->add<Exit>();
@@ -41,7 +38,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<ChasePlayer>();
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));
-		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
+		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "menuppl");
 	}
 	return 0;
 }

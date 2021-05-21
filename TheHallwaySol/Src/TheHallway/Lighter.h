@@ -1,6 +1,7 @@
 #include "Component.h"
 class Light;
 class PlayerMovement;
+
 class Lighter : public Component {
 protected:
 
