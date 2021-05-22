@@ -12,9 +12,21 @@ MazeManager::MazeManager()
 
 bool MazeManager::init(luabridge::LuaRef parameterTable)
 {
+	// para el laberinto
 	width_ = readVariable<int>(parameterTable, "Size");
-	additionalPaths_ = readVariable<size_t>(parameterTable, "Holes");
-	numLevers_ = readVariable<size_t>(parameterTable, "Levers");
+	additionalPaths_ = readVariable<int>(parameterTable, "Holes");
+	
+	// para los enemigos
+	numGhosts_ = readVariable<int>(parameterTable, "Ghosts");
+	numEnemies_ = readVariable<int>(parameterTable, "Enemies");
+	pointsGhost_= readVariable<int>(parameterTable, "PointsGhosts");
+	ghostNear_ = readVariable<float>(parameterTable, "GhostNear");
+	ghostFar_ = readVariable<float>(parameterTable, "GhostFar");
+	enemyNear_= readVariable<float>(parameterTable, "EnemyNear");
+	enemyFar_ = readVariable<float>(parameterTable, "EnemyFar");
+
+	// para las palancas
+	numLevers_ = readVariable<int>(parameterTable, "Levers");
 	chargeVel_ = readVariable<float>(parameterTable, "ChargeVel");
 	unchargeVel_ = readVariable<float>(parameterTable, "UnchargeVel");
 	
@@ -31,14 +43,11 @@ void MazeManager::start()
 
 void MazeManager::createMaze()
 {
-	huntAndKill();      // algoritmo de hunt n kill
-
-	spawnPlayer();      // spawneamos el jugador
+	huntAndKill();				// algoritmo de hunt n kill
+	spawnPlayer();				// spawneamos el jugador
 	createInteractables();		// metemos las palancas
-
-	eraseColumns();     // borramos las columnas que hayan podido quedar
-
-	writeMap(); // lo guardamos en el archivo
+	eraseColumns();				// borramos las columnas que hayan podido quedar
+	writeMap();					// lo guardamos en el archivo
 }
 
 void MazeManager::kill(Vector2 pos)
@@ -56,7 +65,6 @@ void MazeManager::kill(Vector2 pos)
 
 	do
 	{
-		
 		nextCell.first = pos.first + DIRECTIONS[(i + loops) % DIRECTIONS.size()].first;
 		nextCell.second = pos.second + DIRECTIONS[(i + loops) % DIRECTIONS.size()].second;
 		loops++;
@@ -187,9 +195,9 @@ void MazeManager::createInteractables()
 		if (validDir(cell))
 		{
 			cell = getArrayVector(cell);
-			if (map_[cell.first][cell.second] != leverC && map_[cell.first][cell.second] != playerC_)
+			if (map_[cell.first][cell.second] != leverC_ && map_[cell.first][cell.second] != playerC_)
 			{
-				setCell(leverC, cell);
+				setCell(leverC_, cell);
 				i++; tries = 0;
 			}
 		}
@@ -211,7 +219,6 @@ void MazeManager::createInteractables()
 			cell = getArrayVector(cell);
 			if (map_[cell.first][cell.second] == floorC_)
 			{
-				setCell(doorC, cell);
 				exit_ = cell;
 				door = true;
 			}
@@ -237,25 +244,20 @@ void MazeManager::writeMap()
 		f << "\n";
 	}
 	f.close();
-	//TODO meter datos sobre el jugador, enemigos, numero de palancas.. lo necesario, antes de dibujar el mapa
+	//TODO meter datos sobre el jugador, enemigos, lo necesario, antes de dibujar el mapa
 	//		QuackEntity* qe = new QuackEntity("Nombre", active, "TAG");
 
-	// creamos el suelo
-	QuackEntity* floor = createObject("Suelo", Vector3D(width_ * WALL_SCALE, 0, width_ * WALL_SCALE),
-		Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
-	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
 	for (int i = 1; i < 2 * width_; i++)
 	{
 		int j = 1;
 		while(j < 2 * width_)
 		{
-			//Para optimizar la creación de muros, si el muro es de tamaño >1 en la x o la z, alargaremos su escala
-			int hor = 1, ver = 1;
-			int horInd = j + 1, verInd = i + 1;
-
 			// si es pared, intentamos optimizar, juntandola con otras paredes adyacentes
 			if (map_[i][j] == wallC_)
 			{
+				int hor = 1, ver = 1;
+				int horInd = j + 1, verInd = i + 1;
+
 				//comprobamos si el muro es más largo en horizontal o vertical
 				while (horInd < 2 * width_ && map_[i][horInd] == wallC_)
 				{
@@ -293,7 +295,7 @@ void MazeManager::writeMap()
 			}
 
 			// si es una manivela, la creamos 
-			if (map_[i][j] == leverC)
+			else if (map_[i][j] == leverC_)
 			{
 				QuackEntity* boton = createObject("Manivela", Vector3D(j * WALL_SCALE, 0, i * WALL_SCALE), Vector3D(100, 100, 100), "CuboPrueba.mesh", true);
 				(boton->addComponent<Lever>())->setMazeMng(this);
@@ -390,6 +392,11 @@ void MazeManager::createOuterWalls()
 	// verticales
 	QuackEntity* pared3 = createObject("Pared", Vector3D(0, 0, WALL_SCALE * width_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (width_ * 2 - 1)));
 	QuackEntity* pared4 = createObject("Pared", Vector3D(WALL_SCALE * (width_ * 2), 0, WALL_SCALE * width_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (width_ * 2 - 1)));
+
+	// creamos el suelo
+	QuackEntity* floor = createObject("Suelo", Vector3D(width_ * WALL_SCALE, 0, width_ * WALL_SCALE),
+		Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
+	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
 }
 
 

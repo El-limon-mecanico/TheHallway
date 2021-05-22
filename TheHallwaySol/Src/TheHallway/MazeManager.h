@@ -14,8 +14,11 @@ class MazeManager: public Component
 {
 private:
     int width_ = 20;                                    // ancho y alto del laberinto
-    size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
-    int numLevers_ = 0;                               // numero de manivelas por nivel
+    int additionalPaths_ = 0;                           // numero de paredes que se van a tirar de mas
+    int numLevers_ = 0;                                 // numero de manivelas por nivel
+    int numGhosts_ = 0;                                 // numero de fantasmas por nivel
+    int pointsGhost_ = 0;                               // numero de puntos del recorrido para cada fantasma
+    int numEnemies_ = 0;                                // numero de enemigos (que recorren el laberinto) por nivel
 
     std::vector < std::vector<bool>> visitedCells_;     // para llevar un registro de las celdas que ya son parte del laberinto
     Vector2 invalidDir_;                                // por control
@@ -25,12 +28,18 @@ private:
     float chargeVel_ = 1;
     float unchargeVel_ = 1;
 
+    // distancias de los enemigos (radar del jugador)
+    float ghostNear_ = 0;
+    float ghostFar_ = 0;
+    float enemyNear_ = 0;
+    float enemyFar_ = 0;
+
     std::vector<std::vector<char>> map_;
     char floorC_ = '.';
     char wallC_ = 'W';
     char playerC_ = 'P';
-    char leverC = 'L';
-    char doorC = 'D';
+    char leverC_ = 'L';
+    char enemyC_ = 'E';
 
     // arriba, abajo, izquierda y derecha
     std::vector<Vector2> DIRECTIONS{ Vector2(0,-1), Vector2(0,1),  Vector2(-1,0), Vector2(1,0) };
