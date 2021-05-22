@@ -5,6 +5,7 @@
 #include "Lighter.h"
 #include "Light.h"
 #include "PlayerMovement.h"
+#include "Health.h"
 #include "CameraController.h"
 #include "MazeManager.h"
 #include "Light.h"
@@ -36,9 +37,10 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<LoopMovement>();
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<ChasePlayer>();
+		FactoryManager::instance()->add<Health>();
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));
-		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "menuppl");
+		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
 	}
 	return 0;
 }

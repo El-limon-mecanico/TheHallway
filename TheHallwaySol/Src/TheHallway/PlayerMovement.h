@@ -25,5 +25,6 @@ public:
 	void rotate();
 	void move();
 	void update() override;
-	void moving(bool m) { moving_ = m; };
+	void setMoving(bool m) { moving_ = m; };
+	bool getMoving() { return moving_; };
 };
