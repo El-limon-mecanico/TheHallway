@@ -21,7 +21,7 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 
 void PlayerMovement::start() {
 	rb_ = entity_->getComponent<Rigidbody>();
-	transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
+	//transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
 }
 
 void PlayerMovement::rotate()
@@ -32,24 +32,25 @@ void PlayerMovement::rotate()
 }
 
 void PlayerMovement::move() {
+	if (moving_) {
+		if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_LSHIFT))
+			running = true;
+		else if (InputManager::Instance()->getKeyUp(SDL_SCANCODE_LSHIFT))
+			running = false;
 
+		float VelocityX = (InputManager::Instance()->getAxis(Horizontal));
+		float VelocityY = (InputManager::Instance()->getAxis(Vertical));
+		Vector3D hor = transform->right * -VelocityX;
+		Vector3D ver = transform->forward * VelocityY;
+		Vector3D vel = (hor + ver);
 
-
-	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_LSHIFT))
-		running = true;
-	else if (InputManager::Instance()->getKeyUp(SDL_SCANCODE_LSHIFT))
-		running = false;
-
-	float VelocityX = (InputManager::Instance()->getAxis(Horizontal));
-	float VelocityY = (InputManager::Instance()->getAxis(Vertical));
-	Vector3D hor = transform->right * -VelocityX;
-	Vector3D ver = transform->forward * VelocityY;
-	Vector3D vel = (hor + ver);
-
-	rb_->setVelocity(vel * (walkingSpeed_ + runningSpeed_ * running));
+		rb_->setVelocity(vel * (walkingSpeed_ + runningSpeed_ * running));
+	}
+	else
+		rb_->setVelocity(Vector3D(0,0,0));
 }
 
 void PlayerMovement::update() {
 	rotate();
-	if(moving_) move();
+	move();
 }

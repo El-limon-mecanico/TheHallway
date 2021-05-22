@@ -26,6 +26,7 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 
 void MazeManager::start()
 {
+	player_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player");
 	createMaze();
 }
 
@@ -224,26 +225,24 @@ void MazeManager::writeMap()
 	// creamos los bordes como un solo cubo para ahorrar please
 	createOuterWalls();
 
-	// para pruebas solo
-	std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
-	std::ofstream f;
-	f.open(path);
-	for (int i = 0; i < 2 * width_ + 1; i++)
-	{
-		for (int j = 0; j < 2 * width_ + 1; j++)
-		{
-			f << map_[i][j];
-		}
-		f << "\n";
-	}
-	f.close();
-	//TODO meter datos sobre el jugador, enemigos, numero de palancas.. lo necesario, antes de dibujar el mapa
-	//		QuackEntity* qe = new QuackEntity("Nombre", active, "TAG");
+	//// para pruebas solo
+	//std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
+	//std::ofstream f;
+	//f.open(path);
+	//for (int i = 0; i < 2 * width_ + 1; i++)
+	//{
+	//	for (int j = 0; j < 2 * width_ + 1; j++)
+	//	{
+	//		f << map_[i][j];
+	//	}
+	//	f << "\n";
+	//}
+	//f.close();
 
 	// creamos el suelo
 	QuackEntity* floor = createObject("Suelo", Vector3D(width_ * WALL_SCALE, 0, width_ * WALL_SCALE),
 		Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
-	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
+	//floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
 	for (int i = 1; i < 2 * width_; i++)
 	{
 		int j = 1;
@@ -300,6 +299,10 @@ void MazeManager::writeMap()
 				boton->getComponent<Lever>()->setChargingVel(chargeVel_);
 				boton->getComponent<Lever>()->setUnchargingVel(unchargeVel_);
 			}
+
+			//Si es el player, le modificamos su posicion
+			if (map_[i][j] == playerC_)
+				player_->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 5, i * WALL_SCALE));
 
 			j++;
 		}
