@@ -14,11 +14,11 @@ class MazeManager: public Component
 {
 private:
     int width_ = 20;                                    // ancho y alto del laberinto
-    int additionalPaths_ = 0;                           // numero de paredes que se van a tirar de mas
     int numLevers_ = 0;                                 // numero de manivelas por nivel
     int numGhosts_ = 0;                                 // numero de fantasmas por nivel
-    int pointsGhost_ = 0;                               // numero de puntos del recorrido para cada fantasma
     int numEnemies_ = 0;                                // numero de enemigos (que recorren el laberinto) por nivel
+    int pointsGhost_ = 0;                               // numero de puntos del recorrido para cada fantasma
+    int additionalPaths_ = 0;                           // numero de paredes que se van a tirar de mas
 
     std::vector < std::vector<bool>> visitedCells_;     // para llevar un registro de las celdas que ya son parte del laberinto
     Vector2 invalidDir_;                                // por control
@@ -29,20 +29,15 @@ private:
     float unchargeVel_ = 1;
 
     // distancias de los enemigos (radar del jugador)
-    float ghostNear_ = 0;
-    float ghostFar_ = 0;
-    float enemyNear_ = 0;
-    float enemyFar_ = 0;
+    float ghostRadar_ = 0;
+    float enemyRadar_ = 0;
 
     std::vector<std::vector<char>> map_;
-    char floorC_ = '.';
     char wallC_ = 'W';
-    char playerC_ = 'P';
+    char floorC_ = '.';
     char leverC_ = 'L';
     char enemyC_ = 'E';
-
-    // arriba, abajo, izquierda y derecha
-    std::vector<Vector2> DIRECTIONS{ Vector2(0,-1), Vector2(0,1),  Vector2(-1,0), Vector2(1,0) };
+    char playerC_ = 'P';
 
     /// <summary>
     /// Creamos un laberinto con el algoritmo Hunt n Kill.
@@ -110,6 +105,9 @@ private:
     /// </summary>
     void VisitCell(Vector2 pos) { visitedCells_[pos.first][pos.second] = true; };
 
+    Vector2 getArrayVector(Vector2 pos);
+    void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
+    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < width_); };
 
 public:
     MazeManager();
@@ -117,14 +115,20 @@ public:
     virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
     virtual void start() override;
     static std::string GetName() { return "MazeManager"; }
+    std::vector<std::vector<char>> getMap()const { return map_; }
 
-    Vector2 getArrayVector(Vector2 pos);
-    void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
-    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < width_); };
+    /// <summary>
+    /// Las entidades en el mundo pueden preguntarle en que posicion del mapa (vector<vector<char>>) se encuentran.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    Vector2 getPositionInMap(Vector3D pos);
+    Vector3D getPositionInWorld(Vector2 pos, float y = 0);
+    Vector2 getRandomFloor();
+
     void activateLever();
 
-
-
-    // ------------------------------------------------------------------------------------- //
+    // arriba, abajo, izquierda y derecha
+    const std::vector<Vector2> DIRECTIONS{ Vector2(0,-1), Vector2(0,1),  Vector2(-1,0), Vector2(1,0) };
 };
 

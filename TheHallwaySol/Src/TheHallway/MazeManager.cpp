@@ -5,6 +5,7 @@
 #include "SceneMng.h"
 #include "Lever.h"
 #include "Exit.h"
+#include "MazeRunner.h"
 
 MazeManager::MazeManager()
 {
@@ -20,10 +21,8 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	numGhosts_ = readVariable<int>(parameterTable, "Ghosts");
 	numEnemies_ = readVariable<int>(parameterTable, "Enemies");
 	pointsGhost_= readVariable<int>(parameterTable, "PointsGhosts");
-	ghostNear_ = readVariable<float>(parameterTable, "GhostNear");
-	ghostFar_ = readVariable<float>(parameterTable, "GhostFar");
-	enemyNear_= readVariable<float>(parameterTable, "EnemyNear");
-	enemyFar_ = readVariable<float>(parameterTable, "EnemyFar");
+	ghostRadar_ = readVariable<float>(parameterTable, "GhostRadar");
+	enemyRadar_= readVariable<float>(parameterTable, "EnemyRadar");
 
 	// para las palancas
 	numLevers_ = readVariable<int>(parameterTable, "Levers");
@@ -211,23 +210,12 @@ void MazeManager::createInteractables()
 
 	bool door = false;
 	// creamos una puerta
-	while (!door)
-	{
-		Vector2 cell = Vector2(rand() % width_, rand() % width_);
-		if (validDir(cell))
-		{
-			cell = getArrayVector(cell);
-			if (map_[cell.first][cell.second] == floorC_)
-			{
-				exit_ = cell;
-				door = true;
-			}
-		}
-	}
+	exit_ = getRandomFloor();
 }
 
 void MazeManager::writeMap()
 {
+	std::vector<std::vector<bool>> mapaAuxiliar(width_*2+1, std::vector<bool>(width_ * 2 + 1, true));
 	// creamos los bordes como un solo cubo para ahorrar please
 	createOuterWalls();
 
@@ -250,20 +238,20 @@ void MazeManager::writeMap()
 	for (int i = 1; i < 2 * width_; i++)
 	{
 		int j = 1;
-		while(j < 2 * width_)
+		while (j < 2 * width_)
 		{
 			// si es pared, intentamos optimizar, juntandola con otras paredes adyacentes
-			if (map_[i][j] == wallC_)
+			if (map_[i][j] == wallC_ && mapaAuxiliar[i][j])
 			{
 				int hor = 1, ver = 1;
 				int horInd = j + 1, verInd = i + 1;
 
 				//comprobamos si el muro es más largo en horizontal o vertical
-				while (horInd < 2 * width_ && map_[i][horInd] == wallC_)
+				while (horInd < 2 * width_ && map_[i][horInd] == wallC_ && mapaAuxiliar[i][horInd])
 				{
 					horInd++; hor++;
 				}
-				while (verInd < 2 * width_ && map_[verInd][j] == wallC_)
+				while (verInd < 2 * width_ && map_[verInd][j] == wallC_ && mapaAuxiliar[verInd][j])
 				{
 					verInd++; ver++;
 				}
@@ -273,7 +261,7 @@ void MazeManager::writeMap()
 				{
 					//quitamos las paredes, para que no se instancien varias veces
 					for (int k = j; k < horInd; k++)
-						map_[i][k] = floorC_;
+						mapaAuxiliar[i][k] = false;
 
 					// creamos la pared con la escala y posicion correctas
 					float pos = (j + (numBloquesPared - 1) * 0.5) * WALL_SCALE;
@@ -285,7 +273,7 @@ void MazeManager::writeMap()
 				{
 					//quitamos las paredes, para que no se instancien varias veces
 					for (int k = i; k < verInd; k++)
-						map_[k][j] = floorC_;
+						mapaAuxiliar[k][j] = false;
 
 					// creamos la pared con la escala y posicion correctas
 					float pos = (i + (numBloquesPared - 1) * 0.5) * WALL_SCALE;
@@ -301,11 +289,34 @@ void MazeManager::writeMap()
 				(boton->addComponent<Lever>())->setMazeMng(this);
 				boton->getComponent<Lever>()->setChargingVel(chargeVel_);
 				boton->getComponent<Lever>()->setUnchargingVel(unchargeVel_);
+				(boton->addComponent<MazeRunner>())->getPlayer();
+				boton->getComponent<MazeRunner>()->setManager(this);
+				boton->getComponent<MazeRunner>()->setFloorChar(floorC_);
 			}
 
+			else if (map_[i][j] == playerC_)
+			{
+				assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
+				SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 1, i * WALL_SCALE));
+			}
+
+			// limpiamos el mapa para dejar solo marcas de suelo o pared
+			if (map_[i][j] != wallC_)
+				map_[i][j] = floorC_;
 			j++;
 		}
+	}	
+	path = "C:\\Users\\anaana\\Desktop\\Maps\\mapaDespues.map";
+	f.open(path);
+	for (int i = 0; i < 2 * width_ + 1; i++)
+	{
+		for (int j = 0; j < 2 * width_ + 1; j++)
+		{
+			f << map_[i][j];
+		}
+		f << "\n";
 	}
+	f.close();
 }
 
 void MazeManager::eraseColumns()
@@ -395,10 +406,9 @@ void MazeManager::createOuterWalls()
 
 	// creamos el suelo
 	QuackEntity* floor = createObject("Suelo", Vector3D(width_ * WALL_SCALE, 0, width_ * WALL_SCALE),
-		Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
+										Vector3D(width_ * WALL_SCALE, width_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
 	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
 }
-
 
 Vector2 MazeManager::getArrayVector(Vector2 pos)
 {
@@ -418,4 +428,45 @@ void MazeManager::activateLever()
 		salida->addComponent<Exit>();
 
 	}
+}
+
+Vector2 MazeManager::getPositionInMap(Vector3D pos)
+{
+	// nos interesa la posicion en x, z
+	// z es la fila, x la columna
+	// pos[z][x]
+	std::pair<float, float> aux = std::pair<float, float>(pos.z, pos.x);
+	aux.first /= WALL_SCALE; aux.second /= WALL_SCALE;
+	Vector2 ret = aux;
+
+	if (aux.first - ret.first > 0.5) ret.first++;
+	if (aux.second - ret.second > 0.5) ret.second++;
+	return ret;
+}
+
+Vector3D MazeManager::getPositionInWorld(Vector2 pos, float y)
+{
+	Vector3D worldPos = Vector3D(pos.first, y, pos.second);
+	worldPos *= WALL_SCALE;
+	return worldPos;
+}
+
+Vector2 MazeManager::getRandomFloor()
+{
+	Vector2 pos;
+	bool found = false;
+	while (!found)
+	{
+		Vector2 cell = Vector2(rand() % width_, rand() % width_);
+		if (validDir(cell))
+		{
+			cell = getArrayVector(cell);
+			if (map_[cell.first][cell.second] == floorC_)
+			{
+				pos = cell;
+				found = true;
+			}
+		}
+	}
+	return pos;
 }

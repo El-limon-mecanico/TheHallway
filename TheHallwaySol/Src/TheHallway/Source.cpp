@@ -15,6 +15,7 @@
 #include "QuackUI.h"
 #include "LoopMovement.h"
 #include "ChasePlayer.h"
+#include "MazeRunner.h"
 
 #if (defined _DEBUG) //|| !(defined _WIN64)
 int main() {
@@ -38,9 +39,11 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<ChasePlayer>();
 		FactoryManager::instance()->add<Health>();
+		FactoryManager::instance()->add<MazeRunner>();
+
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));
-		QuackEnginePro::Instance()->start("Scenes/scene1.lua", "scene1");
+		QuackEnginePro::Instance()->start("Scenes/MenuPPl.lua", "menuppl");
 	}
 	return 0;
 }

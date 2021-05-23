@@ -152,6 +152,11 @@ Maze = {
         Levers = 1,
         ChargeVel = 5,
         UnchargeVel = 2,
+	    Ghosts = 1,
+        Enemies = 1,
+        PointsGhosts = 4,
+        GhostRadar = 15,
+        EnemyRadar = 20
     }
 }
 
