@@ -3,11 +3,16 @@ menuppl = {
 }
 UI = {
     Active = true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source= "MenuPplTheHallway.wav",
+        Volume=0.25,
+        Loops=-1,
     },
     Children = {
         entities={"StartButton","CtrlButton","QuackImage","Title"},
@@ -82,7 +87,7 @@ StartButton = {
                 CallBackFunction = "menupplToLvlSelector"
             }
         },
-        QuackImage={
+    QuackImage={
     Active = true,
     Components={"Image","Transform"},
             Transform = {
@@ -95,8 +100,10 @@ StartButton = {
                 Style= "TheHallway/StaticImage",
                 Name = "QuackEngine",
                 Image = "quackEngine.png",
-                Position = {0.85,0.8},
-                Size = {100,100}
+                Position = {0.9,0.85},
+                Size = {100,100},
+                Background=false,
+                Border=false
             }
         },
     }

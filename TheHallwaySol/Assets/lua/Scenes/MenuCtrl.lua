@@ -26,7 +26,9 @@ UI = {
                 Name = "MenuCtrlImage",
                 Image = "MenuCtrl.png",
                 Position = {0,0},
-                Size = {1000,700}
+                Size = {1920,1080},
+                Background=false,
+                Border=false
                 },
         },
         BackButton = {

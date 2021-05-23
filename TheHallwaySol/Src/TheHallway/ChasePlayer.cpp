@@ -8,11 +8,10 @@
 
 bool ChasePlayer::init(luabridge::LuaRef parameterTable)
 {
-	LuaRef speed = readVariable<LuaRef>(parameterTable, "Speed");
-	speed_ = speed;
+	bool correct = readVariable<float>(parameterTable, "Speed",&speed_);
 
 	// al principio de la partida, no persigue al jugador
-	return true;
+	return correct;
 }
 
 void ChasePlayer::start()

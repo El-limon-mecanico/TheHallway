@@ -8,8 +8,8 @@
 
 bool Health::init(luabridge::LuaRef parameterTable)
 {
-	lives_ = readVariable<int>(parameterTable, "MaxLives");
-	return true;
+	bool correct = readVariable<int>(parameterTable, "MaxLives",&lives_);
+	return correct;
 }
 
 void Health::start()

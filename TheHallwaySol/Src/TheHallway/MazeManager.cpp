@@ -12,12 +12,13 @@ MazeManager::MazeManager()
 
 bool MazeManager::init(luabridge::LuaRef parameterTable)
 {
-	width_ = readVariable<int>(parameterTable, "Size");
-	additionalPaths_ = readVariable<size_t>(parameterTable, "Holes");
-	numLevers_ = readVariable<size_t>(parameterTable, "Levers");
-	chargeVel_ = readVariable<float>(parameterTable, "ChargeVel");
-	unchargeVel_ = readVariable<float>(parameterTable, "UnchargeVel");
-	
+	bool correct = readVariable<int>(parameterTable, "Size",&width_);
+	correct &= readVariable<size_t>(parameterTable, "Holes",&additionalPaths_);
+	correct &= readVariable<int>(parameterTable, "Levers",&numLevers_);
+	correct &= readVariable<float>(parameterTable, "ChargeVel",&chargeVel_);
+	correct &= readVariable<float>(parameterTable, "UnchargeVel", &unchargeVel_);
+	if (!correct)
+		return false;
 	invalidDir_ = Vector2(-width_, -width_);
 	visitedCells_ = std::vector <std::vector<bool>>(width_, std::vector<bool>(width_, false));
 	map_ = std::vector<std::vector<char>>(width_ * 2 + 1, std::vector<char>(width_ * 2 + 1, wallC_));
