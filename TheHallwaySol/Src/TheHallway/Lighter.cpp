@@ -8,8 +8,8 @@
 
 bool Lighter::init(luabridge::LuaRef parameterTable)
 {
-	chargeSpeed_ = readVariable<float>(parameterTable, "ChargeSpeed");
-	dischargeSpeed_ = readVariable<float>(parameterTable, "DischargeSpeed");
+	readVariable<float>(parameterTable, "ChargeSpeed", &chargeSpeed_);
+	readVariable<float>(parameterTable, "DischargeSpeed", &dischargeSpeed_);
 	return true;
 }
 

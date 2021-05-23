@@ -10,23 +10,27 @@
 
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
-	walkingSpeed_ = readVariable<LuaRef>(parameterTable, "WalkingSpeed");
-	runningSpeed_ = readVariable<LuaRef>(parameterTable, "RunningSpeed");
-	cameraSpeed_ = readVariable<LuaRef>(parameterTable, "CameraSpeed");
+	readVariable<float>(parameterTable, "WalkingSpeed", &walkingSpeed_);
+	readVariable<float>(parameterTable, "RunningSpeed", &runningSpeed_);
+	readVariable<float>(parameterTable, "CameraSpeed", &cameraSpeed_);
 
 	InputManager::Instance()->captureMouse();
+	InputManager::Instance()->setMouseVisibility(false);
 
 	return true;
 }
 
 void PlayerMovement::start() {
 	rb_ = entity_->getComponent<Rigidbody>();
-	//transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
+	CameraController* c = transform->getChild(0)->getComponent<CameraController>();
+	if(c)
+		c->setCameraSpeed(cameraSpeed_ * 0.75);
+	
 }
 
 void PlayerMovement::rotate()
 {
-    float mouseDeltaX_ =  InputManager::Instance()->getMousePositionRelative().x - 0.5;
+    float mouseDeltaX_ =  InputManager::Instance()->getMouseAxis(Horizontal) * QuackEnginePro::Instance()->time()->deltaTime();
 
     rb_->setAngularVelocity(Vector3D(0, -mouseDeltaX_ * cameraSpeed_, 0));
 }
