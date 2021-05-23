@@ -13,9 +13,9 @@ typedef std::pair<int, int> Vector2;
 class MazeManager: public Component
 {
 private:
-    int width_ = 20;                                    // ancho y alto del laberinto
+    int size_ = 20;                                    // ancho y alto del laberinto
     size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
-    int numLevers_ = 0;                               // numero de manivelas por nivel
+    size_t numLevers_ = 0;                               // numero de manivelas por nivel
 
     std::vector < std::vector<bool>> visitedCells_;     // para llevar un registro de las celdas que ya son parte del laberinto
     Vector2 invalidDir_;                                // por control
@@ -111,7 +111,7 @@ public:
 
     Vector2 getArrayVector(Vector2 pos);
     void setCell(char c, Vector2 pos) { map_[(int)(pos.first)][(int)(pos.second)] = c; }
-    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < width_&& pos.second >= 0 && pos.second < width_); };
+    bool validDir(Vector2 pos) { return (pos.first >= 0 && pos.first < size_&& pos.second >= 0 && pos.second < size_); };
     void activateLever();
 
 
