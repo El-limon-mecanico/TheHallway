@@ -14,7 +14,8 @@ void Lever::update()
 	// si el jugador esta en contacto con la manivela y presiona la tecla, se carga la manivela
 	if (player_ && InputManager::Instance()->getKey(SDL_SCANCODE_SPACE))
 	{
-		progress_ += QuackEnginePro::Instance()->time()->deltaTime() * chargingVel_;
+  		progress_ += QuackEnginePro::Instance()->time()->deltaTime() * chargingVel_;
+		std::cout << progress_ << ", " << total_ << std::endl;
 		if (progress_ >= total_)
 			charged_ = true;
 	}

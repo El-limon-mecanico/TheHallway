@@ -39,7 +39,6 @@ void Lighter::update() {
 		}
 	}
 	light_->setDistance(distance_* actualCharge_);
-	std::cout << actualCharge_ << std::endl;
 }
 
 void Lighter::start()

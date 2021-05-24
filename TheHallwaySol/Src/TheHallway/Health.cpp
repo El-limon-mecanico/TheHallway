@@ -46,7 +46,7 @@ void Health::hit()
 
 void Health::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
-	if (other->tag == "Enemy") {
+	if (other->tag() == "Enemy") {
 		hit();
 	}
 }

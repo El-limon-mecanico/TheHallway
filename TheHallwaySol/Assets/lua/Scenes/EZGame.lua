@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy","sceneLight"}
+    entities = {"Maze","Player", "Enemy"}
 }
 
 UI = {
@@ -24,7 +24,7 @@ sceneLight = {
         LightType = 1,
         DiffuseColor = {0.3,0.3,0.3},
         SpecularColor = {0.3,0.3,0.3},
-        Direction = {0,0,0},
+        Direction = {1,0,0},
         Distance = 1,
         InnerAngle = 30,
         OuterAngle = 90,
@@ -61,7 +61,7 @@ Player = {
         DiffuseColor = {1,1,1},
         SpecularColor = {1,1,1},
         Direction = {0,-1,0},
-        Distance = 8000,
+        Distance = 5000,
         InnerAngle = 35,
         OuterAngle = 60,
         isOn = true
@@ -75,7 +75,7 @@ Player = {
     {
         WalkingSpeed = 10,
         RunningSpeed = 10,
-        CameraSpeed = 50
+        CameraSpeed = 200
     },
     Health={
         MaxLives = 3
@@ -88,10 +88,10 @@ Player = {
 
             Active = true,
             
-            Components = {"Transform", "Camera"},
+            Components = {"Transform", "Camera", "CameraController"},
             
             Transform = {
-                Position = {0,200,0},
+                Position = {0,7,3},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
@@ -99,7 +99,7 @@ Player = {
             Camera = {
                 Name = "MainCam",
                 Background = {1,1,1},
-                LookAt = {0,0,0},
+                LookAt = {0,7,5},
                 Width = 0,
                 Height = 0,
                 NearClipDistance = 1,
@@ -115,6 +115,7 @@ Player = {
 
 Enemy = {
     Active=true,
+    Tag = "Enemy",
     Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
 
     Transform = {
@@ -156,9 +157,9 @@ Maze = {
         Rotation = {0,0,0}
     },
     MazeManager = {
-        Size = 10,
-        Holes = 15,
-        Levers = 3,
+        Size = 5,
+        Holes = 3,
+        Levers = 1,
         ChargeVel = 1,
         UnchargeVel = 2
     }

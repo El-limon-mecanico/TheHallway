@@ -45,7 +45,6 @@ void ChasePlayer::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
 	{
-		health_->hit();
 		// dejamos de perseguir al jugador
 		setEnable(false);
 	}
