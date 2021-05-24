@@ -1,5 +1,5 @@
 ﻿scene1 = {
-    entities = {"Enemy", "UI", "sceneLight", "Maze", "Player"}
+    entities = {"Enemy", "UI", "Maze", "Player"}
 }
 
 Enemy = {

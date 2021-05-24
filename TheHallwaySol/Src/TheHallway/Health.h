@@ -6,7 +6,6 @@ private:
 	int lives_;
 	Vector3D initialPos_;
 	std::vector<QuackEntity*> hearts_;
-	QuackEntity* player_;
 	const int HEART_SIZE = 64;
 	int WINDOW_WIDTH;
 public:
@@ -16,4 +15,5 @@ public:
 	static std::string GetName() { return "Health"; }
 	virtual void start();
 	void hit();
+	virtual void onTriggerEnter(QuackEntity* other, Vector3D point);
 };
