@@ -66,5 +66,6 @@ Maze = {
         Source= "TheHallway.wav",
         Volume=1,
         Loops=-1,
+        Enabled=true
     }
 }

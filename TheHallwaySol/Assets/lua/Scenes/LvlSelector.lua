@@ -4,11 +4,17 @@ lvlSelector = {
 
 UI = {
     Active=true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source= "MenuPplTheHallway.wav",
+        Volume=0.25,
+        Loops=-1,
+        Enabled=true
     },
     Children={
         entities={"EzGame","MedGame","HardGame","Title"},

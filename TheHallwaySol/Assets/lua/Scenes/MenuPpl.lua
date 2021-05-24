@@ -13,6 +13,7 @@ UI = {
         Source= "MenuPplTheHallway.wav",
         Volume=0.25,
         Loops=-1,
+        Enabled=true
     },
     Children = {
         entities={"StartButton","CtrlButton","QuackImage","Title"},

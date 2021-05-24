@@ -48,7 +48,7 @@ sceneLight = {
 
 Maze = {
     Active = true,
-    Components = {"Transform", "MazeManager"},
+    Components = {"Transform", "MazeManager","AudioSource"},
 
     Transform = {
         Position = {0,0,0},
@@ -61,5 +61,11 @@ Maze = {
         Levers = 3,
         ChargeVel = 1,
         UnchargeVel = 2
+    },
+    AudioSource={
+        Source= "TheHallway.wav",
+        Volume=1,
+        Loops=-1,
+        Enabled=true
     }
 }
