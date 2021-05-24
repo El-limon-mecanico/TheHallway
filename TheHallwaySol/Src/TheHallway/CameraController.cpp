@@ -19,7 +19,13 @@ void CameraController::start()
 void CameraController::update()
 {
 	float mouseDeltaY_ = InputManager::Instance()->getMouseAxis(Vertical) * QuackEnginePro::Instance()->time()->deltaTime();
-	transform->Rotate(Vector3D(mouseDeltaY_ * cameraSpeed_, 0, 0));
+	float newAngle = yAngle_ + mouseDeltaY_ * cameraSpeed_;
+
+	if(newAngle < 70 && newAngle > -70)
+	{
+		yAngle_ = newAngle;
+		transform->Rotate(Vector3D(mouseDeltaY_ * cameraSpeed_, 0, 0));
+	}
 }
 
 void CameraController::setCameraSpeed(float speed)
