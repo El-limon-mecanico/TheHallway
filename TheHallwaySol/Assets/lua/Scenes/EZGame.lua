@@ -48,7 +48,7 @@ Player = {
     },
 
     Rigidbody = {
-        Type = "Cube",
+        Type = "Box",
         Mass = 1,
         Trigger = false,
         Static = false,
@@ -134,7 +134,7 @@ Enemy = {
         Distance = 15
     },
     Rigidbody = {
-        Type = "Cube",
+        Type = "Box",
         Mass = 1,
         Trigger = true,
         Static = false,

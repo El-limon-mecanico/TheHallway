@@ -25,7 +25,7 @@ private:
 
     // para las manivelas que va a crear
     float chargeVel_ = 1;
-    float unchargeVel_ = 1;
+    float unchargeVel_ = 0.5;
 
     std::vector<std::vector<char>> map_;
     char floorC_ = '.';
