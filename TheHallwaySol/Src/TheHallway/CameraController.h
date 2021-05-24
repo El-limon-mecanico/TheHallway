@@ -5,7 +5,7 @@ class CameraController : public Component {
 protected:
 
 private:
-	float cameraSpeed_;
+	float cameraSpeed_, yAngle_ = 0;
 
 public:
 	CameraController() {}
