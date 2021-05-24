@@ -7,12 +7,14 @@
 
 class QuackEntity;
 enum PrefabType;
-const float WALL_SCALE = 5.75;
+const float WALL_SCALE = 15;
 
 typedef std::pair<int, int> Vector2;
 class MazeManager: public Component
 {
 private:
+    QuackEntity* player_;
+
     int size_ = 20;                                    // ancho y alto del laberinto
     size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
     size_t numLevers_ = 0;                               // numero de manivelas por nivel

@@ -21,6 +21,7 @@ void ChasePlayer::start()
 
 	assert(entity_->hasComponent<Rigidbody>());
 	rb_ = entity_->getComponent<Rigidbody>();
+
 	setEnable(false);
 }
 void ChasePlayer::update() {
@@ -44,9 +45,6 @@ void ChasePlayer::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
 	{
-		// matar al jugador
-		// cambiar cuando tengamos un componente health
-
 		// dejamos de perseguir al jugador
 		setEnable(false);
 	}
