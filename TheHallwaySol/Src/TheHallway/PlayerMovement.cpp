@@ -10,9 +10,9 @@
 
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
-	walkingSpeed_ = readVariable<LuaRef>(parameterTable, "WalkingSpeed");
-	runningSpeed_ = readVariable<LuaRef>(parameterTable, "RunningSpeed");
-	cameraSpeed_ = readVariable<LuaRef>(parameterTable, "CameraSpeed");
+	readVariable<float>(parameterTable, "WalkingSpeed", &walkingSpeed_);
+	readVariable<float>(parameterTable, "RunningSpeed", &runningSpeed_);
+	readVariable<float>(parameterTable, "CameraSpeed", &cameraSpeed_);
 
 	InputManager::Instance()->captureMouse();
 
