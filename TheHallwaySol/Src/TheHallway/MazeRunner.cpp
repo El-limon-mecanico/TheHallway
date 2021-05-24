@@ -3,6 +3,7 @@
 #include "QuackEntity.h"
 #include "SceneMng.h"
 #include "QuackEnginePro.h"
+#include "Rigidbody.h"
 
 #include "InputManager.h"
 
@@ -74,6 +75,26 @@ bool MazeRunner::findPath()
 	return visited[objective_.first][objective_.second];
 }
 
+void MazeRunner::move()
+{
+	// nos movemos en direccion al siguiente punto del path
+	// nos movemos al centro de la casilla (no a la esquina superior izquierda)
+	Vector3D obj = mazeMng_->getPositionInWorld(path_.front(), transform->position().y);
+	float distance = (obj - transform->position()).magnitude();
+	
+	// si estamos lo suficientemente cerca del centro de la casilla, pasamos al siguiente objetivo
+	if (distance < WALL_SCALE * 0.25)
+	{
+		path_.pop_front(); 
+		if (!path_.empty())
+		{
+			obj = mazeMng_->getPositionInWorld(path_.front(), transform->position().y);
+		}
+	}
+	transform->lookAt(obj);
+	entity_->getComponent<Rigidbody>()->setVelocity(transform->forward * speed_);
+}
+
 void MazeRunner::smoothPath()
 {
 	// lista en la que solo vamos a guardar los valores necesarios
@@ -124,6 +145,24 @@ void MazeRunner::start()
 
 void MazeRunner::update()
 {
+	// si nos acercamos al jugador, empezamos a seguirle.
+	// si nos alejamos, dejamos de seguirle
+	float distance = (playerTr_->position() - transform->position()).magnitude();
+	if (distance< triggerDistance_)
+	{
+		following_ = true;
+	}
+	else
+	{
+		// si acabamos de perder al jugador, nos ponemos otro objetivo
+		bool aux = following_;
+		following_ = false;
+		if (aux)
+		{
+			setObjective();
+		}
+	}
+
 	if (following_)
 	{
 		// cada cierto tiempo actualizamos el objetivo
@@ -137,21 +176,6 @@ void MazeRunner::update()
 			timeFollowing_ += QuackEnginePro::Instance()->time()->deltaTime();
 		}
 	}
-	//if (path_.empty()) setObjective();
-
-	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_SPACE))
-	{
-		following_ = !following_;
-		setObjective();
-		std::cout << following_ << "\n";
-	}
-
-	int sz = path_.size();
-	std::cout << "Objetivo: " << objective_.first << " " << objective_.second << "\n";
-	for (int i = 0; i < sz; i++)
-	{
-		std::cout << path_.front().first << "  " << path_.front().second << "\n";
-		Vector2 aux = path_.front(); path_.pop_front();
-		path_.push_back(aux);
-	}
+	if (path_.empty()) setObjective();
+	move();
 }

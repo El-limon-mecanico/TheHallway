@@ -236,6 +236,14 @@ void MazeManager::writeMap()
 	//		QuackEntity* qe = new QuackEntity("Nombre", active, "TAG");
 
 	for (int i = 1; i < 2 * size_; i++)
+	std::vector<std::vector<bool>> mapaAuxiliar(size_ *2+1, std::vector<bool>(size_ * 2 + 1, true));
+
+	// creamos los bordes como un solo cubo para ahorrar please
+	createOuterWalls();
+
+	// instanciamos toda la informacion que hay en el laberinto: paredes, manivelas
+	// y movemos al jugador a la posicion correspondiente. 
+	for (int i = 1; i < 2 * size_; i++)
 	{
 		int j = 1;
 		while (j < 2 * size_)
@@ -289,11 +297,9 @@ void MazeManager::writeMap()
 				(boton->addComponent<Lever>())->setMazeMng(this);
 				boton->getComponent<Lever>()->setChargingVel(chargeVel_);
 				boton->getComponent<Lever>()->setUnchargingVel(unchargeVel_);
-				(boton->addComponent<MazeRunner>())->getPlayer();
-				boton->getComponent<MazeRunner>()->setManager(this);
-				boton->getComponent<MazeRunner>()->setFloorChar(floorC_);
 			}
 
+			// situamos al jugador en su sitio
 			else if (map_[i][j] == playerC_)
 			{
 				assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
@@ -305,18 +311,19 @@ void MazeManager::writeMap()
 				map_[i][j] = floorC_;
 			j++;
 		}
-	}	
-	path = "C:\\Users\\anaana\\Desktop\\Maps\\mapaDespues.map";
-	f.open(path);
-	for (int i = 0; i < 2 * size_ + 1; i++)
-	{
-		for (int j = 0; j < 2 * size_ + 1; j++)
-		{
-			f << map_[i][j];
-		}
-		f << "\n";
 	}
-	f.close();
+	//TODO meter datos sobre enemigos, lo necesario, antes de dibujar el mapa
+
+	// creamos los enemigos (no estan escritos en el mapa)
+	for (int i = 0; i < numEnemies_; i++)
+	{
+		Vector2 pos = getRandomFloor();
+		QuackEntity* enemy = createObject("Enemigo", Vector3D(pos.first * WALL_SCALE, 3, pos.second * WALL_SCALE), Vector3D(1,1,1));
+		(enemy->addComponent<MazeRunner>())->getPlayer();
+		enemy->getComponent<MazeRunner>()->setManager(this);
+		enemy->getComponent<MazeRunner>()->setFloorChar(floorC_);
+		enemy->getComponent<Rigidbody>()->setStatic(false);
+	}
 }
 
 void MazeManager::eraseColumns()
@@ -446,8 +453,9 @@ Vector2 MazeManager::getPositionInMap(Vector3D pos)
 
 Vector3D MazeManager::getPositionInWorld(Vector2 pos, float y)
 {
-	Vector3D worldPos = Vector3D(pos.first, y, pos.second);
+	Vector3D worldPos = Vector3D(pos.second, 0, pos.first);
 	worldPos *= WALL_SCALE;
+	worldPos.y = y;
 	return worldPos;
 }
 

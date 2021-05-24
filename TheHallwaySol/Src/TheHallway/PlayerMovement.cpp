@@ -21,7 +21,7 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 
 void PlayerMovement::start() {
 	rb_ = entity_->getComponent<Rigidbody>();
-	transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
+	//transform->getChild(0)->getComponent<CameraController>()->setCameraSpeed(cameraSpeed_ * 0.75);
 }
 
 void PlayerMovement::rotate()
@@ -50,6 +50,6 @@ void PlayerMovement::move() {
 }
 
 void PlayerMovement::update() {
-	rotate();
+	//rotate();
 	if(moving_) move();
 }

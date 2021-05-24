@@ -7,7 +7,7 @@
 
 class QuackEntity;
 enum PrefabType;
-const float WALL_SCALE = 5.75;
+const float WALL_SCALE = 5;
 
 typedef std::pair<int, int> Vector2;
 class MazeManager: public Component
