@@ -15,7 +15,7 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	readVariable<int>(parameterTable, "Size", &size_);
 	readVariable<size_t>(parameterTable, "Holes", &additionalPaths_);
 	readVariable<size_t>(parameterTable, "Levers", &numLevers_);
-	readVariable<float>(parameterTable, "ChargeVel",&chargeVel_);
+	readVariable<float>(parameterTable, "ChargeVel", &chargeVel_);
 	readVariable<float>(parameterTable, "UnchargeVel", &unchargeVel_);
 	
 	invalidDir_ = Vector2(-size_, -size_);
@@ -229,21 +229,19 @@ void MazeManager::writeMap()
 	QuackEntity* floor = createObject("Suelo", Vector3D(size_ *WALL_SCALE, 0, size_*WALL_SCALE),
 		Vector3D(size_* WALL_SCALE, 1, size_ * WALL_SCALE), "Plano.mesh");
 
-
-
 	for (int i = 1; i < 2 * size_; i++)
 	{
 		int j = 1;
 		while(j < 2 * size_)
 		{
-			//Para optimizar la creaciÛn de muros, si el muro es de tamaÒo >1 en la x o la z, alargaremos su escala
+			//Para optimizar la creaci√≥n de muros, si el muro es de tama√±o >1 en la x o la z, alargaremos su escala
 			int hor = 1, ver = 1;
 			int horInd = j + 1, verInd = i + 1;
 
 			// si es pared, intentamos optimizar, juntandola con otras paredes adyacentes
 			if (map_[i][j] == wallC_)
 			{
-				//comprobamos si el muro es m·s largo en horizontal o vertical
+				//comprobamos si el muro es m√°s largo en horizontal o vertical
 				while (horInd < 2 * size_ && map_[i][horInd] == wallC_)
 				{
 					horInd++; hor++;
