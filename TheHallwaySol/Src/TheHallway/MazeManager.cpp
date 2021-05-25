@@ -15,6 +15,7 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 {
 	// para el laberinto
 	readVariable<int>(parameterTable, "Size", &size_);
+	readVariable<float>(parameterTable, "WallScale", &WALL_SCALE);
 	readVariable<size_t>(parameterTable, "Holes", &additionalPaths_);
 	
 	// para los enemigos
@@ -37,6 +38,7 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 
 void MazeManager::start()
 {
+	player_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player");
 	createMaze();
 }
 
@@ -219,19 +221,6 @@ void MazeManager::writeMap()
 	// creamos los bordes como un solo cubo para ahorrar please
 	createOuterWalls();
 
-	// para pruebas solo
-	std::string path = "C:\\Users\\anaana\\Desktop\\Maps\\mapa.map";
-	std::ofstream f;
-	f.open(path);
-	for (int i = 0; i < 2 * size_ + 1; i++)
-	{
-		for (int j = 0; j < 2 * size_ + 1; j++)
-		{
-			f << map_[i][j];
-		}
-		f << "\n";
-	}
-	f.close();
 	//TODO meter datos sobre el jugador, enemigos, lo necesario, antes de dibujar el mapa
 	//		QuackEntity* qe = new QuackEntity("Nombre", active, "TAG");
 
@@ -254,7 +243,7 @@ void MazeManager::writeMap()
 				int hor = 1, ver = 1;
 				int horInd = j + 1, verInd = i + 1;
 
-				//comprobamos si el muro es m�s largo en horizontal o vertical
+				//comprobamos si el muro es mas largo en horizontal o vertical
 				while (horInd < 2 * size_ && map_[i][horInd] == wallC_ && mapaAuxiliar[i][horInd])
 				{
 					horInd++; hor++;
@@ -273,8 +262,11 @@ void MazeManager::writeMap()
 
 					// creamos la pared con la escala y posicion correctas
 					float pos = (j + (numBloquesPared - 1) * 0.5) * WALL_SCALE;
-					QuackEntity* pared = createObject("Pared", Vector3D(pos, 0, i * WALL_SCALE),
-						Vector3D(WALL_SCALE * numBloquesPared, WALL_SCALE, WALL_SCALE));
+					std::string name = "Wall_" + std::to_string(i) + "-" + std::to_string(j);
+					QuackEntity* pared = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Wall.lua", "Wall", name);
+					pared->transform()->setGlobalPosition(Vector3D(pos, 0, i * WALL_SCALE));
+					pared->transform()->setScale(Vector3D(WALL_SCALE * numBloquesPared, WALL_SCALE * 4, WALL_SCALE));
+
 					j = horInd - 1;
 				}
 				else
@@ -285,25 +277,27 @@ void MazeManager::writeMap()
 
 					// creamos la pared con la escala y posicion correctas
 					float pos = (i + (numBloquesPared - 1) * 0.5) * WALL_SCALE;
-					QuackEntity* pared = createObject("Pared", Vector3D(j * WALL_SCALE, 0, pos),
-						Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * numBloquesPared));
+					std::string name = "Wall_" + std::to_string(i) + "-" + std::to_string(j);
+					QuackEntity* pared = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Wall.lua", "Wall", name);
+					pared->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 0, pos));
+					pared->transform()->setScale(Vector3D(WALL_SCALE, WALL_SCALE * 4, WALL_SCALE * numBloquesPared));
 				}
 			}
 
 			// si es una manivela, la creamos 
 			else if (map_[i][j] == leverC_)
 			{
-				QuackEntity* boton = createObject("Manivela", Vector3D(j * WALL_SCALE, 0, i * WALL_SCALE), Vector3D(100, 100, 100), "CuboPrueba.mesh", true);
-				(boton->addComponent<Lever>())->setMazeMng(this);
-				boton->getComponent<Lever>()->setChargingVel(chargeVel_);
-				boton->getComponent<Lever>()->setUnchargingVel(unchargeVel_);
+				std::string name = "Lever_" + std::to_string(i) + "-" + std::to_string(j);
+				QuackEntity* man = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Lever.lua", "Manivela", name);
+				man->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 3, i * WALL_SCALE));
+				Lever* l = man->getComponent<Lever>();
+				l->setMazeMng(this); l->setChargingVel(chargeVel_); l->setUnchargingVel(unchargeVel_);
 			}
 
 			// situamos al jugador en su sitio
 			else if (map_[i][j] == playerC_)
 			{
-				assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
-				SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 1, i * WALL_SCALE));
+				player_->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 3, i * WALL_SCALE));
 			}
 
 			// limpiamos el mapa para dejar solo marcas de suelo o pared
@@ -403,18 +397,31 @@ QuackEntity* MazeManager::createObject(std::string tag, Vector3D pos, Vector3D s
 
 void MazeManager::createOuterWalls()
 {
+	std::vector<QuackEntity*> v;
+	for(int i = 0; i<4 ; i++){
+		std::string name = "outerWall_" + std::to_string(i);
+		v.push_back(SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Wall.lua", "Wall", name));
+	}
+	
 	// horizontales
-	QuackEntity* pared = createObject("Pared", Vector3D(WALL_SCALE * size_, 0, 0), Vector3D(WALL_SCALE * (size_ * 2 + 1), WALL_SCALE, WALL_SCALE));
-	QuackEntity* pared2 = createObject("Pared", Vector3D(WALL_SCALE * size_, 0, WALL_SCALE * (size_ * 2)), Vector3D(WALL_SCALE * (size_ * 2 + 1), WALL_SCALE, WALL_SCALE));
-
+	v[0]->transform()->setGlobalPosition(Vector3D(WALL_SCALE * size_, 0, 0));
+	v[0]->transform()->setScale(Vector3D(WALL_SCALE * (size_ * 2 + 1), WALL_SCALE * 4, WALL_SCALE));
+	v[1]->transform()->setGlobalPosition(Vector3D(WALL_SCALE * size_, 0, WALL_SCALE * (size_ * 2)));
+	v[1]->transform()->setScale(Vector3D(WALL_SCALE * (size_ * 2 + 1), WALL_SCALE * 4, WALL_SCALE));
 	// verticales
-	QuackEntity* pared3 = createObject("Pared", Vector3D(0, 0, WALL_SCALE * size_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (size_ * 2 - 1)));
-	QuackEntity* pared4 = createObject("Pared", Vector3D(WALL_SCALE * (size_ * 2), 0, WALL_SCALE * size_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (size_ * 2 - 1)));
+	/*
+		QuackEntity* pared3 = createObject("Pared", Vector3D(0, 0, WALL_SCALE * size_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (size_ * 2 - 1)));
+		QuackEntity* pared4 = createObject("Pared", Vector3D(WALL_SCALE * (size_ * 2), 0, WALL_SCALE * size_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (size_ * 2 - 1)));
+	*/
+	v[2]->transform()->setGlobalPosition(Vector3D(0, 0, WALL_SCALE * size_));
+	v[2]->transform()->setScale(Vector3D(WALL_SCALE, WALL_SCALE * 4, WALL_SCALE * (size_ * 2 - 1)));
+	v[3]->transform()->setGlobalPosition(Vector3D(WALL_SCALE * (size_ * 2), 0, WALL_SCALE * size_));
+	v[3]->transform()->setScale(Vector3D(WALL_SCALE, WALL_SCALE * 4, WALL_SCALE * (size_ * 2 - 1)));
 
-	// creamos el suelo
-	QuackEntity* floor = createObject("Suelo", Vector3D(size_ * WALL_SCALE, 0, size_ * WALL_SCALE),
-										Vector3D(size_ * WALL_SCALE, size_ * WALL_SCALE, 1), "PT_PLANE", false, Vector3D(-90, 0, 0));
-	floor->getComponent<MeshRenderer>()->setMaterial("CuboDebug");
+	//// creamos el suelo
+	QuackEntity* floor = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Plane.lua", "Plane", "floor");
+	floor->transform()->setGlobalPosition(Vector3D(size_ * WALL_SCALE, 0, size_ * WALL_SCALE));
+	floor->transform()->setScale(Vector3D(size_ * WALL_SCALE, 1, size_ * WALL_SCALE));
 }
 
 Vector2 MazeManager::getArrayVector(Vector2 pos)
@@ -431,9 +438,8 @@ void MazeManager::activateLever()
 	if (--numLevers_ <= 0)
 	{
 		//creamos una puerta
-		QuackEntity* salida = createObject("Salida", Vector3D(exit_.first * WALL_SCALE, 0, exit_.second * WALL_SCALE), Vector3D(100, 100, 100), "CuboPrueba.mesh", true, Vector3D(180, 0, 0));
-		salida->addComponent<Exit>();
-
+		QuackEntity* salida = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Door.lua", "Door", "Salida");
+		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, 3, exit_.second * WALL_SCALE));
 	}
 }
 

@@ -1,30 +1,23 @@
 ﻿EZGame = {
-    entities = {"UI","defaultCamera","sceneLight", "Maze", "Player"}
+    entities = {"Maze","Player", "Enemy", "sceneLight"}
 }
 
-UI = {
-    Active = true,
-    Components = {"Health"},
-    Health={
-        MaxLives = 3
-    }
-}
 
 sceneLight = {
     Active = true,
     Components = {"Transform", "Light"},
 
     Transform = {
-        Position = {-10,10,10},
+        Position = {0,10,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     Light = {
         LightType = 1,
-        DiffuseColor = {1,1,1},
-        SpecularColor = {1,1,1},
-        Direction = {0,0,0},
+        DiffuseColor = {0.3,0.3,0.3},
+        SpecularColor = {0.3,0.3,0.3},
+        Direction = {1,0,0},
         Distance = 1,
         InnerAngle = 30,
         OuterAngle = 90,
@@ -32,36 +25,13 @@ sceneLight = {
     }
 }
 
-defaultCamera = {
-
-    Active = true,
-    
-    Components = {"Transform", "Camera"},
-    
-    Transform = {
-        Position = {50,150,50},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-
-    Camera = {
-        Name = "MainCam",
-        Background = {0,0,0},
-        LookAt = {50,0,50},
-        Width = 0,
-        Height = 0,
-        NearClipDistance = 1,
-        FarClipDistance = 100000,
-        ProjectionType = "Perspective"
-    }
-}
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody", "PlayerMovement"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health"},
 
     Transform = {
-        Position = {10,5,10},
+        Position = {0,3,3},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
@@ -71,26 +41,26 @@ Player = {
     },
 
     Rigidbody = {
-        Type = "Cube",
+        Type = "Box",
         Mass = 1,
         Trigger = false,
         Static = false,
-        PositionConstrains = {0,0,0},
+        PositionConstrains = {0,1,0},
         RotationConstrains = {1,1,1}
     },
 
     Light = {
         LightType = 0,
         DiffuseColor = {1,1,1},
-        SpecularColor = {0,0,1},
-        Direction = {0,0.5,1},
-        Distance = 3000,
+        SpecularColor = {1,1,1},
+        Direction = {0,-1,0},
+        Distance = 5000,
         InnerAngle = 35,
-        OuterAngle = 50,
+        OuterAngle = 60,
         isOn = true
     },
     Lighter ={
-        ChargeSpeed = 0.15,
+        ChargeSpeed = 0.3,
         DischargeSpeed = 0.08
     },
     
@@ -98,7 +68,75 @@ Player = {
     {
         WalkingSpeed = 10,
         RunningSpeed = 10,
-        CameraSpeed = 100
+        CameraSpeed = 200
+    },
+    Health={
+        MaxLives = 3
+    },
+
+    Children ={
+        entities={"defaultCamera"},
+
+        defaultCamera = {
+
+            Active = true,
+            
+            Components = {"Transform", "Camera"},
+            
+            Transform = {
+                Position = {0,400,3},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+
+            Camera = {
+                Name = "MainCam",
+                Background = {1,1,1},
+                LookAt = {0,0,5},
+                Width = 1,
+                Height = 1,
+                NearClipDistance = 1,
+                FarClipDistance = 100000,
+                ProjectionType = "Perspective"
+            },
+            CameraController = {}
+
+        }
+    }
+}
+
+
+Enemy = {
+    Active=true,
+    Tag = "Enemy",
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
+
+    Transform = {
+        Position = {-10,0,0},
+        Scale = {700,700,700},
+        Rotation = {90,40,0}
+    },
+
+    MeshRenderer = {
+        Mesh = "Icosphere.mesh",
+    },
+
+    LoopMovement = {
+        Speed=10,
+        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
+        Distance = 15
+    },
+    Rigidbody = {
+        Type = "Box",
+        Mass = 1,
+        Trigger = true,
+        Static = false,
+        PositionConstrains = {0,1,0},
+        RotationConstrains = {1,1,1}
+    },
+
+    ChasePlayer = {
+        Speed = 10
     }
 }
 

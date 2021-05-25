@@ -13,6 +13,9 @@ typedef std::pair<int, int> Vector2;
 class MazeManager: public Component
 {
 private:
+    QuackEntity* player_;
+
+    float WALL_SCALE = 15;  
     int size_ = 20;                                    // ancho y alto del laberinto
     size_t numLevers_ = 0;                               // numero de manivelas por nivel
     int numGhosts_ = 0;                                 // numero de fantasmas por nivel
@@ -26,7 +29,7 @@ private:
 
     // para las manivelas que va a crear
     float chargeVel_ = 1;
-    float unchargeVel_ = 1;
+    float unchargeVel_ = 0.5;
 
     // distancias de los enemigos (radar del jugador)
     float ghostRadar_ = 0;

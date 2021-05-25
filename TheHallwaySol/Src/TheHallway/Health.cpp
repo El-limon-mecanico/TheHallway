@@ -14,9 +14,8 @@ bool Health::init(luabridge::LuaRef parameterTable)
 
 void Health::start()
 {
-	player_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player");
-	WINDOW_WIDTH = 1000; // PILLAR EL TAMAÑO DE LA PANTALLA
-	initialPos_ = player_->transform()->position();
+	WINDOW_WIDTH = QuackEnginePro::Instance()->getWindoWidth(); 
+	initialPos_ = entity_->transform()->position();
 	for (int i = 0; i < lives_; i++) {
 		std::string name = "heart_" + std::to_string(i);
 		QuackEntity* q = new QuackEntity();
@@ -35,7 +34,7 @@ void Health::hit()
 	lives_--;
 	if (lives_ > 0) {
 		//resetea la posicion del jugador
-		player_->transform()->setGlobalPosition(initialPos_);
+		entity_->transform()->setGlobalPosition(initialPos_);
 		//quita una de las vidas de la UI
 		hearts_.at(lives_)->getComponent<Image>()->setEnable(false);
 	}
@@ -43,6 +42,13 @@ void Health::hit()
 		SceneMng::Instance()->loadScene("Scenes/GameOver.lua", "gameover");
 	}
 
+}
+
+void Health::onTriggerEnter(QuackEntity* other, Vector3D point)
+{
+	if (other->tag() == "Enemy") {
+		hit();
+	}
 }
 
 
