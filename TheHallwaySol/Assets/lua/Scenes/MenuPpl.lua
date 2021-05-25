@@ -10,10 +10,10 @@ UI = {
         Rotation = {0,0,0}
     },
     AudioSource={
-        Source= "Throne.mp3",
-        Volume=0.25,
+        Source="MenusTheHallway.wav",
+        Volume=1,
         Loops=-1,
-        Enabled=true
+        Play=true
     },
     Children = {
         entities={"StartButton","CtrlButton","QuackImage","Title"},

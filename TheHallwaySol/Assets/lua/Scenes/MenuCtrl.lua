@@ -11,10 +11,10 @@ UI = {
         Rotation = {0,0,0}
     },
     AudioSource={
-        Source= "LaPosadaDeLosMuertos.mp3",
+        Source= "MenusTheHallway.wav",
         Volume=0.25,
         Loops=-1,
-        Enabled=true
+        Play=true
     },
     Children={
         entities={"CtrlImage","BackButton"},
