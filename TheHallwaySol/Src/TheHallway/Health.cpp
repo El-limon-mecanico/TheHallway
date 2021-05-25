@@ -14,7 +14,7 @@ bool Health::init(luabridge::LuaRef parameterTable)
 
 void Health::start()
 {
-	WINDOW_WIDTH = 1000; // PILLAR EL TAMA�O DE LA PANTALLA
+	WINDOW_WIDTH = QuackEnginePro::Instance()->getWindoWidth(); 
 	initialPos_ = entity_->transform()->position();
 	for (int i = 0; i < lives_; i++) {
 		std::string name = "heart_" + std::to_string(i);
