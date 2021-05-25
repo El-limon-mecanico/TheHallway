@@ -7,7 +7,7 @@
 #include "QuackEnginePro.h"
 #include "Rigidbody.h"
 #include "SceneMng.h"
-
+#include "ProgressBar.h"
 
 bool Lever::init(luabridge::LuaRef parameterTable)
 {
@@ -34,8 +34,12 @@ void Lever::update()
 		progress_ -= QuackEnginePro::Instance()->time()->deltaTime() * unchargingVel_;
 	}
 
-	if (charged_)
+	if (charged_) {
 		setEnable(false);
+		pb_->setEnable(false);
+	}
+	pb_->setProgress(progress_ / total_);
+
 }
 
 void Lever::onTriggerEnter(QuackEntity* other, Vector3D point)
@@ -43,6 +47,7 @@ void Lever::onTriggerEnter(QuackEntity* other, Vector3D point)
 	if (other->hasComponent<PlayerMovement>())
 	{
 		player_ = true;
+		pb_->setEnable(true);
 	}
 }
 
@@ -51,6 +56,7 @@ void Lever::onTriggerExit(QuackEntity* other, Vector3D point)
 	if (other->hasComponent<PlayerMovement>())
 	{
 		player_ = false;
+		pb_->setEnable(false);
 	}
 }
 
@@ -62,4 +68,11 @@ void Lever::onDisable()
 	
 	entity_->getComponent<MeshRenderer>()->setEnable(false);
 	mazeMng_->activateLever();
+}
+
+void Lever::start()
+{
+	pb_ = entity_->addComponent<ProgressBar>("Lever_"+entity_->name(), true, std::pair<float,float>{ 0.4,0.8 }, std::pair<float, float>{ 400,60 }, "TheHallway/ProgressBar");
+	pb_->setProgress(0);
+	pb_->setEnable(false);
 }
