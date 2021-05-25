@@ -130,6 +130,7 @@ public:
     Vector2 getRandomFloor();
 
     void activateLever();
+    QuackEntity* getPlayer() { return player_; }
 
     // arriba, abajo, izquierda y derecha
     const std::vector<Vector2> DIRECTIONS{ Vector2(0,-1), Vector2(0,1),  Vector2(-1,0), Vector2(1,0) };

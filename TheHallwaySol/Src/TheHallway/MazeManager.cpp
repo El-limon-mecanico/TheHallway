@@ -312,11 +312,12 @@ void MazeManager::writeMap()
 	for (int i = 0; i < numEnemies_; i++)
 	{
 		Vector2 pos = getRandomFloor();
-		QuackEntity* enemy = createObject("Enemigo", Vector3D(pos.first * WALL_SCALE, 3, pos.second * WALL_SCALE), Vector3D(1,1,1));
-		(enemy->addComponent<MazeRunner>())->getPlayer();
+		std::string name = "Slime_" + std::to_string(i);
+		QuackEntity* enemy = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Slime.lua", "Slime", name);
+		enemy->transform()->setGlobalPosition(Vector3D(pos.first * WALL_SCALE, 3, pos.second * WALL_SCALE));
+		enemy->getComponent<MazeRunner>()->setPlayer(player_->transform());
 		enemy->getComponent<MazeRunner>()->setManager(this);
 		enemy->getComponent<MazeRunner>()->setFloorChar(floorC_);
-		enemy->getComponent<Rigidbody>()->setStatic(false);
 	}
 }
 
@@ -408,11 +409,8 @@ void MazeManager::createOuterWalls()
 	v[0]->transform()->setScale(Vector3D(WALL_SCALE * (size_ * 2 + 1), WALL_SCALE * 4, WALL_SCALE));
 	v[1]->transform()->setGlobalPosition(Vector3D(WALL_SCALE * size_, 0, WALL_SCALE * (size_ * 2)));
 	v[1]->transform()->setScale(Vector3D(WALL_SCALE * (size_ * 2 + 1), WALL_SCALE * 4, WALL_SCALE));
+
 	// verticales
-	/*
-		QuackEntity* pared3 = createObject("Pared", Vector3D(0, 0, WALL_SCALE * size_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (size_ * 2 - 1)));
-		QuackEntity* pared4 = createObject("Pared", Vector3D(WALL_SCALE * (size_ * 2), 0, WALL_SCALE * size_), Vector3D(WALL_SCALE, WALL_SCALE, WALL_SCALE * (size_ * 2 - 1)));
-	*/
 	v[2]->transform()->setGlobalPosition(Vector3D(0, 0, WALL_SCALE * size_));
 	v[2]->transform()->setScale(Vector3D(WALL_SCALE, WALL_SCALE * 4, WALL_SCALE * (size_ * 2 - 1)));
 	v[3]->transform()->setGlobalPosition(Vector3D(WALL_SCALE * (size_ * 2), 0, WALL_SCALE * size_));

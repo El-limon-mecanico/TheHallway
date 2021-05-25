@@ -10,12 +10,12 @@ private:
 	Transform* playerTr_ = nullptr;
 	MazeManager* mazeMng_ = nullptr;
 	
-	float speed_ = 10;
-	char floorC_ = '.';
-	bool following_ = false;				// si sigue al jugador, el objetivo se actualizara 
-	float timeToUpdate_ = 2.5;				// cada cuanto tiempo vuelve a buscar el objetivo
-	float timeFollowing_ = 0;				// tiempo que lleva siguiendo al jugador (para no actualizar el camino en cada update)
-	float triggerDistance_ = 25;				// distancia a la que detecta (o pierde) al jugador
+	float speed_;
+	char floorC_;
+	bool following_;				// si sigue al jugador, el objetivo se actualizara 
+	float timeToUpdate_;				// cada cuanto tiempo vuelve a buscar el objetivo
+	float timeFollowing_;				// tiempo que lleva siguiendo al jugador (para no actualizar el camino en cada update)
+	float triggerDistance_;				// distancia a la que detecta (o pierde) al jugador
 	std::pair<int, int> objective_;			// objetivo que va a buscar
 	std::list<std::pair<int, int>>path_;
 
@@ -38,13 +38,10 @@ public:
 	MazeRunner() {}
 	~MazeRunner() {}
 
-	void getPlayer();
-	void setSpeed(float s) { speed_ = s; }
+	void setPlayer(Transform* tr) { playerTr_ = tr; }
 	void setFloorChar(char c) { floorC_ = c; }
-	void setDistance(float d) { triggerDistance_ = d; }
 	void setManager(MazeManager* maze) { mazeMng_ = maze; }
-	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) { return true; }
-	virtual void start();
+	virtual bool init(luabridge::LuaRef parameterTable = { nullptr });
 	virtual void update();
 
 	static std::string GetName() { return "MazeRunner"; }

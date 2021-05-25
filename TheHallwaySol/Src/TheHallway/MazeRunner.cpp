@@ -8,6 +8,20 @@
 #include "InputManager.h"
 
 typedef std::vector<std::vector<char>> map;
+
+
+bool MazeRunner::init(luabridge::LuaRef parameterTable)
+{
+	readVariable<float>(parameterTable, "Speed", &speed_);
+	readVariable<bool>(parameterTable, "Following", &following_);
+	readVariable<float>(parameterTable, "TimeToUpdate", &timeToUpdate_);
+	readVariable<float>(parameterTable, "MaxDistance", &triggerDistance_);
+
+	timeFollowing_ = 0;
+	return true;
+}
+
+
 void MazeRunner::setObjective()
 {
 	// si seguimos al jugador, buscamos la posicion en la que esta
@@ -53,23 +67,23 @@ bool MazeRunner::findPath()
 		for (int i = 0; i < mazeMng_->DIRECTIONS.size(); i++)
 		{
 			// si es suelo lo consideramos adyacente
-			Vector2 aux; 
-			aux.first = vec.first + mazeMng_->DIRECTIONS[i].first;
-			aux.second = vec.second + mazeMng_->DIRECTIONS[i].second;
+			Vector2 adyac; 
+			adyac.first = vec.first + mazeMng_->DIRECTIONS[i].first;
+			adyac.second = vec.second + mazeMng_->DIRECTIONS[i].second;
 
-			if (maze[aux.first][aux.second] == floorC_ && !visited[aux.first][aux.second])
+			if (maze[adyac.first][adyac.second] == floorC_ && !visited[adyac.first][adyac.second])
 			{
-				last[aux.first][aux.second] = vec;
-				visited[aux.first][aux.second] = true;
-				nodes.push_back(aux);
+				last[adyac.first][adyac.second] = vec;
+				visited[adyac.first][adyac.second] = true;
+				nodes.push_back(adyac);
 			}
 		}
 	}
 
 	// metemos el camino que hayamos calculado
-	for (Vector2 aux = objective_; aux != src; aux = last[aux.first][aux.second])
+	for (Vector2 step = objective_; step != src; step = last[step.first][step.second])
 	{
-		path_.push_front(aux);
+		path_.push_front(step);
 	}
 	path_.push_front(src);
 	return visited[objective_.first][objective_.second];
@@ -77,20 +91,37 @@ bool MazeRunner::findPath()
 
 void MazeRunner::move()
 {
-	// nos movemos en direccion al siguiente punto del path
-	// nos movemos al centro de la casilla (no a la esquina superior izquierda)
-	Vector3D obj = mazeMng_->getPositionInWorld(path_.front(), transform->position().y);
-	float distance = (obj - transform->position()).magnitude();
-	
-	// si estamos lo suficientemente cerca del centro de la casilla, pasamos al siguiente objetivo
-	if (distance < WALL_SCALE * 0.25)
+	Vector3D obj;
+
+	// si estamos cerca del jugador, vamos a por el
+	float dist = (transform->position() - playerTr_->position()).magnitude() / WALL_SCALE;
+	if (following_ && dist < WALL_SCALE*0.5)
 	{
-		path_.pop_front(); 
+		obj = playerTr_->position();
 		if (!path_.empty())
 		{
-			obj = mazeMng_->getPositionInWorld(path_.front(), transform->position().y);
+			path_.pop_front();
+		}
+		path_.push_front(mazeMng_->getPositionInMap(playerTr_->position()));
+	}
+	else
+	{
+		// nos movemos en direccion al siguiente punto del path
+		// nos movemos al centro de la casilla (no a la esquina superior izquierda)
+		obj = mazeMng_->getPositionInWorld(path_.front(), transform->position().y);
+		float distance = (obj - transform->position()).magnitude();
+
+		// si estamos lo suficientemente cerca del centro de la casilla, pasamos al siguiente objetivo
+		if (distance < WALL_SCALE * 0.25)
+		{
+			path_.pop_front();
+			if (!path_.empty())
+			{
+				obj = mazeMng_->getPositionInWorld(path_.front(), transform->position().y);
+			}
 		}
 	}
+	
 	transform->lookAt(obj);
 	entity_->getComponent<Rigidbody>()->setVelocity(transform->forward * speed_);
 }
@@ -132,16 +163,6 @@ inline bool MazeRunner::sameDirection(Vector2 a, Vector2 b)
 		(a.second < 0 && b.second < 0) || (a.second > 0 && b.second > 0);
 }
 
-void MazeRunner::getPlayer()
-{
-	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
-	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
-}
-
-void MazeRunner::start()
-{
-	getPlayer();
-}
 
 void MazeRunner::update()
 {
