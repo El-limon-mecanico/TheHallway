@@ -1,14 +1,7 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy"}
+    entities = {"Maze","Player", "Enemy", "sceneLight"}
 }
 
-UI = {
-    Active = true,
-    Components = {"Health"},
-    Health={
-        MaxLives = 3
-    }
-}
 
 sceneLight = {
     Active = true,
@@ -88,10 +81,10 @@ Player = {
 
             Active = true,
             
-            Components = {"Transform", "Camera", "CameraController"},
+            Components = {"Transform", "Camera"},
             
             Transform = {
-                Position = {0,7,3},
+                Position = {0,400,3},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
@@ -99,7 +92,7 @@ Player = {
             Camera = {
                 Name = "MainCam",
                 Background = {1,1,1},
-                LookAt = {0,7,5},
+                LookAt = {0,0,5},
                 Width = 0,
                 Height = 0,
                 NearClipDistance = 1,

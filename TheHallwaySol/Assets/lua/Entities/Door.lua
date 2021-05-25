@@ -1,7 +1,7 @@
-Manivela ={
+Door ={
     Active = true,
-    Tag = "Manivela",
-    Components = {"Transform","MeshRenderer", "Rigidbody", "Lever"},
+    Tag = "Door",
+    Components = {"Transform","MeshRenderer", "Rigidbody", "Exit"},
 
     Transform = {
         Position = {0,0,0},
@@ -22,9 +22,5 @@ Manivela ={
         RotationConstrains = {1,1,1}
     },
 
-    Lever = {
-        Total = 10,
-        ChargingVel = 1,
-        UncharginVel = 0.5
-    }
+    Exit = {}
 }
