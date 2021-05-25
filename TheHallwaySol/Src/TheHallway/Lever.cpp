@@ -9,6 +9,14 @@
 #include "SceneMng.h"
 
 
+bool Lever::init(luabridge::LuaRef parameterTable)
+{
+	readVariable<float>(parameterTable, "Total", &total_);
+	readVariable<float>(parameterTable, "ChargingVel", &chargingVel_);
+	readVariable<float>(parameterTable, "UncharginVel", &unchargingVel_);
+	return true;
+}
+
 void Lever::update()
 {
 	// si el jugador esta en contacto con la manivela y presiona la tecla, se carga la manivela
