@@ -1,4 +1,4 @@
-pause = {
+Pause = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 

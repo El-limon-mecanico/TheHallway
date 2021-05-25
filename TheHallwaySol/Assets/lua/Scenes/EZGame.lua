@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy", "sceneLight"}
+    entities = {"Maze","Player", "Enemy"}
 }
 
 
@@ -81,18 +81,18 @@ Player = {
 
             Active = true,
             
-            Components = {"Transform", "Camera"},
+            Components = {"Transform", "Camera","CameraController"},
             
             Transform = {
-                Position = {0,400,3},
+                Position = {0,7,3},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
 
             Camera = {
                 Name = "MainCam",
-                Background = {0.46,0.49,0.48},
-                LookAt = {0,0,5},
+                Background = {0,0,0},
+                LookAt = {0,7,5},
                 Width = 1,
                 Height = 1,
                 xProp = 16,

@@ -1,14 +1,20 @@
-gameover = {
+GameOver = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
 UI = {
     Active=true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source= "MenusTheHallway.wav",
+        Volume=0.25,
+        Loops=-1,
+        Play=true
     },
     Children={
         entities={"GameOverText","MainMenuButton","SelectLevelButton"},
@@ -31,7 +37,7 @@ UI = {
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.15,-0.1  },
+                Position = {0.15,-0.01  },
                 Size = {1000,250}
                 },
         },

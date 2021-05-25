@@ -1,4 +1,4 @@
-lvlSelector = {
+LvlSelector = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 

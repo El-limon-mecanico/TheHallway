@@ -1,4 +1,4 @@
-menuppl = {
+MenuPpl = {
     entities = {"defaultCamera", "sceneLight", "UI"}
 }
 UI = {
@@ -36,7 +36,7 @@ UI = {
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
-            Position = {0.25,-0.1  },
+            Position = {0.25,-0.01},
             Size = {600,250}
         }
     },

@@ -20,7 +20,6 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 		return false ;
 
 	InputManager::Instance()->captureMouse();
-	InputManager::Instance()->setMouseVisibility(false);
 
 	return true;
 }

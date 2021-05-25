@@ -1,4 +1,4 @@
-menuctrl = {
+MenuCtrl = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
