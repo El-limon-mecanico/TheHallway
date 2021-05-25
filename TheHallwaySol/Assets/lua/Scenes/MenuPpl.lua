@@ -10,7 +10,7 @@ UI = {
         Rotation = {0,0,0}
     },
     AudioSource={
-        Source= "MenuPplTheHallway.wav",
+        Source= "Throne.mp3",
         Volume=0.25,
         Loops=-1,
         Enabled=true
@@ -61,7 +61,7 @@ CtrlButton = {
                 BRColor = "FFA20410",
                 Position = {0.3,0.65},
                 Size = {400,100},
-                CallBackFunction = "menupplToControls"
+                CallBackFunction = "toControls"
             }
         },
 StartButton = {
@@ -85,7 +85,7 @@ StartButton = {
                 BRColor = "FFA20410",
                 Position = {0.3,0.35},
                 Size = {400,100},
-                CallBackFunction = "menupplToLvlSelector"
+                CallBackFunction = "toLvlSelector"
             }
         },
     QuackImage={
@@ -140,14 +140,17 @@ defaultCamera = {
         Rotation = {0,0,0}
     },
 
-    Camera = {
-        Name = "MenuPplCam",
+    Camera = {   
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
-        Width = 0,
-        Height = 0,
+        Width = 1,
+        Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }

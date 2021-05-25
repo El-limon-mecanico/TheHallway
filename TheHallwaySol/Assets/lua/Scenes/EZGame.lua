@@ -98,13 +98,16 @@ Player = {
 
             Camera = {
                 Name = "MainCam",
-                Background = {1,1,1},
+                Background = {0.46,0.49,0.48},
                 LookAt = {0,7,5},
-                Width = 0,
-                Height = 0,
+                Width = 1,
+                Height = 1,
+                xProp = 16,
+                yProp = 9,
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
-                ProjectionType = "Perspective"
+                ProjectionType = "Perspective",
+                zOrder = 0
             },
             CameraController = {}
 

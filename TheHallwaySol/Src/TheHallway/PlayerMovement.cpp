@@ -8,6 +8,8 @@
 #include "CameraController.h"
 #include <iostream>
 
+#include "SceneMng.h"
+
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
 	bool correct  = readVariable<float>(parameterTable, "WalkingSpeed",&walkingSpeed_);
@@ -22,6 +24,8 @@ bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 
 	return true;
 }
+
+
 
 void PlayerMovement::start() {
 	rb_ = entity_->getComponent<Rigidbody>();
@@ -60,4 +64,12 @@ void PlayerMovement::move() {
 void PlayerMovement::update() {
 	rotate();
 	move();
+	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_ESCAPE)) {
+		InputManager::Instance()->setMouseVisibility(true);
+		SceneMng::Instance()->pushNewScene("Scenes/Pause.lua", "pause");
+	}
+}
+void PlayerMovement::onEnable()
+{
+	InputManager::Instance()->setMouseVisibility(false);
 }

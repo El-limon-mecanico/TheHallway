@@ -11,7 +11,7 @@ UI = {
         Rotation = {0,0,0}
     },
     AudioSource={
-        Source= "MenuPplTheHallway.wav",
+        Source= "LaPosadaDeLosMuertos.mp3",
         Volume=0.25,
         Loops=-1,
         Enabled=true
@@ -58,7 +58,7 @@ UI = {
             BRColor = "FFA20410",
             Position = {0.001,0.01},
             Size = {100,50},
-            CallBackFunction = "controlsToMenuppl"
+            CallBackFunction = "back"
         },
     }
 }
@@ -95,13 +95,16 @@ defaultCamera = {
     },
 
     Camera = {
-        Name = "MenuCtrl",
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
-        Width = 0,
-        Height = 0,
+        Width = 1,
+        Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }

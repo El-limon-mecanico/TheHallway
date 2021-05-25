@@ -56,7 +56,7 @@ UI = {
             BRColor = "FFA20410",
             Position = {0.3,0.35},
             Size = {400,100},
-            CallBackFunction = "gOtoMainMenu"
+            CallBackFunction = "toMenuppl"
         },},
         SelectLevelButton = {
             Active =true,
@@ -79,7 +79,7 @@ UI = {
             BRColor = "FFA20410",
             Position = {0.3,0.7},
             Size = {400,100},
-            CallBackFunction = "gOtoLvlSelector"
+            CallBackFunction = "toLvlSelector"
         },
     }
 }
@@ -116,13 +116,16 @@ defaultCamera = {
     },
 
     Camera = {
-        Name = "MenuCtrl",
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
-        Width = 0,
-        Height = 0,
+        Width = 1,
+        Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }
