@@ -1,7 +1,7 @@
 Ghost = {
     Active=true,
     Tag = "Enemy",
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer","AudioSource"},
 
     Transform = {
         Position = {-10,0,0},
@@ -30,5 +30,13 @@ Ghost = {
 
     ChasePlayer = {
         Speed = 10
+    },
+    AudioSource={
+        Source= "Ghost.wav",
+        Volume=4,
+        Loops=-1,
+        Play=false,
+        Enabled =true,
+        D3=true
     }
 }

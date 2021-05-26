@@ -6,7 +6,7 @@
 #include "Lever.h"
 #include "Exit.h"
 #include "MazeRunner.h"
-
+#include "AudioSource.h"
 MazeManager::MazeManager()
 {
 }
@@ -316,6 +316,7 @@ void MazeManager::writeMap()
 		enemy->getComponent<MazeRunner>()->setPlayer(player_->transform());
 		enemy->getComponent<MazeRunner>()->setManager(this);
 		enemy->getComponent<MazeRunner>()->setFloorChar(floorC_);
+		enemy->getComponent<AudioSource>()->play();
 	}
 }
 

@@ -28,7 +28,7 @@ sceneLight = {
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health","AudioListener"},
 
     Transform = {
         Position = {0,3,3},
@@ -73,7 +73,7 @@ Player = {
     Health={
         MaxLives = 3
     },
-
+    AudioListener={},
     Children ={
         entities={"defaultCamera","LighterSound","WalkSound","RunSound","ScreamSounds"},
 
@@ -151,7 +151,7 @@ ScreamSounds={
             Active=true,
             Components={"AudioSource"},
             AudioSource={
-                Source= "GirlScream.mp3",
+                Source= "GirlScream.ogg",
                 Volume=1,
                 Loops=0,
                 Play=false,
@@ -163,7 +163,7 @@ ScreamSounds={
             Active=true,
             Components={"AudioSource"},
             AudioSource={
-                Source= "BoyScream.mp3",
+                Source= "BoyScream.ogg",
                 Volume=1,
                 Loops=0,
                 Play=false,
@@ -180,7 +180,7 @@ ScreamSounds={
 Enemy = {
     Active=true,
     Tag = "Enemy",
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
+    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer","AudioSource"},
 
     Transform = {
         Position = {-10,0,0},
@@ -208,6 +208,14 @@ Enemy = {
 
     ChasePlayer = {
         Speed = 10
+    },
+    AudioSource={
+        Source= "Ghost.wav",
+        Volume=4,
+        Loops=-1,
+        Play=false,
+        Enabled =true,
+        D3=true
     }
 }
 

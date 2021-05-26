@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "QuackEnginePro.h"
 #include "AudioSource.h";
+#include "PlayerMovement.h"
 bool Health::init(luabridge::LuaRef parameterTable)
 {
 	bool correct = readVariable<int>(parameterTable, "MaxLives",&lives_);
@@ -36,6 +37,7 @@ void Health::start()
 void Health::hit()
 {
 	lives_--;
+	entity_->getComponent<PlayerMovement>()->setMoving(false);
 	if (lives_ > 0) {
 		//resetea la posicion del jugador
 		entity_->transform()->setGlobalPosition(initialPos_);

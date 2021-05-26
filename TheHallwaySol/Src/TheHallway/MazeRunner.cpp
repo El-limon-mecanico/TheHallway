@@ -6,7 +6,7 @@
 #include "Rigidbody.h"
 
 #include "InputManager.h"
-
+#include "AudioSource.h"
 typedef std::vector<std::vector<char>> map;
 
 
