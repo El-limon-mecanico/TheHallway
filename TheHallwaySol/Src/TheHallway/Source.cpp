@@ -16,6 +16,7 @@
 #include "LoopMovement.h"
 #include "ChasePlayer.h"
 #include "MinimapController.h"
+#include "MazeRunner.h"
 
 #if (defined _DEBUG) //|| !(defined _WIN64)
 int main() {
@@ -40,6 +41,8 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<ChasePlayer>();
 		FactoryManager::instance()->add<Health>();
 		FactoryManager::instance()->add<MinimapController>();
+		FactoryManager::instance()->add<MazeRunner>();
+
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));
 		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "menuppl");

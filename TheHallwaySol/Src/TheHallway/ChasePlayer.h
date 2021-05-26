@@ -14,8 +14,10 @@ private:
 	float maxDistance_ = 25;
 	Vector3D direction_ = Vector3D({ 0,0,0 });
 public:
-	ChasePlayer() {}
+	ChasePlayer(float speed = 0): speed_(speed) {}
 	~ChasePlayer() {}
+	void setTriggerDistance(float d) { maxDistance_ = d; }
+	void getPlayer();
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 	void start() override;
 	void update() override;

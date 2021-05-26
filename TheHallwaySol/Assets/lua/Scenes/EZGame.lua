@@ -1,14 +1,7 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy", "Minimap", "Minimap2"}
+    entities = {"Maze","Player", "Enemy", "Minimap"}
 }
 
-UI = {
-    Active = true,
-    Components = {"Health"},
-    Health={
-        MaxLives = 3
-    }
-}
 
 sceneLight = {
     Active = true,
@@ -48,7 +41,7 @@ Player = {
     },
 
     Rigidbody = {
-        Type = "Cube",
+        Type = "Box",
         Mass = 1,
         Trigger = false,
         Static = false,
@@ -136,7 +129,7 @@ Enemy = {
         Distance = 15
     },
     Rigidbody = {
-        Type = "Cube",
+        Type = "Box",
         Mass = 1,
         Trigger = true,
         Static = false,
@@ -160,11 +153,17 @@ Maze = {
     },
 
     MazeManager = {
-        Size = 5,
-        Holes = 3,
+        Active = true,
+        Size = 6,
+        Holes = 100,
         Levers = 1,
-        ChargeVel = 1,
-        UnchargeVel = 2
+        ChargeVel = 5,
+        UnchargeVel = 2,
+	    Ghosts = 0,
+        Enemies = 1,
+        PointsGhosts = 4,
+        GhostRadar = 15,
+        EnemyRadar = 20
     }
 }
 

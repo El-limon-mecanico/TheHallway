@@ -25,6 +25,8 @@ public:
 	LoopMovement(float speed=0,std::vector<Vector3D>objectives=std::vector<Vector3D>(),int next=0):speed_(speed),objectives_(objectives),actualObjective_(next) {}
 	///Destructor por defecto
 	~LoopMovement() {}
+	void setTriggerDistance(float d) { playerTriggerDistance_ = d; }
+	void getPlayer();
 	///Posibilita leer la componente desde lua
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 	//Pone al objeto mirando al lugar adecuado y setea la gravedad a 0
@@ -36,4 +38,6 @@ public:
 
 	virtual void onEnable();
 	virtual void onDisable();
+
+	void findObjective();
 };
