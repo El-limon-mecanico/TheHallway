@@ -65,7 +65,7 @@ void PlayerMovement::update() {
 	move();
 	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_ESCAPE)) {
 		InputManager::Instance()->setMouseVisibility(true);
-		SceneMng::Instance()->pushNewScene("Scenes/Pause.lua", "pause");
+		SceneMng::Instance()->pushNewScene("Scenes/Pause.lua", "Pause");
 	}
 }
 void PlayerMovement::onEnable()
