@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy"}
+    entities = {"Maze","Player", "Enemy", "Minimap"}
 }
 
 
@@ -100,8 +100,9 @@ Player = {
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
                 ProjectionType = "Perspective",
-                zOrder = 0
+                zOrder = 1
             },
+
             CameraController = {}
 
         }
@@ -152,6 +153,7 @@ Maze = {
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
+
     MazeManager = {
         Active = true,
         Size = 6,
@@ -170,5 +172,44 @@ Maze = {
         Volume=1,
         Loops=-1,
         Play=true
+    }
+}
+
+Minimap = 
+{
+    Active = true,
+    Components = {"Transform", "Camera", "MinimapController", "Image"},
+    
+    Transform = {
+        Position = {0,100,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
+
+    Camera = {
+        Name = "MinimapCam",
+        Background = {0,0,0},
+        LookAt = {0,0,0},
+        Top = 0.05,
+        Left = 0.78,
+        Width = 0.2,
+        Height = 0.33,
+        NearClipDistance = 1,
+        FarClipDistance = 100000,
+        ProjectionType = "Perspective",
+        zOrder = 0
+    },
+
+    MinimapController = {},
+
+    Image = { 
+        Active = true,
+        Style= "TheHallway/StaticImage",
+        Name = "MapFrame",
+        Image = "MapFrame.png",
+        Background = false,
+        Border = false,
+        Position = {0.776, 0.04},
+        Size = {236, 220}
     }
 }
