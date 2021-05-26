@@ -10,6 +10,7 @@ enum PrefabType;
 const float WALL_SCALE = 5;
 
 typedef std::pair<int, int> Vector2;
+
 class MazeManager: public Component
 {
 private:
@@ -27,13 +28,8 @@ private:
     Vector2 invalidDir_;                                // por control
     Vector2 exit_;
 
-    // para las manivelas que va a crear
-    float chargeVel_ = 1;
-    float unchargeVel_ = 0.5;
-
     // distancias de los enemigos (radar del jugador)
     float ghostRadar_ = 0;
-    float enemyRadar_ = 0;
 
     std::vector<std::vector<char>> map_;
     char wallC_ = 'W';
@@ -135,4 +131,5 @@ public:
     // arriba, abajo, izquierda y derecha
     const std::vector<Vector2> DIRECTIONS{ Vector2(0,-1), Vector2(0,1),  Vector2(-1,0), Vector2(1,0) };
 };
+
 

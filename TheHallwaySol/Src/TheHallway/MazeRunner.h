@@ -46,3 +46,4 @@ public:
 
 	static std::string GetName() { return "MazeRunner"; }
 };
+

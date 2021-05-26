@@ -22,13 +22,10 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	readVariable<int>(parameterTable, "Ghosts", &numGhosts_);
 	readVariable<int>(parameterTable, "Enemies", &numEnemies_);
 	readVariable<float>(parameterTable, "GhostRadar", &ghostRadar_);
-	readVariable<float>(parameterTable, "EnemyRadar", &enemyRadar_);
 	readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
 
 	// para las palancas
 	readVariable<size_t>(parameterTable, "Levers", &numLevers_);
-	readVariable<float>(parameterTable, "ChargeVel", &chargeVel_);
-	readVariable<float>(parameterTable, "UnchargeVel", &unchargeVel_);
 	
 	invalidDir_ = Vector2(-size_, -size_);
 	visitedCells_ = std::vector <std::vector<bool>>(size_, std::vector<bool>(size_, false));
@@ -291,7 +288,7 @@ void MazeManager::writeMap()
 				QuackEntity* man = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Lever.lua", "Manivela", name);
 				man->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 3, i * WALL_SCALE));
 				Lever* l = man->getComponent<Lever>();
-				l->setMazeMng(this); l->setChargingVel(chargeVel_); l->setUnchargingVel(unchargeVel_);
+				l->setMazeMng(this);
 			}
 
 			// situamos al jugador en su sitio

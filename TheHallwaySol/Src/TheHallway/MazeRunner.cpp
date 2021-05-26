@@ -51,13 +51,11 @@ bool MazeRunner::findPath()
 	Vector2 src = mazeMng_->getPositionInMap(entity_->transform()->position());
 	path_.clear();
 
-	std::vector<std::vector<int>>distance(maze.size(), std::vector(maze.size(), INT_MAX));
 	std::vector<std::vector<bool>>visited(maze.size(), std::vector(maze.size(), false));
 	std::vector<std::vector<Vector2>>last(maze.size(), std::vector(maze.size(), Vector2(-1,-1)));
 	std::list<Vector2>nodes;
 
 	nodes.push_back(src);
-	distance[src.first][src.second] = 0;
 	visited[src.first][src.second] = true;
 	
 	// algoritmo bfs, pero cortamos cuando lleguemos al destino
@@ -79,11 +77,13 @@ bool MazeRunner::findPath()
 			}
 		}
 	}
-
 	// metemos el camino que hayamos calculado
-	for (Vector2 step = objective_; step != src; step = last[step.first][step.second])
+	Vector2 step = objective_;
+	volatile Vector2 aux = step;	// necesitamos que sea volatile porque si no, lo optimiza y peta : D
+	for (; step != src; step = last[aux.first][aux.second])
 	{
-		path_.push_front(step);
+		aux.first = step.first; aux.second = step.second;
+		path_.push_front(Vector2(aux.first, aux.second));
 	}
 	path_.push_front(src);
 	return visited[objective_.first][objective_.second];
