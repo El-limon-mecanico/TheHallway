@@ -15,6 +15,7 @@
 #include "QuackUI.h"
 #include "LoopMovement.h"
 #include "ChasePlayer.h"
+#include "MinimapController.h"
 #include "MazeRunner.h"
 
 #if (defined _DEBUG) //|| !(defined _WIN64)
@@ -39,6 +40,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		FactoryManager::instance()->add<Lighter>();
 		FactoryManager::instance()->add<ChasePlayer>();
 		FactoryManager::instance()->add<Health>();
+		FactoryManager::instance()->add<MinimapController>();
 		FactoryManager::instance()->add<MazeRunner>();
 
 		UIElement::addScheme("TheHallway.scheme");
