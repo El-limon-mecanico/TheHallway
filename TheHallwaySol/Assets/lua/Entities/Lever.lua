@@ -1,7 +1,7 @@
 Manivela ={
     Active = true,
     Tag = "Manivela",
-    Components = {"Transform","MeshRenderer", "Rigidbody", "Lever"},
+    Components = {"Transform","MeshRenderer", "Rigidbody", "Lever","AudioSource"},
 
     Transform = {
         Position = {0,0,0},
@@ -26,5 +26,13 @@ Manivela ={
         Total = 10,
         ChargingVel = 1,
         UncharginVel = 0.5
+    },
+    AudioSource={
+        Source="Throne.mp3",
+        Volume=0.25,
+        Loops=-1,
+        Play=false,
+        D3=false,
+        Enabled=true
     }
 }

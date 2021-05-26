@@ -1,7 +1,7 @@
 #include "Component.h"
 
 class Rigidbody;
-
+class AudioSource;
 class PlayerMovement : public Component {
 protected:
 
@@ -12,7 +12,8 @@ private:
 	Rigidbody* rb_;
 	bool moving_ = true;
 	bool running = false;
-
+	AudioSource* walkSound_ = nullptr;
+	AudioSource* runningSound_ = nullptr;
 public:
 	PlayerMovement() {}
 	~PlayerMovement() {}

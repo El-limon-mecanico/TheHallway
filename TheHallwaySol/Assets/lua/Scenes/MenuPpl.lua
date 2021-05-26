@@ -11,7 +11,7 @@ UI = {
     },
     AudioSource={
         Source="MenusTheHallway.wav",
-        Volume=1,
+        Volume=0.25,
         Loops=-1,
         Play=true
     },

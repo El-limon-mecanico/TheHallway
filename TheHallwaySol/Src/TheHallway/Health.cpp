@@ -5,7 +5,7 @@
 #include "Scene.h"
 #include "InputManager.h"
 #include "QuackEnginePro.h"
-
+#include "AudioSource.h";
 bool Health::init(luabridge::LuaRef parameterTable)
 {
 	bool correct = readVariable<int>(parameterTable, "MaxLives",&lives_);
@@ -25,7 +25,11 @@ void Health::start()
 		SceneMng::Instance()->getCurrentScene()->addEntity(q);
 		hearts_.push_back(q);
 	}
-
+	Transform* screamsTransform=transform->getChildByName("ScreamSounds")->getComponent<Transform>();
+	//Se hace rand()+1 ya que sino el hijo en la posicion 0 tendria mas posibilidades que el resto
+	int child = (rand()+1) % screamsTransform->getChildren().size();
+	std::cout << child << "\n";
+	scream_=screamsTransform->getChild(child)->getComponent<AudioSource>();
 }
 
 
@@ -49,6 +53,7 @@ void Health::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->tag() == "Enemy") {
 		hit();
+		scream_->play();
 	}
 }
 

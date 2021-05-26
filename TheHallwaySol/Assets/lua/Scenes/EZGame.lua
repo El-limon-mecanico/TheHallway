@@ -75,7 +75,7 @@ Player = {
     },
 
     Children ={
-        entities={"defaultCamera"},
+        entities={"defaultCamera","LighterSound","WalkSound","RunSound","ScreamSounds"},
 
         defaultCamera = {
 
@@ -105,8 +105,75 @@ Player = {
 
             CameraController = {}
 
-        }
+        },
+        LighterSound={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "ChargingLighter.wav",
+                Volume=1,
+                Loops=-1,
+                Play=false,
+                Enabled =true,
+                D3=false
+            }
+        },
+        WalkSound={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "Steps.ogg",
+                Volume=1,
+                Loops=-1,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+    },
+    RunSound={
+        Active=true,
+        Components={"AudioSource"},
+        AudioSource={
+            Source= "LaRajaDeTuFalda.mp3",
+            Volume=1,
+            Loops=-1,
+            Play=false,
+            Enabled =true,
+            D3=false
+        },
+},
+ScreamSounds={
+    Active=true,
+    Components={},
+    Children={
+        entities={"GirlScream","BoyScream"},
+        GirlScream={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "GirlScream.mp3",
+                Volume=1,
+                Loops=0,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+        },
+        BoyScream={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "BoyScream.mp3",
+                Volume=1,
+                Loops=0,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+        },
     }
+}
+}
 }
 
 
@@ -169,9 +236,9 @@ Maze = {
     },
     AudioSource={
         Source= "TheHallway.wav",
-        Volume=1,
+        Volume=0.1,
         Loops=-1,
-        Play=true
+        Play=true,
     }
 }
 

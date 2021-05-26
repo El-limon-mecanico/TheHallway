@@ -2,7 +2,7 @@
 #include "Component.h"
 
 class MazeManager;
-
+class AudioSource;
 class Lever : public Component
 {
 private:
@@ -15,7 +15,7 @@ private:
     bool charged_ = false;
 
     MazeManager* mazeMng_ = nullptr;
-
+    AudioSource* sound_ = nullptr;
 public:
     Lever() {}
     ~Lever() {}
@@ -25,7 +25,7 @@ public:
     void setChargingVel(float v) { chargingVel_ = v; }
     void setUnchargingVel(float v) { unchargingVel_ = v; }
     void setMazeMng(MazeManager* mng) { mazeMng_ = mng; }
-
+    virtual void start() override;
     virtual bool init(luabridge::LuaRef parameterTable = { nullptr });
     virtual void update();
     virtual void onTriggerEnter(QuackEntity* other, Vector3D point);

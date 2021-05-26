@@ -7,7 +7,12 @@
 #include "QuackEnginePro.h"
 #include "Rigidbody.h"
 #include "SceneMng.h"
+#include "AudioSource.h"
 
+void Lever::start()
+{
+	sound_ = entity_->getComponent<AudioSource>();
+}
 
 bool Lever::init(luabridge::LuaRef parameterTable)
 {
@@ -26,14 +31,18 @@ void Lever::update()
 		std::cout << progress_ << ", " << total_ << std::endl;
 		if (progress_ >= total_)
 			charged_ = true;
+		if(!sound_->isPlaying())
+		sound_->play();
 	}
 	
 	// si se puede descargar la manivela, se descarga
-	else if (progress_ > 0)
-	{
-		progress_ -= QuackEnginePro::Instance()->time()->deltaTime() * unchargingVel_;
+	else {
+		if (progress_ > 0)
+		{
+			progress_ -= QuackEnginePro::Instance()->time()->deltaTime() * unchargingVel_;
+		}
+			sound_->stop();
 	}
-
 	if (charged_)
 		finish();
 }
@@ -57,7 +66,7 @@ void Lever::onTriggerExit(QuackEntity* other, Vector3D point)
 void Lever::finish()
 {
 	assert(mazeMng_);
-	
+	sound_->stop();
 	mazeMng_->activateLever();
 	entity_->destroy();
 }
