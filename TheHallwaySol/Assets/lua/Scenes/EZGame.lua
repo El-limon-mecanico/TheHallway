@@ -81,7 +81,7 @@ Player = {
 
             Active = true,
             
-            Components = {"Transform", "Camera","CameraController"},
+            Components = {"Transform", "Camera", "CameraController"},
             
             Transform = {
                 Position = {0,7,3},
@@ -153,11 +153,17 @@ Maze = {
         Rotation = {0,0,0}
     },
     MazeManager = {
-        Size = 5,
-        Holes = 3,
+        Active = true,
+        Size = 6,
+        Holes = 100,
         Levers = 1,
-        ChargeVel = 1,
-        UnchargeVel = 2
+        ChargeVel = 5,
+        UnchargeVel = 2,
+        Ghosts = 0,
+        Enemies = 1,
+        PointsGhosts = 4,
+        GhostRadar = 15,
+        EnemyRadar = 20
     },
     AudioSource={
         Source= "TheHallway.wav",
