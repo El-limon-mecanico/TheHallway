@@ -6,11 +6,10 @@ private:
 	static void ToEZGame();
 	static void toMedGame();
 	static void hardGame();
-	static void fromMainMenuToControls();
-	static void fromMainMenuToLvlSelector();
-	static void fromControlsToMain();
-	static void fromGameOverToLvlSelector();
-	static void fromGameOverToMain();
+	static void toControls();
+	static void back();
+	static void toLvlSelector();
+	static void toMenuPpl();
 public:
 	GameCallbacks() {};
 	~GameCallbacks() {};

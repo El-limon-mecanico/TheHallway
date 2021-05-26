@@ -6,12 +6,23 @@
 #include "Scene.h"
 #include "ChasePlayer.h"
 
+void LoopMovement::getPlayer()
+{
+	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
+	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
+}
+
 bool LoopMovement::init(luabridge::LuaRef parameterTable)
 {
-	readVariable<float>(parameterTable, "Speed", &speed_);
-	readVariable<float>(parameterTable, "Distance", &playerTriggerDistance_);
+	bool correct = true;
+	correct &= readVariable<float>(parameterTable, "Speed",&speed_);
+	correct &= readVariable<float>(parameterTable, "Distance",&playerTriggerDistance_);
 	LuaRef ob = NULL;
-	readVariable<LuaRef>(parameterTable, "Objectives",&ob);
+	correct &= readVariable<LuaRef>(parameterTable, "Objectives",&ob);
+
+	if (!correct)
+		return false;
+
 	for (size_t i = 1; i <= ob.length(); i++)
 	{
 		Vector3D v;
@@ -44,8 +55,7 @@ void LoopMovement::updateVelocity()
 }
 void LoopMovement::start()
 {
-	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
-	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
+	getPlayer();
 	assert(entity_->hasComponent<Rigidbody>());
 	rb_ = entity_->getComponent<Rigidbody>();
 	rb_->setGravity({ 0,0,0 });
@@ -67,6 +77,21 @@ void LoopMovement::update() {
 /// </summary>
 void LoopMovement::onEnable()
 {
+	findObjective();
+	if(rb_)
+		updateVelocity();
+}
+
+void LoopMovement::onDisable()
+{
+	// volvemos al comportamiento de persecucion
+	// assert porque no tenemos otro movimiento para los enemigos
+	assert(entity_->hasComponent<ChasePlayer>());
+	entity_->getComponent<ChasePlayer>()->setEnable(true);
+}
+
+void LoopMovement::findObjective()
+{
 	// buscamos el objetivo mas cercano para volver al circuito
 	float distanceMagn = INT_MAX;
 	int index = 0;
@@ -83,15 +108,5 @@ void LoopMovement::onEnable()
 
 	// cambiamos el objetivo por el que hemos calculado
 	actualObjective_ = index;
-	if(rb_)
-		updateVelocity();
-}
-
-void LoopMovement::onDisable()
-{
-	// volvemos al comportamiento de persecucion
-	// assert porque no tenemos otro movimiento para los enemigos
-	assert(entity_->hasComponent<ChasePlayer>());
-	entity_->getComponent<ChasePlayer>()->setEnable(true);
 }
 

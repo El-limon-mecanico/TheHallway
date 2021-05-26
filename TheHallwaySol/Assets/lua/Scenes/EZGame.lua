@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy", "sceneLight"}
+    entities = {"Maze","Player", "Enemy", "Minimap"}
 }
 
 
@@ -88,24 +88,28 @@ Player = {
 
             Active = true,
             
-            Components = {"Transform", "Camera"},
+            Components = {"Transform", "Camera", "CameraController"},
             
             Transform = {
-                Position = {0,400,3},
+                Position = {0,7,3},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
 
             Camera = {
                 Name = "MainCam",
-                Background = {1,1,1},
-                LookAt = {0,0,5},
+                Background = {0,0,0},
+                LookAt = {0,7,5},
                 Width = 1,
                 Height = 1,
+                xProp = 16,
+                yProp = 9,
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
-                ProjectionType = "Perspective"
+                ProjectionType = "Perspective",
+                zOrder = 1
             },
+
             CameraController = {}
 
         }
@@ -149,18 +153,70 @@ Enemy = {
 
 Maze = {
     Active = true,
-    Components = {"Transform", "MazeManager"},
+    Components = {"Transform", "MazeManager","AudioSource"},
 
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
+
     MazeManager = {
-        Size = 5,
-        Holes = 3,
+        Active = true,
+        Size = 6,
+        Holes = 100,
         Levers = 1,
-        ChargeVel = 1,
-        UnchargeVel = 2
+        ChargeVel = 5,
+        UnchargeVel = 2,
+        Ghosts = 0,
+        Enemies = 1,
+        PointsGhosts = 4,
+        GhostRadar = 15,
+        EnemyRadar = 20
+    },
+    AudioSource={
+        Source= "TheHallway.wav",
+        Volume=1,
+        Loops=-1,
+        Play=true
+    }
+}
+
+Minimap = 
+{
+    Active = true,
+    Components = {"Transform", "Camera", "MinimapController", "Image"},
+    
+    Transform = {
+        Position = {0,100,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
+
+    Camera = {
+        Name = "MinimapCam",
+        Background = {0,0,0},
+        LookAt = {0,0,0},
+        Top = 0.05,
+        Left = 0.78,
+        Width = 0.2,
+        Height = 0.33,
+        NearClipDistance = 1,
+        FarClipDistance = 100000,
+        ProjectionType = "Perspective",
+        zOrder = 0
+    },
+
+    MinimapController = {},
+
+    Image = { 
+        Active = true,
+        Style= "TheHallway/StaticImage",
+        Name = "MapFrame",
+        Image = "MapFrame.png",
+        Background = false,
+        Border = false,
+        Position = {0.776, 0.04},
+        Size = {236, 220}
     }
 }

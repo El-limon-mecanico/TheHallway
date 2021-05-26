@@ -1,13 +1,19 @@
-menuppl = {
+MenuPpl = {
     entities = {"defaultCamera", "sceneLight", "UI"}
 }
 UI = {
     Active = true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source="MenusTheHallway.wav",
+        Volume=1,
+        Loops=-1,
+        Play=true
     },
     Children = {
         entities={"StartButton","CtrlButton","QuackImage","Title"},
@@ -30,7 +36,7 @@ UI = {
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
-            Position = {0.25,-0.1  },
+            Position = {0.25,-0.01},
             Size = {600,250}
         }
     },
@@ -55,7 +61,7 @@ CtrlButton = {
                 BRColor = "FFA20410",
                 Position = {0.3,0.65},
                 Size = {400,100},
-                CallBackFunction = "menupplToControls"
+                CallBackFunction = "toControls"
             }
         },
 StartButton = {
@@ -79,10 +85,10 @@ StartButton = {
                 BRColor = "FFA20410",
                 Position = {0.3,0.35},
                 Size = {400,100},
-                CallBackFunction = "menupplToLvlSelector"
+                CallBackFunction = "toLvlSelector"
             }
         },
-        QuackImage={
+    QuackImage={
     Active = true,
     Components={"Image","Transform"},
             Transform = {
@@ -95,8 +101,10 @@ StartButton = {
                 Style= "TheHallway/StaticImage",
                 Name = "QuackEngine",
                 Image = "quackEngine.png",
-                Position = {0.85,0.8},
-                Size = {100,100}
+                Position = {0.9,0.85},
+                Size = {100,100},
+                Background=false,
+                Border=false
             }
         },
     }
@@ -132,14 +140,17 @@ defaultCamera = {
         Rotation = {0,0,0}
     },
 
-    Camera = {
-        Name = "MenuPplCam",
+    Camera = {   
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
         Width = 1,
         Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }

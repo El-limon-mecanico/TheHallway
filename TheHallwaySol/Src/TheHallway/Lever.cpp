@@ -34,12 +34,9 @@ void Lever::update()
 		progress_ -= QuackEnginePro::Instance()->time()->deltaTime() * unchargingVel_;
 	}
 
-	if (charged_) {
-		setEnable(false);
-		pb_->setEnable(false);
-	}
+	if (charged_)
+		finish();
 	pb_->setProgress(progress_ / total_);
-
 }
 
 void Lever::onTriggerEnter(QuackEntity* other, Vector3D point)
@@ -60,14 +57,13 @@ void Lever::onTriggerExit(QuackEntity* other, Vector3D point)
 	}
 }
 
-void Lever::onDisable()
+void Lever::finish()
 {
 	assert(mazeMng_);
-	assert(entity_->hasComponent<MeshRenderer>());
-	assert(entity_->hasComponent<Rigidbody>());
 	
-	entity_->getComponent<MeshRenderer>()->setEnable(false);
+	pb_->setEnable(false);
 	mazeMng_->activateLever();
+	entity_->destroy();
 }
 
 void Lever::start()

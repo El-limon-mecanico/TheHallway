@@ -31,6 +31,12 @@
     <Filter Include="Archivos de encabezado\Enemies\Protector">
       <UniqueIdentifier>{ca68f670-a3f5-4fb3-9e54-319ae3f1b79e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Enemies\MazeRunner">
+      <UniqueIdentifier>{053bb942-8d0e-42ea-bf86-4f0e2cae5b69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Enemies\MazeRunner">
+      <UniqueIdentifier>{22d1209b-f136-4107-8a7c-16a3428eec85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\TheHallway\Source.cpp">
@@ -66,6 +72,12 @@
     <ClCompile Include="..\..\Src\TheHallway\ChasePlayer.cpp">
       <Filter>Archivos de origen\Enemies\Protector</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\MinimapController.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TheHallway\MazeRunner.cpp">
+      <Filter>Archivos de origen\Enemies\MazeRunner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Src\TheHallway\MazeManager.h">
@@ -98,6 +110,12 @@
     <ClInclude Include="..\..\Src\TheHallway\ChasePlayer.h">
       <Filter>Archivos de encabezado\Enemies\Protector</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\MinimapController.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TheHallway\MazeRunner.h">
+      <Filter>Archivos de encabezado\Enemies\MazeRunner</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Assets\lua\Scenes\HardGame.lua">
@@ -128,6 +146,39 @@
       <Filter>Archivos de recursos</Filter>
     </None>
     <None Include="..\..\Assets\lua\Scenes\GameOver.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\defaultCamera.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Door.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\entidad1.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\entidad2.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\entidad3.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Ghost.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Lever.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Plane.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Slime.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Test1.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\Assets\lua\Entities\Wall.lua">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

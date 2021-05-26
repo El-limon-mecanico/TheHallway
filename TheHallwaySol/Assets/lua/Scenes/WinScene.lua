@@ -1,14 +1,20 @@
-winScene = {
+WinScene = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
 UI = {
     Active=true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source= "MenusTheHallway.wav",
+        Volume=0.25,
+        Loops=-1,
+        Play=true
     },
     Children={
         entities={"WinText","MainMenuButton","SelectLevelButton"},
@@ -31,7 +37,7 @@ UI = {
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.25,-0.1  },
+                Position = {0.25,-0.01  },
                 Size = {1000,250}
                 },
         },
@@ -56,7 +62,7 @@ UI = {
             BRColor = "FFA20410",
             Position = {0.3,0.35},
             Size = {400,100},
-            CallBackFunction = "gOtoMainMenu"
+            CallBackFunction = "toMenuppl"
         },},
         SelectLevelButton = {
             Active =true,
@@ -79,7 +85,7 @@ UI = {
             BRColor = "FFA20410",
             Position = {0.3,0.7},
             Size = {400,100},
-            CallBackFunction = "gOtoLvlSelector"
+            CallBackFunction = "toLvlSelector"
         },
     }
 }
@@ -116,13 +122,16 @@ defaultCamera = {
     },
 
     Camera = {
-        Name = "MenuCtrl",
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
         Width = 1,
         Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }

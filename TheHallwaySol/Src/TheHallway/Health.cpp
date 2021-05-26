@@ -8,8 +8,8 @@
 
 bool Health::init(luabridge::LuaRef parameterTable)
 {
-	readVariable<int>(parameterTable, "MaxLives", &lives_);
-	return true;
+	bool correct = readVariable<int>(parameterTable, "MaxLives",&lives_);
+	return correct;
 }
 
 void Health::start()
@@ -39,7 +39,8 @@ void Health::hit()
 		hearts_.at(lives_)->getComponent<Image>()->setEnable(false);
 	}
 	else {
-		SceneMng::Instance()->loadScene("Scenes/GameOver.lua", "gameover");
+		InputManager::Instance()->setMouseVisibility(true);
+		SceneMng::Instance()->loadScene("Scenes/GameOver.lua", "GameOver");
 	}
 
 }
