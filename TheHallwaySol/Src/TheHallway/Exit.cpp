@@ -9,6 +9,6 @@ void Exit::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
 	{
-		SceneMng::Instance()->loadScene("Scenes/menu.lua", "menuPrincipal");
+		SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "menuppl");
 	}
 }

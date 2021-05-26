@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy", "sceneLight"}
+    entities = {"Maze","Player"}
 }
 
 
@@ -81,10 +81,10 @@ Player = {
 
             Active = true,
             
-            Components = {"Transform", "Camera"},
+            Components = {"Transform", "Camera", "CameraController"},
             
             Transform = {
-                Position = {0,400,3},
+                Position = {0,7,3},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
@@ -92,7 +92,7 @@ Player = {
             Camera = {
                 Name = "MainCam",
                 Background = {1,1,1},
-                LookAt = {0,0,5},
+                LookAt = {0,7,5},
                 Width = 1,
                 Height = 1,
                 NearClipDistance = 1,
@@ -150,10 +150,16 @@ Maze = {
         Rotation = {0,0,0}
     },
     MazeManager = {
-        Size = 5,
-        Holes = 3,
+        Active = true,
+        Size = 6,
+        Holes = 100,
         Levers = 1,
-        ChargeVel = 1,
-        UnchargeVel = 2
+        ChargeVel = 5,
+        UnchargeVel = 2,
+	    Ghosts = 0,
+        Enemies = 1,
+        PointsGhosts = 4,
+        GhostRadar = 15,
+        EnemyRadar = 20
     }
 }

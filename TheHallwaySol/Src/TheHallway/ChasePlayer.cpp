@@ -6,6 +6,12 @@
 #include "PlayerMovement.h"
 #include "SceneMng.h"
 
+void ChasePlayer::getPlayer()
+{
+	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
+	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
+}
+
 bool ChasePlayer::init(luabridge::LuaRef parameterTable)
 {
 	readVariable<float>(parameterTable, "Speed", &speed_);
@@ -16,9 +22,7 @@ bool ChasePlayer::init(luabridge::LuaRef parameterTable)
 
 void ChasePlayer::start()
 {
-	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
-	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
-
+	getPlayer();
 	assert(entity_->hasComponent<Rigidbody>());
 	rb_ = entity_->getComponent<Rigidbody>();
 
