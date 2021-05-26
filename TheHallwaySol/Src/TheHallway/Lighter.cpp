@@ -42,6 +42,8 @@ void Lighter::update() {
 	light_->setDistance(distance_* actualCharge_);
 	if(actualCharge_<0.25)
 		progressBar_->setProperty("ProgressColour", "FFFF0000");
+	else
+		progressBar_->setProperty("ProgressColour", "FFFFFFFF");
 	progressBar_->setProgress(actualCharge_);
 
 }
