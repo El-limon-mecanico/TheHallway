@@ -39,11 +39,7 @@ void Lighter::update() {
 		}
 	}
 	light_->setDistance(distance_* actualCharge_);
-	if(actualCharge_>0.5)
-		progressBar_->setProperty("ProgressColour", "FF00FF00");
-	else if(actualCharge_>0.1)
-		progressBar_->setProperty("ProgressColour", "FFFFFF00");
-	else
+	if(actualCharge_<0.25)
 		progressBar_->setProperty("ProgressColour", "FFFF0000");
 	progressBar_->setProgress(actualCharge_);
 
@@ -55,4 +51,5 @@ void Lighter::start()
 	distance_ = light_->getDistance();
 	pM_ = entity_->getComponent<PlayerMovement>();
 	progressBar_ = entity_->getComponent<ProgressBar>();
+	progressBar_->setProperty("ProgressColour", "FFFFFFFF");
 }
