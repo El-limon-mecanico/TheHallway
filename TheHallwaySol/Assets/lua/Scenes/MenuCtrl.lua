@@ -1,14 +1,20 @@
-menuctrl = {
+MenuCtrl = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
 UI = {
     Active=true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source= "MenusTheHallway.wav",
+        Volume=0.25,
+        Loops=-1,
+        Play=true
     },
     Children={
         entities={"CtrlImage","BackButton"},
@@ -26,7 +32,9 @@ UI = {
                 Name = "MenuCtrlImage",
                 Image = "MenuCtrl.png",
                 Position = {0,0},
-                Size = {1000,700}
+                Size = {1920,1080},
+                Background=false,
+                Border=false
                 },
         },
         BackButton = {
@@ -50,7 +58,7 @@ UI = {
             BRColor = "FFA20410",
             Position = {0.001,0.01},
             Size = {100,50},
-            CallBackFunction = "controlsToMenuppl"
+            CallBackFunction = "back"
         },
     }
 }
@@ -87,13 +95,16 @@ defaultCamera = {
     },
 
     Camera = {
-        Name = "MenuCtrl",
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
         Width = 1,
         Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }

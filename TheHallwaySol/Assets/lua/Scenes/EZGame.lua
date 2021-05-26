@@ -91,10 +91,12 @@ Player = {
 
             Camera = {
                 Name = "MainCam",
-                Background = {1,1,1},
+                Background = {0,0,0},
                 LookAt = {0,7,5},
                 Width = 1,
                 Height = 1,
+                xProp = 16,
+                yProp = 9,
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
                 ProjectionType = "Perspective",
@@ -144,7 +146,7 @@ Enemy = {
 
 Maze = {
     Active = true,
-    Components = {"Transform", "MazeManager"},
+    Components = {"Transform", "MazeManager","AudioSource"},
 
     Transform = {
         Position = {0,0,0},
@@ -159,11 +161,17 @@ Maze = {
         Levers = 1,
         ChargeVel = 5,
         UnchargeVel = 2,
-	    Ghosts = 0,
+        Ghosts = 0,
         Enemies = 1,
         PointsGhosts = 4,
         GhostRadar = 15,
         EnemyRadar = 20
+    },
+    AudioSource={
+        Source= "TheHallway.wav",
+        Volume=1,
+        Loops=-1,
+        Play=true
     }
 }
 

@@ -8,17 +8,23 @@
 #include "CameraController.h"
 #include <iostream>
 
+#include "SceneMng.h"
+
 bool PlayerMovement::init(luabridge::LuaRef parameterTable)
 {
-	readVariable<float>(parameterTable, "WalkingSpeed", &walkingSpeed_);
-	readVariable<float>(parameterTable, "RunningSpeed", &runningSpeed_);
-	readVariable<float>(parameterTable, "CameraSpeed", &cameraSpeed_);
+	bool correct  = readVariable<float>(parameterTable, "WalkingSpeed",&walkingSpeed_);
+	correct = readVariable<float>(parameterTable, "RunningSpeed", &runningSpeed_);
+	correct = readVariable<float>(parameterTable, "CameraSpeed",&cameraSpeed_);
+	
+	if(!correct)
+		return false ;
 
 	InputManager::Instance()->captureMouse();
-	InputManager::Instance()->setMouseVisibility(false);
 
 	return true;
 }
+
+
 
 void PlayerMovement::start() {
 	rb_ = entity_->getComponent<Rigidbody>();
@@ -57,4 +63,12 @@ void PlayerMovement::move() {
 void PlayerMovement::update() {
 	rotate();
 	move();
+	if (InputManager::Instance()->getKeyDown(SDL_SCANCODE_ESCAPE)) {
+		InputManager::Instance()->setMouseVisibility(true);
+		SceneMng::Instance()->pushNewScene("Scenes/Pause.lua", "Pause");
+	}
+}
+void PlayerMovement::onEnable()
+{
+	InputManager::Instance()->setMouseVisibility(false);
 }

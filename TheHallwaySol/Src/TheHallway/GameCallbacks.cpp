@@ -3,58 +3,44 @@
 #include <iostream>
 #include "CallBacks.h"
 #include "SceneMng.h"
+#include "InputManager.h"
 std::unique_ptr<GameCallbacks> GameCallbacks::instance_;
 
 void GameCallbacks::ToEZGame()
 {
-
-	std::cout << "Ir al EZjuego\n";
+	InputManager::Instance()->setMouseVisibility(false);
 	SceneMng::Instance()->loadScene("Scenes/EZGame.lua", "EZGame");
-	//SceneMng::Instance()->pushNewScene("Scenes/scene1.lua", "scene1");
-	//TODO hacer que nos lleve al juego
 }
 void GameCallbacks::toMedGame()
 {
 
+	InputManager::Instance()->setMouseVisibility(false);
 	std::cout << "Ir al Medjuego\n";
 	SceneMng::Instance()->loadScene("Scenes/MedGame.lua", "MedGame");
-	//SceneMng::Instance()->pushNewScene("Scenes/scene1.lua", "scene1");
-	//TODO hacer que nos lleve al juego
 }
 void GameCallbacks::hardGame()
 {
-
+	InputManager::Instance()->setMouseVisibility(false);
 	std::cout << "Ir al Hard juego\n";
 	SceneMng::Instance()->loadScene("Scenes/HardGame.lua", "HardGame");
-	//SceneMng::Instance()->pushNewScene("Scenes/scene1.lua", "scene1");
-	//TODO hacer que nos lleve al juego
 }
-void GameCallbacks::fromMainMenuToControls() {
+void GameCallbacks::toControls() {
+	InputManager::Instance()->setMouseVisibility(true);
+
 	std::cout << "Ir a los controles\n";
-	SceneMng::Instance()->loadScene("Scenes/MenuCtrl.lua", "menuctrl");
-	//SceneMng::Instance()->pushNewScene("Scenes/MenuCtrl.lua", "menuctrl");
+	SceneMng::Instance()->pushNewScene("Scenes/MenuCtrl.lua", "MenuCtrl");
 }
-void GameCallbacks::fromMainMenuToLvlSelector() {
-	std::cout << "Ir a los lvls\n";
-	SceneMng::Instance()->loadScene("Scenes/LvlSelector.lua", "lvlSelector");
-	//SceneMng::Instance()->pushNewScene("Scenes/MenuCtrl.lua", "menuctrl");
-}
-void GameCallbacks::fromControlsToMain()
+void GameCallbacks::back()
 {
-	SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "menuppl");
-	//SceneMng::Instance()->popCurrentScene();
-	std::cout << "Ir al menu ppl\n";
+	SceneMng::Instance()->popCurrentScene();
 }
-void GameCallbacks::fromGameOverToMain()
+void GameCallbacks::toMenuPpl()
 {
-	SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "menuppl");
-	//SceneMng::Instance()->popCurrentScene();
-	std::cout << "Ir al menu ppl\n";
+	SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "MenuPpl");
 }
-void GameCallbacks::fromGameOverToLvlSelector()
+void GameCallbacks::toLvlSelector()
 {
-	SceneMng::Instance()->loadScene("Scenes/LvlSelector.lua", "lvlSelector");
-	//SceneMng::Instance()->popCurrentScene();
+	SceneMng::Instance()->loadScene("Scenes/LvlSelector.lua", "LvlSelector");
 	std::cout << "Ir al menu ppl\n";
 }
 void GameCallbacks::initCallbacks()
@@ -62,12 +48,10 @@ void GameCallbacks::initCallbacks()
 	CallBacks::instance()->addMethod("ToEzGame", ToEZGame);
 	CallBacks::instance()->addMethod("ToMedGame", toMedGame);
 	CallBacks::instance()->addMethod("ToHardGame", hardGame);
-	CallBacks::instance()->addMethod("menupplToLvlSelector", fromMainMenuToLvlSelector);
-	CallBacks::instance()->addMethod("menupplToControls", fromMainMenuToControls);
-	CallBacks::instance()->addMethod("controlsToMenuppl", fromControlsToMain);
-
-	CallBacks::instance()->addMethod("gOtoMainMenu", fromGameOverToMain);
-	CallBacks::instance()->addMethod("gOtoLvlSelector",fromGameOverToLvlSelector);
+	CallBacks::instance()->addMethod("toLvlSelector", toLvlSelector);
+	CallBacks::instance()->addMethod("toControls", toControls);
+	CallBacks::instance()->addMethod("back", back);
+	CallBacks::instance()->addMethod("toMenuppl", toMenuPpl);
 }
 
 

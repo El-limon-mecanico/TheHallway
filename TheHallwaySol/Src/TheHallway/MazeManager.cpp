@@ -14,19 +14,20 @@ MazeManager::MazeManager()
 bool MazeManager::init(luabridge::LuaRef parameterTable)
 {
 	// para el laberinto
-	readVariable<int>(parameterTable, "Size", &size_);
-	readVariable<float>(parameterTable, "WallScale", &WALL_SCALE);
-	readVariable<size_t>(parameterTable, "Holes", &additionalPaths_);
+	bool correct = readVariable<int>(parameterTable, "Size", &size_);
+	correct &=readVariable<float>(parameterTable, "WallScale", &WALL_SCALE);
+	correct &=readVariable<size_t>(parameterTable, "Holes", &additionalPaths_);
 	
 	// para los enemigos
-	readVariable<int>(parameterTable, "Ghosts", &numGhosts_);
-	readVariable<int>(parameterTable, "Enemies", &numEnemies_);
-	readVariable<float>(parameterTable, "GhostRadar", &ghostRadar_);
-	readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
+	correct &=readVariable<int>(parameterTable, "Ghosts", &numGhosts_);
+	correct &=readVariable<int>(parameterTable, "Enemies", &numEnemies_);
+	correct &=readVariable<float>(parameterTable, "GhostRadar", &ghostRadar_);
+	correct &=readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
 
 	// para las palancas
-	readVariable<size_t>(parameterTable, "Levers", &numLevers_);
-	
+	correct &=readVariable<size_t>(parameterTable, "Levers", &numLevers_);
+	if (!correct)
+		return false;
 	invalidDir_ = Vector2(-size_, -size_);
 	visitedCells_ = std::vector <std::vector<bool>>(size_, std::vector<bool>(size_, false));
 	map_ = std::vector<std::vector<char>>(size_ * 2 + 1, std::vector<char>(size_ * 2 + 1, wallC_));

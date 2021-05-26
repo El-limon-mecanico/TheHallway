@@ -35,7 +35,7 @@ void Lever::update()
 	}
 
 	if (charged_)
-		setEnable(false);
+		finish();
 }
 
 void Lever::onTriggerEnter(QuackEntity* other, Vector3D point)
@@ -54,12 +54,10 @@ void Lever::onTriggerExit(QuackEntity* other, Vector3D point)
 	}
 }
 
-void Lever::onDisable()
+void Lever::finish()
 {
 	assert(mazeMng_);
-	assert(entity_->hasComponent<MeshRenderer>());
-	assert(entity_->hasComponent<Rigidbody>());
 	
-	entity_->getComponent<MeshRenderer>()->setEnable(false);
 	mazeMng_->activateLever();
+	entity_->destroy();
 }
