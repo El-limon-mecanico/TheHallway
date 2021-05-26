@@ -6,11 +6,6 @@
 #include "PlayerMovement.h"
 #include "SceneMng.h"
 
-void ChasePlayer::getPlayer()
-{
-	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
-	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
-}
 
 bool ChasePlayer::init(luabridge::LuaRef parameterTable)
 {
@@ -22,7 +17,6 @@ bool ChasePlayer::init(luabridge::LuaRef parameterTable)
 
 void ChasePlayer::start()
 {
-	getPlayer();
 	assert(entity_->hasComponent<Rigidbody>());
 	rb_ = entity_->getComponent<Rigidbody>();
 
@@ -33,7 +27,15 @@ void ChasePlayer::update() {
 	//si nos hemos alejado mucho, volvemos al merodeo
 	float dist = (transform->position() - playerTr_->position()).magnitude();
 	if (dist > maxDistance_)
+	{
+		// volvemos al comportamiento de merodeo
+		// assert porque no tenemos otro movimiento para los enemigos
+		assert(entity_->hasComponent<LoopMovement>());
+		entity_->getComponent<LoopMovement>()->setEnable(true);
+		entity_->getComponent<LoopMovement>()->move();		
+
 		setEnable(false);
+	}
 	else
 	{
 		direction_ = playerTr_->position();
@@ -43,8 +45,6 @@ void ChasePlayer::update() {
 	}
 }
 
-
-// TODO: ACTUALIZAR SALUD DEL JUGADOR
 void ChasePlayer::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
@@ -52,12 +52,4 @@ void ChasePlayer::onTriggerEnter(QuackEntity* other, Vector3D point)
 		// dejamos de perseguir al jugador
 		setEnable(false);
 	}
-}
-
-void ChasePlayer::onDisable()
-{
-	// volvemos al comportamiento de merodeo
-	// assert porque no tenemos otro movimiento para los enemigos
-	assert(entity_->hasComponent<LoopMovement>());
-	entity_->getComponent<LoopMovement>()->setEnable(true);
 }
