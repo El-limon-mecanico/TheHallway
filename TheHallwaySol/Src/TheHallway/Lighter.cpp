@@ -4,7 +4,7 @@
 #include "QuackEntity.h"
 #include "QuackEnginePro.h"
 #include "PlayerMovement.h"
-
+#include "ProgressBar.h"
 
 bool Lighter::init(luabridge::LuaRef parameterTable)
 {
@@ -40,6 +40,12 @@ void Lighter::update() {
 		}
 	}
 	light_->setDistance(distance_* actualCharge_);
+	if(actualCharge_<0.25)
+		progressBar_->setProperty("ProgressColour", "FFFF0000");
+	else
+		progressBar_->setProperty("ProgressColour", "FFFFFFFF");
+	progressBar_->setProgress(actualCharge_);
+
 }
 
 void Lighter::start()
@@ -47,4 +53,6 @@ void Lighter::start()
 	light_ = entity_->getComponent<Light>();
 	distance_ = light_->getDistance();
 	pM_ = entity_->getComponent<PlayerMovement>();
+	progressBar_ = entity_->getComponent<ProgressBar>();
+	progressBar_->setProperty("ProgressColour", "FFFFFFFF");
 }

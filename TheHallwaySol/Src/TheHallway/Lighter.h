@@ -1,7 +1,7 @@
 #include "Component.h"
 class Light;
 class PlayerMovement;
-
+class ProgressBar;
 class Lighter : public Component {
 protected:
 
@@ -12,7 +12,7 @@ private:
 	float distance_; 
 	Light* light_;
 	PlayerMovement* pM_;
-
+	ProgressBar* progressBar_;
 public:
 	Lighter() : actualCharge_(1) {};
 	~Lighter() {};

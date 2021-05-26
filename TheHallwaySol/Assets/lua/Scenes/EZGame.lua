@@ -28,7 +28,7 @@ sceneLight = {
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter","ProgressBar" ,"Health"},
 
     Transform = {
         Position = {0,3,3},
@@ -61,9 +61,16 @@ Player = {
     },
     Lighter ={
         ChargeSpeed = 0.3,
-        DischargeSpeed = 0.08
+        DischargeSpeed = 0.08,
     },
-    
+    ProgressBar={
+        Active = true,
+        Style= "TheHallway/ProgressBar",
+        Name = "LighterProgress",
+        Position = {0.15,0.01},
+        Size = {150,50},
+        Progress = 0
+    },
     PlayerMovement = 
     {
         WalkingSpeed = 10,
