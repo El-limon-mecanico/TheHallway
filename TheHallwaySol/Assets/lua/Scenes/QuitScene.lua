@@ -1,4 +1,4 @@
-WinScene = {
+QuitScene = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
@@ -17,8 +17,8 @@ UI = {
         Play=true
     },
     Children={
-        entities={"WinText","MainMenuButton","SelectLevelButton","QuitButton"},
-        WinText={
+        entities={"QuitText","YesButton","NoButton"},
+        QuitText={
             Active= true,
             Components={"Text", "Transform"},
             Transform = {
@@ -31,17 +31,17 @@ UI = {
                 Background = false,
                 Border = false,
                 Style= "TheHallway/StaticText",
-                Name = "WinText",
-                Text = "Damn it you WIN",
+                Name = "QuitText",
+                Text = "Do you want to close the game?",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.25,-0.01  },
-                Size = {1000,250}
+                Position = {0.15,-0.01  },
+                Size = {1200,250}
                 },
         },
-        MainMenuButton = {
+        YesButton = {
             Active =true,
             Components={"Button", "Transform"},
             Transform = {
@@ -54,17 +54,17 @@ UI = {
             Enable = true, 
             Type = "Button",
             Style= "TheHallway/Button",
-            Name = "GOMainButton",
-            Text = "Main Menu",
+            Name = "quitButton",
+            Text = "Yes",
             TLColor = "FFA20410",
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
             Position = {0.3,0.35},
             Size = {400,100},
-            CallBackFunction = "toMenuppl"
+            CallBackFunction = "quit"
         },},
-        SelectLevelButton = {
+        NoButton = {
             Active =true,
             Components={"Button", "Transform"},
             Transform = {
@@ -77,41 +77,17 @@ UI = {
             Enable = true, 
             Type = "Button",
             Style= "TheHallway/Button",
-            Name = "GOSelectButton",
-            Text = "Select Level",
+            Name = "NoButton",
+            Text = "No",
             TLColor = "FFA20410",
             TRColor = "FFA20410",
             BLColor = "FFA20410",
             BRColor = "FFA20410",
             Position = {0.3,0.7},
             Size = {400,100},
-            CallBackFunction = "toLvlSelector"
+            CallBackFunction = "back"
         },
-    }, 
-           QuitButton = {
-        Active = true,
-        Components={"Button","Transform"},
-                Transform = {
-                    Position = {0,0,0},
-                    Scale = {1,1,1},
-                    Rotation = {0,0,0}
-                },
-                Button = {
-                    Active = true,
-                    Enable = true,
-                    Type = "Button",
-                    Style= "TheHallway/Button",
-                    Name = "QuitButton",
-                    Text = "x",
-                    TLColor = "FFA20410",
-                    TRColor = "FFA20410",
-                    BLColor = "FFA20410",
-                    BRColor = "FFA20410",
-                    Position = {0.9,0.01},
-                    Size = {100,100},
-                    CallBackFunction = "toQuitScene"
-                }
-            },
+    }
 }
 }
 sceneLight = {

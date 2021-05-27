@@ -10,6 +10,8 @@ private:
 	static void back();
 	static void toLvlSelector();
 	static void toMenuPpl();
+	static void quit();
+	static void toQuitScene();
 public:
 	GameCallbacks() {};
 	~GameCallbacks() {};
