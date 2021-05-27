@@ -5,16 +5,16 @@ Manivela ={
 
     Transform = {
         Position = {0,0,0},
-        Scale = {3,3,3},
-        Rotation = {0,0,0}
+        Scale = {100,100,100},
+        Rotation = {90,0,-90}
     },
 
     MeshRenderer ={
-        Mesh = "Cube",
+        Mesh = "Manivela.mesh",
     },
 
     Rigidbody = {
-        Type = "Box",
+        Type = "Sphere",
         Mass = 1,
         Trigger = true,
         Static = true,
@@ -23,13 +23,13 @@ Manivela ={
     },
 
     Lever = {
-        Total = 10,
+        Total = 5,
         ChargingVel = 1,
         UncharginVel = 0.5
     },
     AudioSource={
-        Source="Throne.mp3",
-        Volume=0.25,
+        Source="Manivela.mp3",
+        Volume=0.8,
         Loops=-1,
         Play=false,
         D3=false,

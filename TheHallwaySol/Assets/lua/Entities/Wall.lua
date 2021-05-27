@@ -11,6 +11,7 @@ Wall ={
 
     MeshRenderer ={
         Mesh = "Cube",
+        Material = "TheHallway/Wall"
     },
 
     Rigidbody = {

@@ -26,7 +26,6 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	correct &=readVariable<int>(parameterTable, "Slimes", &numSlimes_);
 	correct &=readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
 
-
 	// para las palancas
 	correct &=readVariable<size_t>(parameterTable, "Levers", &numLevers_);
 	if (!correct)
@@ -458,7 +457,17 @@ void MazeManager::activateLever()
 	{
 		//creamos una puerta
 		QuackEntity* salida = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Door.lua", "Door", "Salida");
-		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, 0, exit_.second * WALL_SCALE));
+		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, salida->transform()->position().y, exit_.second * WALL_SCALE));
+		Vector3D rot = { 0,0,0 };
+		if (map_[exit_.first - 1][exit_.second] == floorC_ &&
+			map_[exit_.first + 1][exit_.second] == floorC_)// si en vertical en la "cruz" son todo suelo, rotamos x grados
+			rot.y = 90;
+		else if (map_[exit_.first][exit_.second - 1] == floorC_ &&
+				map_[exit_.first][exit_.second + 1] == floorC_)	// si en horizontal en la "cruz" son todo suelo, rotamos y grados
+			rot.y = 180;
+		else // la puerta esta en un pasillo que hace esquina. rotamos al azar? o no rotamos? o rotamos z?
+			rot.y = 45;
+		salida->transform()->setGlobalRotation(rot);
 	}
 }
 

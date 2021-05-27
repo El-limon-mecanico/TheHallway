@@ -2,42 +2,18 @@
     entities = {"Maze","Player", "Minimap"}
 }
 
-
-sceneLight = {
-    Active = true,
-    Components = {"Transform", "Light"},
-
-    Transform = {
-        Position = {0,10,0},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-
-    Light = {
-        LightType = 1,
-        DiffuseColor = {0.3,0.3,0.3},
-        SpecularColor = {0.3,0.3,0.3},
-        Direction = {1,0,0},
-        Distance = 1,
-        InnerAngle = 30,
-        OuterAngle = 90,
-        isOn = true
-    }
-}
-
-
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter","ProgressBar", "Health","AudioListener"},
+    Components = {"Transform","MeshRenderer", "Rigidbody","PlayerMovement", "ProgressBar", "Health","AudioListener"},
 
     Transform = {
-        Position = {0,3,3},
+        Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     MeshRenderer = {
-        Mesh = "Suzanne.mesh",
+        Mesh = "Empty.mesh",
     },
 
     Rigidbody = {
@@ -49,40 +25,89 @@ Player = {
         RotationConstrains = {1,1,1}
     },
 
-    Light = {
-        LightType = 0,
-        DiffuseColor = {1,1,1},
-        SpecularColor = {1,1,1},
-        Direction = {0,-1,0},
-        Distance = 5000,
-        InnerAngle = 35,
-        OuterAngle = 60,
-        isOn = true
-    },
-    Lighter ={
-        ChargeSpeed = 0.3,
-        DischargeSpeed = 0.08,
-    },
     ProgressBar={
         Active = true,
         Style= "TheHallway/ProgressBar",
         Name = "LighterProgress",
         Position = {0.2,0.01},
         Size = {150,50},
-        Progress = 0
+        Progress = 0,
+        TargetResolution = {1920,1080}
     },
     PlayerMovement = 
     {
-        WalkingSpeed = 10,
+        WalkingSpeed = 13,
         RunningSpeed = 10,
-        CameraSpeed = 200
+        CameraSpeed = 150
     },
     Health={
         MaxLives = 3
     },
     AudioListener={},
+
     Children ={
-        entities={"defaultCamera","LighterSound","WalkSound","RunSound","ScreamSounds"},
+        entities={"defaultCamera","WalkSound","RunSound","ScreamSounds", "Farolillo", "LuzFarol"},
+
+        Farolillo = {
+            Active = true,
+
+            Components = {"Transform", "MeshRenderer"},
+
+            Transform = {
+                Position = {1,4,5},
+                Scale = {0.5,0.5,0.5},
+                Rotation = {0,90,0}
+            },
+
+            MeshRenderer = {
+                Mesh = "Farolillo.mesh",   
+            },
+        },
+
+        LuzFarol = {
+            Active = true,
+
+            Components = {"Transform", "Light", "Lighter"},
+
+            Transform = {
+                Position = {0,3,2},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+
+            Light = {
+                LightType = 0,
+                DiffuseColor = {1,1,1},
+                SpecularColor = {1,1,1},
+                Direction = {0,0,1},
+                Distance = 7000,
+                InnerAngle = 35,
+                OuterAngle = 60,
+                isOn = true
+            },
+            Lighter ={
+                ChargeSpeed = 0.3,
+                DischargeSpeed = 0.04,
+            },
+
+            Children = {
+                entities = {"LighterSound"},
+
+                LighterSound={
+                    Active=true,
+                    Components={"AudioSource"},
+                    AudioSource={
+                        Source= "Fire.mp3",
+                        Volume=1,
+                        Loops=-1,
+                        Play=false,
+                        Enabled =true,
+                        D3=false
+                    }
+                }
+
+            }
+        },
 
         defaultCamera = {
 
@@ -113,18 +138,7 @@ Player = {
             CameraController = {}
 
         },
-        LighterSound={
-            Active=true,
-            Components={"AudioSource"},
-            AudioSource={
-                Source= "ChargingLighter.wav",
-                Volume=1,
-                Loops=-1,
-                Play=false,
-                Enabled =true,
-                D3=false
-            }
-        },
+        
         WalkSound={
             Active=true,
             Components={"AudioSource"},
@@ -136,51 +150,52 @@ Player = {
                 Enabled =true,
                 D3=false
             },
-    },
-    RunSound={
-        Active=true,
-        Components={"AudioSource"},
-        AudioSource={
-            Source= "LaRajaDeTuFalda.mp3",
-            Volume=1,
-            Loops=-1,
-            Play=false,
-            Enabled =true,
-            D3=false
         },
-},
-ScreamSounds={
-    Active=true,
-    Components={},
-    Children={
-        entities={"GirlScream","BoyScream"},
-        GirlScream={
+
+        RunSound={
             Active=true,
             Components={"AudioSource"},
             AudioSource={
-                Source= "GirlScream.ogg",
-                Volume=1,
-                Loops=0,
+                Source= "Running.ogg",
+                Volume=0.4,
+                Loops=-1,
                 Play=false,
                 Enabled =true,
                 D3=false
             },
         },
-        BoyScream={
+        ScreamSounds={
             Active=true,
-            Components={"AudioSource"},
-            AudioSource={
-                Source= "BoyScream.ogg",
-                Volume=1,
-                Loops=0,
-                Play=false,
-                Enabled =true,
-                D3=false
-            },
-        },
+            Components={},
+            Children={
+                entities={"GirlScream","BoyScream"},
+                GirlScream={
+                    Active=true,
+                    Components={"AudioSource"},
+                    AudioSource={
+                        Source= "GirlScream.ogg",
+                        Volume=0.3,
+                        Loops=0,
+                        Play=false,
+                        Enabled =true,
+                        D3=false
+                    },
+                },
+                BoyScream={
+                    Active=true,
+                    Components={"AudioSource"},
+                    AudioSource={
+                        Source= "BoyScream.ogg",
+                        Volume=0.3,
+                        Loops=0,
+                        Play=false,
+                        Enabled =true,
+                        D3=false
+                    },
+                },
+            }
+        }
     }
-}
-}
 }
 
 
@@ -197,10 +212,10 @@ Maze = {
     MazeManager = {
         Active = true,
         Size = 6,
-        Holes = 100,
+        Holes = 105,
         Levers = 1,
-	    Ghosts = 1,
-        Slimes = 1,
+	    Ghosts = 0,
+        Slimes = 0,
         PointsGhosts = 4,
     },
     AudioSource={
@@ -246,6 +261,7 @@ Minimap =
         Background = false,
         Border = false,
         Position = {0.776, 0.04},
-        Size = {236, 220}
+        Size = {396, 375},
+        TargetResolution = {1920,1080}
     }
 }
