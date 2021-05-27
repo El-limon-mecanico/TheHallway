@@ -67,7 +67,7 @@ Player = {
         Active = true,
         Style= "TheHallway/ProgressBar",
         Name = "LighterProgress",
-        Position = {0.15,0.01},
+        Position = {0.2,0.01},
         Size = {150,50},
         Progress = 0
     },
