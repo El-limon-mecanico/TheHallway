@@ -212,10 +212,10 @@ Maze = {
     MazeManager = {
         Active = true,
         Size = 6,
-        Holes = 105,
+        Holes = 10,
         Levers = 1,
-	    Ghosts = 0,
-        Slimes = 0,
+	    Ghosts = 1,
+        Slimes = 1,
         PointsGhosts = 4,
     },
     AudioSource={
@@ -229,7 +229,7 @@ Maze = {
 Minimap = 
 {
     Active = true,
-    Components = {"Transform", "Camera", "MinimapController", "Image"},
+    Components = {"Transform", "Camera", "MinimapController"},
     
     Transform = {
         Position = {0,100,0},
@@ -251,17 +251,5 @@ Minimap =
         zOrder = 0
     },
 
-    MinimapController = {},
-
-    Image = { 
-        Active = true,
-        Style= "TheHallway/StaticImage",
-        Name = "MapFrame",
-        Image = "MapFrame.png",
-        Background = false,
-        Border = false,
-        Position = {0.776, 0.04},
-        Size = {396, 375},
-        TargetResolution = {1920,1080}
-    }
+    MinimapController = {}
 }

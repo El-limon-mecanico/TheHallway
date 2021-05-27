@@ -251,17 +251,5 @@ Minimap =
         zOrder = 0
     },
 
-    MinimapController = {},
-
-    Image = { 
-        Active = true,
-        Style= "TheHallway/StaticImage",
-        Name = "MapFrame",
-        Image = "MapFrame.png",
-        Background = false,
-        Border = false,
-        Position = {0.776, 0.04},
-        Size = {236, 220},
-        TargetResolution = {1920,1080}
-    }
+    MinimapController = {}
 }

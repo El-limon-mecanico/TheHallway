@@ -76,7 +76,7 @@ UI = {
                 Type = "Button",
                 Style= "TheHallway/Button",
                 Name = "GOMainButton",
-                Text = "Men� Principal",
+                Text = "Menu Principal",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
@@ -133,7 +133,8 @@ UI = {
                 BRColor = "FFA20410",
                 Position = {0.9,0.01},
                 Size = {100,100},
-                CallBackFunction = "toQuitScene"
+                CallBackFunction = "toQuitScene",
+                TargetResolution = {1920,1080},
             }
         }
     }

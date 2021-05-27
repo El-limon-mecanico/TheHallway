@@ -15,7 +15,6 @@ bool MinimapController::init(luabridge::LuaRef parameterTable)
 void MinimapController::start()
 {
 	player_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
-	entity_->getComponent<Image>()->setEnable(active_);
 }
 
 void MinimapController::update()
@@ -27,6 +26,5 @@ void MinimapController::update()
 		active_ = !active_;
 
 		entity_->getComponent<QuackCamera>()->setzOrder(2 * active_);
-		entity_->getComponent<Image>()->setEnable(active_);
 	}
 }
