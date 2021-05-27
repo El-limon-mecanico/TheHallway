@@ -192,26 +192,14 @@
     <ClInclude Include="..\..\Src\TheHallway\PlayerMovement.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Assets\lua\Entities\defaultCamera.lua" />
-    <None Include="..\..\Assets\lua\Entities\Door.lua" />
-    <None Include="..\..\Assets\lua\Entities\entidad1.lua" />
-    <None Include="..\..\Assets\lua\Entities\entidad2.lua" />
-    <None Include="..\..\Assets\lua\Entities\entidad3.lua" />
-    <None Include="..\..\Assets\lua\Entities\Ghost.lua" />
-    <None Include="..\..\Assets\lua\Entities\Lever.lua" />
-    <None Include="..\..\Assets\lua\Entities\Plane.lua" />
-    <None Include="..\..\Assets\lua\Entities\Slime.lua" />
-    <None Include="..\..\Assets\lua\Entities\Test1.lua" />
-    <None Include="..\..\Assets\lua\Entities\Wall.lua" />
     <None Include="..\..\Assets\lua\Scenes\EZGame.lua" />
     <None Include="..\..\Assets\lua\Scenes\GameOver.lua" />
     <None Include="..\..\Assets\lua\Scenes\HardGame.lua" />
     <None Include="..\..\Assets\lua\Scenes\LvlSelector.lua" />
     <None Include="..\..\Assets\lua\Scenes\MedGame.lua" />
-    <None Include="..\..\Assets\lua\Scenes\menu.lua" />
     <None Include="..\..\Assets\lua\Scenes\MenuCtrl.lua" />
     <None Include="..\..\Assets\lua\Scenes\MenuPpl.lua" />
-    <None Include="..\..\Assets\lua\Scenes\scene1.lua" />
+    <None Include="..\..\Assets\lua\Scenes\Pause.lua" />
     <None Include="..\..\Assets\lua\Scenes\WinScene.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

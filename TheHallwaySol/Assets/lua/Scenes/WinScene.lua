@@ -17,7 +17,27 @@ UI = {
         Play=true
     },
     Children={
-        entities={"WinText","MainMenuButton","SelectLevelButton","QuitButton"},
+        entities={"Background", "WinText","MainMenuButton","SelectLevelButton","QuitButton" },
+        Background={
+            Active= true,
+            Components={"Image", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Image={
+                Active = true,
+                Style= "TheHallway/StaticImage",
+                Name = "MenuBackground",
+                Image = "menuBackground.png",
+                TargetResolution = {1920,1080},
+                Position = {0,0},
+                Size = {1920,1080},
+                Background=false,
+                Border=false
+            },
+        },
         WinText={
             Active= true,
             Components={"Text", "Transform"},
@@ -32,14 +52,15 @@ UI = {
                 Border = false,
                 Style= "TheHallway/StaticText",
                 Name = "WinText",
-                Text = "Damn it you WIN",
+                Text = "HAS ESCAPADO",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.25,-0.01  },
-                Size = {1000,250}
-                },
+                Position = {0.29,-0.01  },
+                TargetResolution = {1920,1080},
+                Size = {790,250}
+            },
         },
         MainMenuButton = {
             Active =true,
@@ -50,20 +71,22 @@ UI = {
                 Rotation = {0,0,0}
             },
             Button={
-            Active = true,
-            Enable = true, 
-            Type = "Button",
-            Style= "TheHallway/Button",
-            Name = "GOMainButton",
-            Text = "Main Menu",
-            TLColor = "FFA20410",
-            TRColor = "FFA20410",
-            BLColor = "FFA20410",
-            BRColor = "FFA20410",
-            Position = {0.3,0.35},
-            Size = {400,100},
-            CallBackFunction = "toMenuppl"
-        },},
+                Active = true,
+                Enable = true, 
+                Type = "Button",
+                Style= "TheHallway/Button",
+                Name = "GOMainButton",
+                Text = "Men� Principal",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.3,0.35},
+                Size = {750,150},
+                TargetResolution = {1920,1080},
+                CallBackFunction = "toMenuppl"
+            },
+        },
         SelectLevelButton = {
             Active =true,
             Components={"Button", "Transform"},
@@ -73,6 +96,23 @@ UI = {
                 Rotation = {0,0,0}
             },
             Button={
+                Active = true,
+                Enable = true, 
+                Type = "Button",
+                Style= "TheHallway/Button",
+                Name = "GOSelectButton",
+                Text = "Jugar de nuevo",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.3,0.55},
+                TargetResolution = {1920,1080},
+                Size = {750,150},
+                CallBackFunction = "toLvlSelector"
+            },
+        }
+    }
             Active = true,
             Enable = true, 
             Type = "Button",
@@ -111,8 +151,7 @@ UI = {
                     Size = {100,100},
                     CallBackFunction = "toQuitScene"
                 }
-            },
-}
+            }
 }
 sceneLight = {
     Active = true,
