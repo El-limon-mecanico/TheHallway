@@ -200,6 +200,7 @@
     <None Include="..\..\Assets\lua\Scenes\MenuCtrl.lua" />
     <None Include="..\..\Assets\lua\Scenes\MenuPpl.lua" />
     <None Include="..\..\Assets\lua\Scenes\Pause.lua" />
+    <None Include="..\..\Assets\lua\Scenes\QuitScene.lua" />
     <None Include="..\..\Assets\lua\Scenes\WinScene.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

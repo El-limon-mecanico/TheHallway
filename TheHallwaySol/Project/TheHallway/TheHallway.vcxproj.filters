@@ -145,5 +145,8 @@
     <None Include="..\..\Assets\lua\Scenes\WinScene.lua">
       <Filter>Archivos de recursos</Filter>
     </None>
+    <None Include="..\..\Assets\lua\Scenes\QuitScene.lua">
+      <Filter>Archivos de recursos</Filter>
+    </None>
   </ItemGroup>
 </Project>
