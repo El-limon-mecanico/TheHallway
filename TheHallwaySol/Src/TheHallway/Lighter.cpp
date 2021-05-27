@@ -4,6 +4,7 @@
 #include "QuackEntity.h"
 #include "QuackEnginePro.h"
 #include "PlayerMovement.h"
+#include "AudioSource.h"
 #include "ProgressBar.h"
 
 bool Lighter::init(luabridge::LuaRef parameterTable)
@@ -27,6 +28,10 @@ void Lighter::update() {
 			if (actualCharge_ > 1) //si llega al m�ximo, setea
 				actualCharge_ = 1;
 		}
+		if (!sound_->isPlaying()) {
+			sound_->play();
+		}
+		
 	}
 	else {
 		//activa el movimiento si fuese necesario
@@ -37,6 +42,9 @@ void Lighter::update() {
 			actualCharge_ -= QuackEnginePro::Instance()->time()->deltaTime() * dischargeSpeed_;
 			if (actualCharge_ < 0)//si llega al m�nimo, setea
 				actualCharge_ = 0;
+		}
+		if (sound_->isPlaying()) {
+			sound_->stop();
 		}
 	}
 	light_->setDistance(distance_* actualCharge_);
@@ -53,6 +61,7 @@ void Lighter::start()
 	light_ = entity_->getComponent<Light>();
 	distance_ = light_->getDistance();
 	pM_ = entity_->getComponent<PlayerMovement>();
+	sound_=transform->getChildByName("LighterSound")->getComponent<AudioSource>();
 	progressBar_ = entity_->getComponent<ProgressBar>();
 	progressBar_->setProperty("ProgressColour", "FFFFFFFF");
 }

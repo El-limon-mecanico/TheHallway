@@ -7,6 +7,7 @@
 #include "QuackEnginePro.h"
 #include "Rigidbody.h"
 #include "SceneMng.h"
+#include "AudioSource.h"
 #include "ProgressBar.h"
 
 bool Lever::init(luabridge::LuaRef parameterTable)
@@ -26,14 +27,18 @@ void Lever::update()
 		std::cout << progress_ << ", " << total_ << std::endl;
 		if (progress_ >= total_)
 			charged_ = true;
+		if(!sound_->isPlaying())
+		sound_->play();
 	}
 	
 	// si se puede descargar la manivela, se descarga
-	else if (progress_ > 0)
-	{
-		progress_ -= QuackEnginePro::Instance()->time()->deltaTime() * unchargingVel_;
+	else {
+		if (progress_ > 0)
+		{
+			progress_ -= QuackEnginePro::Instance()->time()->deltaTime() * unchargingVel_;
+		}
+			sound_->stop();
 	}
-
 	if (charged_)
 		finish();
 	pb_->setProgress(progress_ / total_);
@@ -60,7 +65,7 @@ void Lever::onTriggerExit(QuackEntity* other, Vector3D point)
 void Lever::finish()
 {
 	assert(mazeMng_);
-	
+	sound_->stop();
 	pb_->setEnable(false);
 	mazeMng_->activateLever();
 	entity_->destroy();
@@ -68,6 +73,7 @@ void Lever::finish()
 
 void Lever::start()
 {
+	sound_ = entity_->getComponent<AudioSource>();
 	pb_ = entity_->addComponent<ProgressBar>("Lever_"+entity_->name(), true, std::pair<float,float>{ 0.4,0.8 }, std::pair<float, float>{ 400,60 }, "TheHallway/ProgressBar");
 	pb_->setProgress(0);
 	pb_->setEnable(false);

@@ -28,7 +28,7 @@ sceneLight = {
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter","ProgressBar" ,"Health"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter","ProgressBar", "Health","AudioListener"},
 
     Transform = {
         Position = {0,3,3},
@@ -67,7 +67,7 @@ Player = {
         Active = true,
         Style= "TheHallway/ProgressBar",
         Name = "LighterProgress",
-        Position = {0.15,0.01},
+        Position = {0.2,0.01},
         Size = {150,50},
         Progress = 0
     },
@@ -80,9 +80,9 @@ Player = {
     Health={
         MaxLives = 3
     },
-
+    AudioListener={},
     Children ={
-        entities={"defaultCamera"},
+        entities={"defaultCamera","LighterSound","WalkSound","RunSound","ScreamSounds"},
 
         defaultCamera = {
 
@@ -112,8 +112,75 @@ Player = {
 
             CameraController = {}
 
-        }
+        },
+        LighterSound={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "ChargingLighter.wav",
+                Volume=1,
+                Loops=-1,
+                Play=false,
+                Enabled =true,
+                D3=false
+            }
+        },
+        WalkSound={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "Steps.ogg",
+                Volume=1,
+                Loops=-1,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+    },
+    RunSound={
+        Active=true,
+        Components={"AudioSource"},
+        AudioSource={
+            Source= "LaRajaDeTuFalda.mp3",
+            Volume=1,
+            Loops=-1,
+            Play=false,
+            Enabled =true,
+            D3=false
+        },
+},
+ScreamSounds={
+    Active=true,
+    Components={},
+    Children={
+        entities={"GirlScream","BoyScream"},
+        GirlScream={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "GirlScream.ogg",
+                Volume=1,
+                Loops=0,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+        },
+        BoyScream={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "BoyScream.ogg",
+                Volume=1,
+                Loops=0,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+        },
     }
+}
+}
 }
 
 
@@ -130,7 +197,7 @@ Maze = {
     MazeManager = {
         Active = true,
         Size = 6,
-        Holes = 10,
+        Holes = 100,
         Levers = 1,
 	    Ghosts = 1,
         Slimes = 1,
@@ -138,10 +205,9 @@ Maze = {
     },
     AudioSource={
         Source= "TheHallway.wav",
-        Volume=1,
+        Volume=0.1,
         Loops=-1,
-        Play=true
-
+        Play=true,
     }
 }
 

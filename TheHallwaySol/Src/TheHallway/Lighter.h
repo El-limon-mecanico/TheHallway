@@ -1,18 +1,20 @@
 #include "Component.h"
 class Light;
 class PlayerMovement;
+class AudioSource;
 class ProgressBar;
 class Lighter : public Component {
 protected:
 
 private:
-	float chargeSpeed_;
-	float dischargeSpeed_;
-	float actualCharge_; //de 0 a 1
-	float distance_; 
-	Light* light_;
-	PlayerMovement* pM_;
-	ProgressBar* progressBar_;
+	float chargeSpeed_=0;
+	float dischargeSpeed_=0;
+	float actualCharge_=0; //de 0 a 1
+	float distance_=0; 
+	Light* light_=nullptr;
+	PlayerMovement* pM_=nullptr;
+	AudioSource* sound_=nullptr;
+	ProgressBar* progressBar_=nullptr;
 public:
 	Lighter() : actualCharge_(1) {};
 	~Lighter() {};

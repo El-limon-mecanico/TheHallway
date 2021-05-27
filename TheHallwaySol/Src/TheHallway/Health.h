@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+class AudioSource;
 class QuackEntity;
 class Health : public Component {
 private:
@@ -8,6 +9,7 @@ private:
 	std::vector<QuackEntity*> hearts_;
 	const int HEART_SIZE = 64;
 	int WINDOW_WIDTH;
+	AudioSource* scream_ = nullptr;
 public:
 	Health() {};
 	~Health() { hearts_.clear(); };

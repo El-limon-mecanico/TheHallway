@@ -49,6 +49,9 @@ void ChasePlayer::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
 	{
+		assert(entity_->hasComponent<LoopMovement>());
+		entity_->getComponent<LoopMovement>()->setEnable(true);
+		entity_->getComponent<LoopMovement>()->move();
 		// dejamos de perseguir al jugador
 		setEnable(false);
 	}

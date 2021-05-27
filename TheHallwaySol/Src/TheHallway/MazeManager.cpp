@@ -6,6 +6,7 @@
 #include "Lever.h"
 #include "Exit.h"
 #include "MazeRunner.h"
+#include "AudioSource.h"
 #include "LoopMovement.h"
 #include "ChasePlayer.h"
 
@@ -22,7 +23,7 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	
 	// para los enemigos
 	correct &=readVariable<int>(parameterTable, "Ghosts", &numGhosts_);
-	correct &=readVariable<int>(parameterTable, "Enemies", &numSlimes_);
+	correct &=readVariable<int>(parameterTable, "Slimes", &numSlimes_);
 	correct &=readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
 
 
@@ -319,6 +320,7 @@ void MazeManager::writeMap()
 		enemy->getComponent<MazeRunner>()->setPlayer(player_->transform());	// le pasamos las variables que no se pueden leer de archivo
 		enemy->getComponent<MazeRunner>()->setManager(this);				// posicion del jugador, maze manager
 		enemy->getComponent<MazeRunner>()->setFloorChar(floorC_);			// y el char que usamos para representar el suelo
+		enemy->getComponent<AudioSource>()->play();
 	}
 
 	// creamos los fantasmas: atraviesan las paredes
@@ -335,6 +337,7 @@ void MazeManager::writeMap()
 		}
 		enemy->transform()->setGlobalPosition(lmv->getObjectives()[0]);
 		lmv->move();
+		enemy->getComponent<AudioSource>()->play();
 	}
 
 }
