@@ -23,7 +23,7 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	
 	// para los enemigos
 	correct &=readVariable<int>(parameterTable, "Ghosts", &numGhosts_);
-	correct &=readVariable<int>(parameterTable, "Enemies", &numSlimes_);
+	correct &=readVariable<int>(parameterTable, "Slimes", &numSlimes_);
 	correct &=readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
 
 

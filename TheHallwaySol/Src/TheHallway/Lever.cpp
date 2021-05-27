@@ -10,11 +10,6 @@
 #include "AudioSource.h"
 #include "ProgressBar.h"
 
-void Lever::start()
-{
-	sound_ = entity_->getComponent<AudioSource>();
-}
-
 bool Lever::init(luabridge::LuaRef parameterTable)
 {
 	readVariable<float>(parameterTable, "Total", &total_);
@@ -78,6 +73,7 @@ void Lever::finish()
 
 void Lever::start()
 {
+	sound_ = entity_->getComponent<AudioSource>();
 	pb_ = entity_->addComponent<ProgressBar>("Lever_"+entity_->name(), true, std::pair<float,float>{ 0.4,0.8 }, std::pair<float, float>{ 400,60 }, "TheHallway/ProgressBar");
 	pb_->setProgress(0);
 	pb_->setEnable(false);
