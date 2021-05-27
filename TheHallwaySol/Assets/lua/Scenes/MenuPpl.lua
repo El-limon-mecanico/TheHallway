@@ -16,33 +16,56 @@ UI = {
         Play=true
     },
     Children = {
-        entities={"StartButton","CtrlButton","QuackImage","Title"},
- Title = {
-    Active = true,
-    Components={"Text","Transform"},
+        entities={"Background", "StartButton","CtrlButton","QuackImage","Title", "FullScreenButton"},
+        Background={
+            Active= true,
+            Components={"Image", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Image={
+                Active = true,
+                Style= "TheHallway/StaticImage",
+                Name = "MenuBackground",
+                Image = "menuBackground.png",
+                TargetResolution = {1920,1080},
+                Position = {0,0},
+                Size = {1920,1080},
+                Background=false,
+                Border=false
+            },
+        },
+
+        Title = {
+            Active = true,
+            Components={"Text","Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
             Text= {
+                Active = true,
+                Background = false,
+                Border = false,
+                Style= "TheHallway/StaticText",
+                Name = "Title",
+                Text = "THE HALLWAY",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.3,-0.01},
+                Size = {775,250},
+                TargetResolution = {1920,1080},
+            }
+        },
+
+        CtrlButton = {
             Active = true,
-            Background = false,
-            Border = false,
-            Style= "TheHallway/StaticText",
-            Name = "Title",
-            Text = "THE HALLWAY",
-            TLColor = "FFA20410",
-            TRColor = "FFA20410",
-            BLColor = "FFA20410",
-            BRColor = "FFA20410",
-            Position = {0.25,-0.01},
-            Size = {600,250}
-        }
-    },
-CtrlButton = {
-    Active = true,
-    Components={"Button","Transform"},
+            Components={"Button","Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
@@ -59,14 +82,16 @@ CtrlButton = {
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.3,0.65},
-                Size = {400,100},
-                CallBackFunction = "toControls"
+                Position = {0.39,0.65},
+                Size = {525,150},
+                CallBackFunction = "toControls",
+                TargetResolution = {1920,1080},
             }
         },
-StartButton = {
-    Active = true,
-    Components={"Button","Transform"},
+
+        StartButton = {
+            Active = true,
+            Components={"Button","Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
@@ -83,14 +108,16 @@ StartButton = {
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.3,0.35},
-                Size = {400,100},
+                Position = {0.39,0.35},
+                TargetResolution = {1920,1080},
+                Size = {525,150},
                 CallBackFunction = "toLvlSelector"
             }
         },
-    QuackImage={
-    Active = true,
-    Components={"Image","Transform"},
+
+        QuackImage={
+            Active = true,
+            Components={"Image","Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
@@ -101,12 +128,39 @@ StartButton = {
                 Style= "TheHallway/StaticImage",
                 Name = "QuackEngine",
                 Image = "quackEngine.png",
+                TargetResolution = {1920,1080},
                 Position = {0.9,0.85},
                 Size = {100,100},
                 Background=false,
                 Border=false
             }
         },
+        
+        FullScreenButton = {
+            Active =true,
+            Components={"Button", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Button={
+                Active = true,
+                Enable = true, 
+                Type = "Button",
+                Style= "TheHallway/Button",
+                Name = "fullscreenButton",
+                Text = "Fullscreen",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.45,0.5},
+                TargetResolution = {1920,1080},
+                Size = {525,150},
+                CallBackFunction = "fullscreen"
+            },
+        }
     }
 }
 sceneLight = {

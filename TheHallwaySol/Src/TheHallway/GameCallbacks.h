@@ -10,6 +10,7 @@ private:
 	static void back();
 	static void toLvlSelector();
 	static void toMenuPpl();
+	static void fullscreen();
 public:
 	GameCallbacks() {};
 	~GameCallbacks() {};
