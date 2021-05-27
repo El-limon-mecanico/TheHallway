@@ -2,30 +2,6 @@
     entities = {"Maze","Player", "Minimap"}
 }
 
-
-sceneLight = {
-    Active = true,
-    Components = {"Transform", "Light"},
-
-    Transform = {
-        Position = {0,10,0},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-
-    Light = {
-        LightType = 1,
-        DiffuseColor = {0.3,0.3,0.3},
-        SpecularColor = {0.3,0.3,0.3},
-        Direction = {1,0,0},
-        Distance = 1,
-        InnerAngle = 30,
-        OuterAngle = 90,
-        isOn = true
-    }
-}
-
-
 Player = {
     Active = true,
     Components = {"Transform","MeshRenderer", "Rigidbody","PlayerMovement", "ProgressBar", "Health","AudioListener"},
@@ -59,9 +35,9 @@ Player = {
     },
     PlayerMovement = 
     {
-        WalkingSpeed = 10,
+        WalkingSpeed = 13,
         RunningSpeed = 10,
-        CameraSpeed = 200
+        CameraSpeed = 150
     },
     Health={
         MaxLives = 3
@@ -79,7 +55,7 @@ Player = {
             Transform = {
                 Position = {1,4,5},
                 Scale = {0.5,0.5,0.5},
-                Rotation = {0,0,0}
+                Rotation = {0,90,0}
             },
 
             MeshRenderer = {
@@ -103,14 +79,14 @@ Player = {
                 DiffuseColor = {1,1,1},
                 SpecularColor = {1,1,1},
                 Direction = {0,0,1},
-                Distance = 5000,
+                Distance = 7000,
                 InnerAngle = 35,
                 OuterAngle = 60,
                 isOn = true
             },
             Lighter ={
                 ChargeSpeed = 0.3,
-                DischargeSpeed = 0.08,
+                DischargeSpeed = 0.04,
             },
 
             Children = {
@@ -120,7 +96,7 @@ Player = {
                     Active=true,
                     Components={"AudioSource"},
                     AudioSource={
-                        Source= "ChargingLighter.wav",
+                        Source= "Fire.mp3",
                         Volume=1,
                         Loops=-1,
                         Play=false,
@@ -179,8 +155,8 @@ Player = {
             Active=true,
             Components={"AudioSource"},
             AudioSource={
-                Source= "LaRajaDeTuFalda.mp3",
-                Volume=1,
+                Source= "Running.ogg",
+                Volume=0.4,
                 Loops=-1,
                 Play=false,
                 Enabled =true,
@@ -236,9 +212,9 @@ Maze = {
         Active = true,
         Size = 6,
         Holes = 100,
-        Levers = 1,
+        Levers = 2,
 	    Ghosts = 0,
-        Slimes = 0,
+        Slimes = 1,
         PointsGhosts = 4,
     },
     AudioSource={
@@ -284,6 +260,6 @@ Minimap =
         Background = false,
         Border = false,
         Position = {0.776, 0.04},
-        Size = {236, 220}
+        Size = {296, 275}
     }
 }

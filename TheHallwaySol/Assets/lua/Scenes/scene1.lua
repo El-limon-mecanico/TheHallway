@@ -1,5 +1,21 @@
 ﻿scene1 = {
-    entities = {"Enemy", "UI", "Maze", "Player"}
+    entities = {"defaultCamera", "manivela"}
+}
+
+manivela={
+    Active = true,
+    Components = {"Transform", "MeshRenderer"},
+
+    Transform = {
+        Position = {0,0,8},
+        Scale = {100,100,100},
+        Rotation = {0,0,0}
+    },
+
+    MeshRenderer={
+        Mesh = "Manivela.mesh"
+    }
+
 }
 
 Enemy = {
@@ -8,12 +24,12 @@ Enemy = {
 
     Transform = {
         Position = {-10,0,0},
-        Scale = {700,700,700},
-        Rotation = {90,40,0}
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
     },
 
     MeshRenderer = {
-        Mesh = "Icosphere.mesh",
+        Mesh = "Manivela.mesh",
     },
 
     LoopMovement = {
@@ -103,36 +119,30 @@ Player = {
         WalkingSpeed = 10,
         RunningSpeed = 10,
         CameraSpeed = 100
+    }
+}
+
+defaultCamera = {
+
+    Active = true,
+    
+    Components = {"Transform", "Camera"},
+    
+    Transform = {
+        Position = {0,0,2},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
     },
 
-    Children={
-        entities={"defaultCamera"},  
-
-        defaultCamera = {
-
-            Active = true,
-            
-            Components = {"Transform", "Camera", "CameraController"},
-            
-            Transform = {
-                Position = {0,0,2},
-                Scale = {1,1,1},
-                Rotation = {0,0,0}
-            },
-
-            Camera = {
-                Name = "MainCam",
-                Background = {1,1,0},
-                LookAt = {0,0,4},
-                Width = 0,
-                Height = 0,
-                NearClipDistance = 1,
-                FarClipDistance = 100000,
-                ProjectionType = "Perspective"
-            },
-
-            CameraController = {}
-        }
+    Camera = {
+        Name = "MainCam",
+        Background = {1,1,0},
+        LookAt = {0,0,4},
+        Width = 1,
+        Height = 1,
+        NearClipDistance = 1,
+        FarClipDistance = 100000,
+        ProjectionType = "Perspective"
     }
 }
 

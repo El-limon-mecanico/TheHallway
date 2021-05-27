@@ -23,14 +23,14 @@ Slime = {
     },
 
     MazeRunner = {
-        Speed = 10,
+        Speed = 8,
         Following = false,
         TimeToUpdate = 2.5,
         MaxDistance = 35
     },
     AudioSource={
         Source= "Slime.ogg",
-        Volume=4,
+        Volume=2,
         Loops=-1,
         Play=false,
         Enabled =true,

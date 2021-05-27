@@ -1,46 +1,23 @@
 ﻿HardGame = {
-    entities = {"Player", "Maze", "Enemy"}
+    entities = {"Maze","Player", "Minimap"}
 }
-
-sceneLight = {
-    Active = true,
-    Components = {"Transform", "Light"},
-
-    Transform = {
-        Position = {0,10,0},
-        Scale = {1,1,1},
-        Rotation = {0,0,0}
-    },
-
-    Light = {
-        LightType = 1,
-        DiffuseColor = {0.3,0.3,0.3},
-        SpecularColor = {0.3,0.3,0.3},
-        Direction = {1,0,0},
-        Distance = 1,
-        InnerAngle = 30,
-        OuterAngle = 90,
-        isOn = true
-    }
-}
-
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health"},
+    Components = {"Transform","MeshRenderer", "Rigidbody","PlayerMovement", "ProgressBar", "Health","AudioListener"},
 
     Transform = {
-        Position = {0,3,3},
+        Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
 
     MeshRenderer = {
-        Mesh = "Suzanne.mesh",
+        Mesh = "Empty.mesh",
     },
 
     Rigidbody = {
-        Type = "Cube",
+        Type = "Box",
         Mass = 1,
         Trigger = false,
         Static = false,
@@ -48,33 +25,88 @@ Player = {
         RotationConstrains = {1,1,1}
     },
 
-    Light = {
-        LightType = 0,
-        DiffuseColor = {1,1,1},
-        SpecularColor = {1,1,1},
-        Direction = {0,-1,0},
-        Distance = 5000,
-        InnerAngle = 35,
-        OuterAngle = 60,
-        isOn = true
+    ProgressBar={
+        Active = true,
+        Style= "TheHallway/ProgressBar",
+        Name = "LighterProgress",
+        Position = {0.2,0.01},
+        Size = {150,50},
+        Progress = 0
     },
-    Lighter ={
-        ChargeSpeed = 0.3,
-        DischargeSpeed = 0.08
-    },
-    
     PlayerMovement = 
     {
-        WalkingSpeed = 10,
+        WalkingSpeed = 13,
         RunningSpeed = 10,
-        CameraSpeed = 200
+        CameraSpeed = 150
     },
     Health={
         MaxLives = 3
     },
+    AudioListener={},
 
     Children ={
-        entities={"defaultCamera"},
+        entities={"defaultCamera","WalkSound","RunSound","ScreamSounds", "Farolillo", "LuzFarol"},
+
+        Farolillo = {
+            Active = true,
+
+            Components = {"Transform", "MeshRenderer"},
+
+            Transform = {
+                Position = {1,4,5},
+                Scale = {0.5,0.5,0.5},
+                Rotation = {0,90,0}
+            },
+
+            MeshRenderer = {
+                Mesh = "Farolillo.mesh",   
+            },
+        },
+
+        LuzFarol = {
+            Active = true,
+
+            Components = {"Transform", "Light", "Lighter"},
+
+            Transform = {
+                Position = {0,3,2},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+
+            Light = {
+                LightType = 0,
+                DiffuseColor = {1,1,1},
+                SpecularColor = {1,1,1},
+                Direction = {0,0,1},
+                Distance = 7000,
+                InnerAngle = 35,
+                OuterAngle = 60,
+                isOn = true
+            },
+            Lighter ={
+                ChargeSpeed = 0.3,
+                DischargeSpeed = 0.08,
+            },
+
+            Children = {
+                entities = {"LighterSound"},
+
+                LighterSound={
+                    Active=true,
+                    Components={"AudioSource"},
+                    AudioSource={
+                        Source= "Fire.mp3",
+                        Volume=1,
+                        Loops=-1,
+                        Play=false,
+                        Enabled =true,
+                        D3=false
+                    }
+                }
+
+            }
+        },
 
         defaultCamera = {
 
@@ -90,7 +122,7 @@ Player = {
 
             Camera = {
                 Name = "MainCam",
-                Background = {0.46,0.49,0.48},
+                Background = {0,0,0},
                 LookAt = {0,7,5},
                 Width = 1,
                 Height = 1,
@@ -99,48 +131,73 @@ Player = {
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
                 ProjectionType = "Perspective",
-                zOrder = 0
+                zOrder = 1
             },
+
             CameraController = {}
 
+        },
+        
+        WalkSound={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "Steps.ogg",
+                Volume=1,
+                Loops=-1,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+        },
+
+        RunSound={
+            Active=true,
+            Components={"AudioSource"},
+            AudioSource={
+                Source= "Running.ogg",
+                Volume=0.4,
+                Loops=-1,
+                Play=false,
+                Enabled =true,
+                D3=false
+            },
+        },
+        ScreamSounds={
+            Active=true,
+            Components={},
+            Children={
+                entities={"GirlScream","BoyScream"},
+                GirlScream={
+                    Active=true,
+                    Components={"AudioSource"},
+                    AudioSource={
+                        Source= "GirlScream.ogg",
+                        Volume=1,
+                        Loops=0,
+                        Play=false,
+                        Enabled =true,
+                        D3=false
+                    },
+                },
+                BoyScream={
+                    Active=true,
+                    Components={"AudioSource"},
+                    AudioSource={
+                        Source= "BoyScream.ogg",
+                        Volume=1,
+                        Loops=0,
+                        Play=false,
+                        Enabled =true,
+                        D3=false
+                    },
+                },
+            }
         }
     }
 }
 
 
-Enemy = {
-    Active=true,
-    Tag = "Enemy",
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
-
-    Transform = {
-        Position = {-10,0,0},
-        Scale = {700,700,700},
-        Rotation = {90,40,0}
-    },
-
-    MeshRenderer = {
-        Mesh = "Icosphere.mesh",
-    },
-
-    LoopMovement = {
-        Speed=10,
-        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
-        Distance = 15
-    },
-    Rigidbody = {
-        Type = "Cube",
-        Mass = 1,
-        Trigger = true,
-        Static = false,
-        PositionConstrains = {0,1,0},
-        RotationConstrains = {1,1,1}
-    },
-
-    ChasePlayer = {
-        Speed = 10
-    }
-}
 
 Maze = {
     Active = true,
@@ -151,17 +208,59 @@ Maze = {
         Scale = {1,1,1},
         Rotation = {0,0,0}
     },
+
     MazeManager = {
-        Size = 15,
-        Holes = 5,
+        Active = true,
+        Size = 13,
+        Holes = 10,
         Levers = 3,
-        ChargeVel = 1,
-        UnchargeVel = 2
+	    Ghosts = 2,
+        Slimes = 3,
+        PointsGhosts = 4,
     },
     AudioSource={
         Source= "TheHallway.wav",
-        Volume=1,
+        Volume=0.1,
         Loops=-1,
-        Play=true
+        Play=true,
+    }
+}
+
+Minimap = 
+{
+    Active = true,
+    Components = {"Transform", "Camera", "MinimapController", "Image"},
+    
+    Transform = {
+        Position = {0,100,0},
+        Scale = {1,1,1},
+        Rotation = {0,0,0}
+    },
+
+    Camera = {
+        Name = "MinimapCam",
+        Background = {0,0,0},
+        LookAt = {0,0,0},
+        Top = 0.05,
+        Left = 0.78,
+        Width = 0.2,
+        Height = 0.33,
+        NearClipDistance = 1,
+        FarClipDistance = 100000,
+        ProjectionType = "Perspective",
+        zOrder = 0
+    },
+
+    MinimapController = {},
+
+    Image = { 
+        Active = true,
+        Style= "TheHallway/StaticImage",
+        Name = "MapFrame",
+        Image = "MapFrame.png",
+        Background = false,
+        Border = false,
+        Position = {0.776, 0.04},
+        Size = {236, 220}
     }
 }

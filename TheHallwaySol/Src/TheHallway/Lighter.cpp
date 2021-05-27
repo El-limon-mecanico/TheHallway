@@ -21,16 +21,19 @@ void Lighter::update() {
 	if (InputManager::Instance()->getMouseButtons().leftDown) {
 		//cargas si se puede hacer
 		if (actualCharge_ < 1) {
+			if (!sound_->isPlaying()) {
+				sound_->play();
+			}
 			//desactivas el movimiento
 			if (pM_->getMoving())
 				pM_->setMoving(false);
 			actualCharge_ += QuackEnginePro::Instance()->time()->deltaTime() * chargeSpeed_;
-			if (actualCharge_ > 1) //si llega al m�ximo, setea
+			if (actualCharge_ > 1) { //si llega al m�ximo, setea
 				actualCharge_ = 1;
+				sound_->stop();
+			}
 		}
-		if (!sound_->isPlaying()) {
-			sound_->play();
-		}
+		
 		
 	}
 	else {
