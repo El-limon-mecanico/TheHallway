@@ -40,9 +40,8 @@ void GameCallbacks::toMenuPpl()
 	SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "MenuPpl");
 }
 void GameCallbacks::fullscreen()
-{/*
-	std::cout << "FSSS\n";
-	QuackEnginePro::Instance()->setFullScreen(!QuackEnginePro::Instance()->getFullScreen());*/
+{
+	QuackEnginePro::Instance()->setFullScreen(!QuackEnginePro::Instance()->getFullScreen());
 }
 void GameCallbacks::toLvlSelector()
 {

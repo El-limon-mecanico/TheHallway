@@ -17,7 +17,27 @@ UI = {
         Play=true
     },
     Children={
-        entities={"GameOverText","MainMenuButton","SelectLevelButton"},
+        entities={"Background", "GameOverText","MainMenuButton","SelectLevelButton"},
+        Background={
+            Active= true,
+            Components={"Image", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Image={
+                Active = true,
+                Style= "TheHallway/StaticImage",
+                Name = "MenuBackground",
+                Image = "menuBackground.png",
+                TargetResolution = {1920,1080},
+                Position = {0,0},
+                Size = {1920,1080},
+                Background=false,
+                Border=false
+            },
+        },
         GameOverText={
             Active= true,
             Components={"Text", "Transform"},
@@ -32,14 +52,15 @@ UI = {
                 Border = false,
                 Style= "TheHallway/StaticText",
                 Name = "GameOverText",
-                Text = "YOU CANNOT ESCAPE",
+                Text = "NO PUEDES ESCAPAR",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.15,-0.01  },
-                Size = {1000,250}
-                },
+                Position = {0.21,-0.01  },
+                TargetResolution = {1920,1080},
+                Size = {1100,250}
+            },
         },
         MainMenuButton = {
             Active =true,
@@ -50,20 +71,22 @@ UI = {
                 Rotation = {0,0,0}
             },
             Button={
-            Active = true,
-            Enable = true, 
-            Type = "Button",
-            Style= "TheHallway/Button",
-            Name = "GOMainButton",
-            Text = "Main Menu",
-            TLColor = "FFA20410",
-            TRColor = "FFA20410",
-            BLColor = "FFA20410",
-            BRColor = "FFA20410",
-            Position = {0.3,0.35},
-            Size = {400,100},
-            CallBackFunction = "toMenuppl"
-        },},
+                Active = true,
+                Enable = true, 
+                Type = "Button",
+                Style= "TheHallway/Button",
+                Name = "GOMainButton",
+                Text = "Menú Principal",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.3,0.35},
+                Size = {750,150},
+                TargetResolution = {1920,1080},
+                CallBackFunction = "toMenuppl"
+            },
+        },
         SelectLevelButton = {
             Active =true,
             Components={"Button", "Transform"},
@@ -73,22 +96,23 @@ UI = {
                 Rotation = {0,0,0}
             },
             Button={
-            Active = true,
-            Enable = true, 
-            Type = "Button",
-            Style= "TheHallway/Button",
-            Name = "GOSelectButton",
-            Text = "Select Level",
-            TLColor = "FFA20410",
-            TRColor = "FFA20410",
-            BLColor = "FFA20410",
-            BRColor = "FFA20410",
-            Position = {0.3,0.7},
-            Size = {400,100},
-            CallBackFunction = "toLvlSelector"
-        },
+                Active = true,
+                Enable = true, 
+                Type = "Button",
+                Style= "TheHallway/Button",
+                Name = "GOSelectButton",
+                Text = "Jugar de nuevo",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.3,0.55},
+                TargetResolution = {1920,1080},
+                Size = {750,150},
+                CallBackFunction = "toLvlSelector"
+            },
+        }
     }
-}
 }
 sceneLight = {
     Active = true,

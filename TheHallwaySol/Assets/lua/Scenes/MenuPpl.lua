@@ -63,32 +63,6 @@ UI = {
             }
         },
 
-        CtrlButton = {
-            Active = true,
-            Components={"Button","Transform"},
-            Transform = {
-                Position = {0,0,0},
-                Scale = {1,1,1},
-                Rotation = {0,0,0}
-            },
-            Button = {
-                Active = true,
-                Enable = true,
-                Type = "Button",
-                Style= "TheHallway/Button",
-                Name = "CtrlButton",
-                Text = "Controles",
-                TLColor = "FFA20410",
-                TRColor = "FFA20410",
-                BLColor = "FFA20410",
-                BRColor = "FFA20410",
-                Position = {0.39,0.65},
-                Size = {525,150},
-                CallBackFunction = "toControls",
-                TargetResolution = {1920,1080},
-            }
-        },
-
         StartButton = {
             Active = true,
             Components={"Button","Transform"},
@@ -114,7 +88,7 @@ UI = {
                 CallBackFunction = "toLvlSelector"
             }
         },
-
+        
         QuackImage={
             Active = true,
             Components={"Image","Transform"},
@@ -155,11 +129,37 @@ UI = {
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.45,0.5},
+                Position = {0.39,0.55},
                 TargetResolution = {1920,1080},
                 Size = {525,150},
                 CallBackFunction = "fullscreen"
             },
+        },
+
+        CtrlButton = {
+            Active = true,
+            Components={"Button","Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Button = {
+                Active = true,
+                Enable = true,
+                Type = "Button",
+                Style= "TheHallway/Button",
+                Name = "CtrlButton",
+                Text = "Controles",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.39,0.75},
+                Size = {525,150},
+                CallBackFunction = "toControls",
+                TargetResolution = {1920,1080},
+            }
         }
     }
 }

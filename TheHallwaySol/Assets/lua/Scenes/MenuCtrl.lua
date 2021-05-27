@@ -1,4 +1,4 @@
-MenuCtrl = {
+﻿MenuCtrl = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
@@ -17,7 +17,7 @@ UI = {
         Play=true
     },
     Children={
-        entities={"Background", "CtrlImage","BackButton"},
+        entities={"Background", "Title", "CtrlImage","BackButton"},
         Background={
             Active= true,
             Components={"Image", "Transform"},
@@ -38,7 +38,31 @@ UI = {
                 Border=false
             },
         },
-
+        
+        Title = {
+            Active = true,
+            Components={"Text","Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
+            },
+            Text= {
+                Active = true,
+                Background = false,
+                Border = false,
+                Style= "TheHallway/StaticText",
+                Name = "Title",
+                Text = "CONTROLES",
+                TLColor = "FFA20410",
+                TRColor = "FFA20410",
+                BLColor = "FFA20410",
+                BRColor = "FFA20410",
+                Position = {0.34,-0.01},
+                Size = {600,250},
+                TargetResolution = {1920,1080},
+            }
+        },
         CtrlImage={
             Active= true,
             Components={"Image", "Transform"},
@@ -81,7 +105,7 @@ UI = {
                 BRColor = "FFA20410",
                 Position = {0.001,0.01},
                 TargetResolution = {1920,1080},
-                Size = {100,50},
+                Size = {125,100},
                 CallBackFunction = "back"
             },
         },
