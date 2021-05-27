@@ -1,0 +1,35 @@
+material TheHallway/Wall
+ {
+    technique
+    {
+       pass
+        {
+          lighting on
+          texture_unit
+          {
+            texture Wall.png
+            scale 0.1 0.1
+          }
+
+       }   
+    }
+ }
+
+ material TheHallway/Floor
+ {
+    technique
+    {
+       pass
+        {
+         specular 0.1 0.1 0.1 0.1 0.0
+          lighting on
+          texture_unit
+          {
+            texture Floor.png
+            scale 0.1 0.1
+          }
+            cull_hardware none
+            cull_software none 
+       }   
+    }
+ }

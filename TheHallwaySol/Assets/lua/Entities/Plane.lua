@@ -11,6 +11,7 @@ Plane ={
 
     MeshRenderer ={
         Mesh = "Plano.mesh",
+        Material="TheHallway/Floor"
     },
 
     Rigidbody = {
