@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy", "Minimap"}
+    entities = {"Maze","Player", "Minimap"}
 }
 
 
@@ -28,7 +28,7 @@ sceneLight = {
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health","AudioListener"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter","ProgressBar", "Health","AudioListener"},
 
     Transform = {
         Position = {0,3,3},
@@ -61,9 +61,16 @@ Player = {
     },
     Lighter ={
         ChargeSpeed = 0.3,
-        DischargeSpeed = 0.08
+        DischargeSpeed = 0.08,
     },
-    
+    ProgressBar={
+        Active = true,
+        Style= "TheHallway/ProgressBar",
+        Name = "LighterProgress",
+        Position = {0.15,0.01},
+        Size = {150,50},
+        Progress = 0
+    },
     PlayerMovement = 
     {
         WalkingSpeed = 10,
@@ -177,48 +184,6 @@ ScreamSounds={
 }
 
 
-Enemy = {
-    Active=true,
-    Tag = "Enemy",
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer","AudioSource"},
-
-    Transform = {
-        Position = {-10,0,0},
-        Scale = {700,700,700},
-        Rotation = {90,40,0}
-    },
-
-    MeshRenderer = {
-        Mesh = "Icosphere.mesh",
-    },
-
-    LoopMovement = {
-        Speed=10,
-        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
-        Distance = 15
-    },
-    Rigidbody = {
-        Type = "Box",
-        Mass = 1,
-        Trigger = true,
-        Static = false,
-        PositionConstrains = {0,1,0},
-        RotationConstrains = {1,1,1}
-    },
-
-    ChasePlayer = {
-        Speed = 10
-    },
-    AudioSource={
-        Source= "Ghost.wav",
-        Volume=4,
-        Loops=-1,
-        Play=false,
-        Enabled =true,
-        D3=true
-    }
-}
-
 Maze = {
     Active = true,
     Components = {"Transform", "MazeManager","AudioSource"},
@@ -232,15 +197,11 @@ Maze = {
     MazeManager = {
         Active = true,
         Size = 6,
-        Holes = 100,
+        Holes = 10,
         Levers = 1,
-        ChargeVel = 5,
-        UnchargeVel = 2,
-        Ghosts = 0,
-        Enemies = 1,
+	    Ghosts = 1,
+        Slimes = 1,
         PointsGhosts = 4,
-        GhostRadar = 15,
-        EnemyRadar = 20
     },
     AudioSource={
         Source= "TheHallway.wav",

@@ -7,6 +7,9 @@
 #include "Exit.h"
 #include "MazeRunner.h"
 #include "AudioSource.h"
+#include "LoopMovement.h"
+#include "ChasePlayer.h"
+
 MazeManager::MazeManager()
 {
 }
@@ -20,9 +23,9 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	
 	// para los enemigos
 	correct &=readVariable<int>(parameterTable, "Ghosts", &numGhosts_);
-	correct &=readVariable<int>(parameterTable, "Enemies", &numEnemies_);
-	correct &=readVariable<float>(parameterTable, "GhostRadar", &ghostRadar_);
+	correct &=readVariable<int>(parameterTable, "Enemies", &numSlimes_);
 	correct &=readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
+
 
 	// para las palancas
 	correct &=readVariable<size_t>(parameterTable, "Levers", &numLevers_);
@@ -287,7 +290,7 @@ void MazeManager::writeMap()
 			{
 				std::string name = "Lever_" + std::to_string(i) + "-" + std::to_string(j);
 				QuackEntity* man = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Lever.lua", "Manivela", name);
-				man->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 3, i * WALL_SCALE));
+				man->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 0, i * WALL_SCALE));
 				Lever* l = man->getComponent<Lever>();
 				l->setMazeMng(this);
 			}
@@ -295,7 +298,7 @@ void MazeManager::writeMap()
 			// situamos al jugador en su sitio
 			else if (map_[i][j] == playerC_)
 			{
-				player_->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 3, i * WALL_SCALE));
+				player_->transform()->setGlobalPosition(Vector3D(j * WALL_SCALE, 0, i * WALL_SCALE));
 			}
 
 			// limpiamos el mapa para dejar solo marcas de suelo o pared
@@ -304,20 +307,39 @@ void MazeManager::writeMap()
 			j++;
 		}
 	}
-	//TODO meter datos sobre enemigos, lo necesario, antes de dibujar el mapa
+
 
 	// creamos los enemigos (no estan escritos en el mapa)
-	for (int i = 0; i < numEnemies_; i++)
+	// primero, los que recorren el laberinto: los slimes
+	for (int i = 0; i < numSlimes_; i++)
 	{
 		Vector2 pos = getRandomFloor();
 		std::string name = "Slime_" + std::to_string(i);
 		QuackEntity* enemy = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Slime.lua", "Slime", name);
-		enemy->transform()->setGlobalPosition(Vector3D(pos.first * WALL_SCALE, 3, pos.second * WALL_SCALE));
-		enemy->getComponent<MazeRunner>()->setPlayer(player_->transform());
-		enemy->getComponent<MazeRunner>()->setManager(this);
-		enemy->getComponent<MazeRunner>()->setFloorChar(floorC_);
+		enemy->transform()->setGlobalPosition(Vector3D(pos.first * WALL_SCALE, 0, pos.second * WALL_SCALE));
+		enemy->getComponent<MazeRunner>()->setPlayer(player_->transform());	// le pasamos las variables que no se pueden leer de archivo
+		enemy->getComponent<MazeRunner>()->setManager(this);				// posicion del jugador, maze manager
+		enemy->getComponent<MazeRunner>()->setFloorChar(floorC_);			// y el char que usamos para representar el suelo
 		enemy->getComponent<AudioSource>()->play();
 	}
+
+	// creamos los fantasmas: atraviesan las paredes
+	for (int i = 0; i < numGhosts_; i++)
+	{
+		std::string name = "Ghost_" + std::to_string(i);
+		QuackEntity* enemy = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Ghost.lua", "Ghost", name);
+		enemy->getComponent<ChasePlayer>()->setPlayer(player_->transform());
+		LoopMovement* lmv = enemy->getComponent<LoopMovement>();		
+		lmv->setPlayer(player_->transform());
+		for (int j = 0; j < pointsGhost_; j++)							// le anadimos los puntos del mapa que va a autilizar en su recorrido
+		{
+			lmv->addPoint(getPositionInWorld(getRandomFloor()));		// buscamos la posicion en el mundo que se corresponde con un suelo aleatorio del mapa
+		}
+		enemy->transform()->setGlobalPosition(lmv->getObjectives()[0]);
+		lmv->move();
+		enemy->getComponent<AudioSource>()->play();
+	}
+
 }
 
 void MazeManager::eraseColumns()
@@ -436,7 +458,7 @@ void MazeManager::activateLever()
 	{
 		//creamos una puerta
 		QuackEntity* salida = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Door.lua", "Door", "Salida");
-		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, 3, exit_.second * WALL_SCALE));
+		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, 0, exit_.second * WALL_SCALE));
 	}
 }
 

@@ -15,7 +15,7 @@ Ghost = {
 
     LoopMovement = {
         Speed=10,
-        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
+        Objectives={},
         Distance = 15
     },
 

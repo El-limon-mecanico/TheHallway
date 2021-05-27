@@ -8,6 +8,7 @@
 #include "Rigidbody.h"
 #include "SceneMng.h"
 #include "AudioSource.h"
+#include "ProgressBar.h"
 
 void Lever::start()
 {
@@ -45,6 +46,7 @@ void Lever::update()
 	}
 	if (charged_)
 		finish();
+	pb_->setProgress(progress_ / total_);
 }
 
 void Lever::onTriggerEnter(QuackEntity* other, Vector3D point)
@@ -52,6 +54,7 @@ void Lever::onTriggerEnter(QuackEntity* other, Vector3D point)
 	if (other->hasComponent<PlayerMovement>())
 	{
 		player_ = true;
+		pb_->setEnable(true);
 	}
 }
 
@@ -60,6 +63,7 @@ void Lever::onTriggerExit(QuackEntity* other, Vector3D point)
 	if (other->hasComponent<PlayerMovement>())
 	{
 		player_ = false;
+		pb_->setEnable(false);
 	}
 }
 
@@ -67,6 +71,14 @@ void Lever::finish()
 {
 	assert(mazeMng_);
 	sound_->stop();
+	pb_->setEnable(false);
 	mazeMng_->activateLever();
 	entity_->destroy();
+}
+
+void Lever::start()
+{
+	pb_ = entity_->addComponent<ProgressBar>("Lever_"+entity_->name(), true, std::pair<float,float>{ 0.4,0.8 }, std::pair<float, float>{ 400,60 }, "TheHallway/ProgressBar");
+	pb_->setProgress(0);
+	pb_->setEnable(false);
 }
