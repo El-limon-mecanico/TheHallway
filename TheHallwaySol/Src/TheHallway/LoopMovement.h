@@ -20,13 +20,15 @@ private:
 	void updateObjective();
 	//Ctualiza el valor de velocity
 	void updateVelocity();
+
 public:
 	///Constructor por defecto y con argumentos
 	LoopMovement(float speed=0,std::vector<Vector3D>objectives=std::vector<Vector3D>(),int next=0):speed_(speed),objectives_(objectives),actualObjective_(next) {}
 	///Destructor por defecto
 	~LoopMovement() {}
 	void setTriggerDistance(float d) { playerTriggerDistance_ = d; }
-	void getPlayer();
+	void setPlayer(Transform* tr) { playerTr_ = tr; }
+
 	///Posibilita leer la componente desde lua
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 	//Pone al objeto mirando al lugar adecuado y setea la gravedad a 0
@@ -36,8 +38,10 @@ public:
 	//devuelve el nombre de la componente
 	static std::string GetName() { return "LoopMovement"; }
 
-	virtual void onEnable();
-	virtual void onDisable();
-
+	void addPoint(Vector3D p) { objectives_.push_back(p); }
+	const std::vector<Vector3D> getObjectives() const { return objectives_; }
+	
 	void findObjective();
+
+	void move();
 };

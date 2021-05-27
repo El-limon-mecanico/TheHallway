@@ -1,5 +1,5 @@
 ﻿EZGame = {
-    entities = {"Maze","Player", "Enemy", "Minimap"}
+    entities = {"Maze","Player", "Minimap"}
 }
 
 
@@ -117,40 +117,6 @@ Player = {
 }
 
 
-Enemy = {
-    Active=true,
-    Tag = "Enemy",
-    Components = {"Transform", "MeshRenderer", "LoopMovement","Rigidbody", "ChasePlayer"},
-
-    Transform = {
-        Position = {-10,0,0},
-        Scale = {700,700,700},
-        Rotation = {90,40,0}
-    },
-
-    MeshRenderer = {
-        Mesh = "Icosphere.mesh",
-    },
-
-    LoopMovement = {
-        Speed=10,
-        Objectives={{-10,0,0},{51,0,0}, {51,0,51}, {0,0,51}},
-        Distance = 15
-    },
-    Rigidbody = {
-        Type = "Box",
-        Mass = 1,
-        Trigger = true,
-        Static = false,
-        PositionConstrains = {0,1,0},
-        RotationConstrains = {1,1,1}
-    },
-
-    ChasePlayer = {
-        Speed = 10
-    }
-}
-
 Maze = {
     Active = true,
     Components = {"Transform", "MazeManager","AudioSource"},
@@ -164,21 +130,18 @@ Maze = {
     MazeManager = {
         Active = true,
         Size = 6,
-        Holes = 100,
+        Holes = 10,
         Levers = 1,
-        ChargeVel = 5,
-        UnchargeVel = 2,
-        Ghosts = 0,
-        Enemies = 1,
+	    Ghosts = 1,
+        Slimes = 1,
         PointsGhosts = 4,
-        GhostRadar = 15,
-        EnemyRadar = 20
     },
     AudioSource={
         Source= "TheHallway.wav",
         Volume=1,
         Loops=-1,
         Play=true
+
     }
 }
 

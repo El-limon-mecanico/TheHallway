@@ -17,12 +17,11 @@ public:
 	ChasePlayer(float speed = 0): speed_(speed) {}
 	~ChasePlayer() {}
 	void setTriggerDistance(float d) { maxDistance_ = d; }
-	void getPlayer();
+	void setPlayer(Transform* tr) { playerTr_ = tr; }
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 	void start() override;
 	void update() override;
 	virtual void onTriggerEnter(QuackEntity* other, Vector3D point);
-	virtual void onDisable();
 
 	static std::string GetName() { return "ChasePlayer"; }
 };

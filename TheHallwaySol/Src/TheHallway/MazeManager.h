@@ -20,7 +20,7 @@ private:
     int size_ = 20;                                    // ancho y alto del laberinto
     size_t numLevers_ = 0;                               // numero de manivelas por nivel
     int numGhosts_ = 0;                                 // numero de fantasmas por nivel
-    int numEnemies_ = 0;                                // numero de enemigos (que recorren el laberinto) por nivel
+    int numSlimes_ = 0;                                // numero de enemigos (que recorren el laberinto) por nivel
     int pointsGhost_ = 0;                               // numero de puntos del recorrido para cada fantasma
     size_t additionalPaths_ = 0;                        // numero de paredes que se van a tirar de mas
 
@@ -28,14 +28,10 @@ private:
     Vector2 invalidDir_;                                // por control
     Vector2 exit_;
 
-    // distancias de los enemigos (radar del jugador)
-    float ghostRadar_ = 0;
-
     std::vector<std::vector<char>> map_;
     char wallC_ = 'W';
     char floorC_ = '.';
     char leverC_ = 'L';
-    char enemyC_ = 'E';
     char playerC_ = 'P';
 
     /// <summary>

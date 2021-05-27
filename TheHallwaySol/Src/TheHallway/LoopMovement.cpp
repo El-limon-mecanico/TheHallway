@@ -6,12 +6,6 @@
 #include "Scene.h"
 #include "ChasePlayer.h"
 
-void LoopMovement::getPlayer()
-{
-	assert(SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player"));
-	playerTr_ = SceneMng::Instance()->getCurrentScene()->getObjectWithName("Player")->transform();
-}
-
 bool LoopMovement::init(luabridge::LuaRef parameterTable)
 {
 	bool correct = true;
@@ -55,12 +49,9 @@ void LoopMovement::updateVelocity()
 }
 void LoopMovement::start()
 {
-	getPlayer();
 	assert(entity_->hasComponent<Rigidbody>());
 	rb_ = entity_->getComponent<Rigidbody>();
 	rb_->setGravity({ 0,0,0 });
-	transform->lookAt(objectives_[actualObjective_]);
-	updateVelocity();
 }
 void LoopMovement::update() {
 	updateObjective();
@@ -68,26 +59,19 @@ void LoopMovement::update() {
 	float distance = (transform->position() - playerTr_->position()).magnitude();
 	if (distance < playerTriggerDistance_)
 	{
+		// volvemos al comportamiento de persecucion
+		// assert porque no tenemos otro movimiento para los enemigos
+		assert(entity_->hasComponent<ChasePlayer>());
+		entity_->getComponent<ChasePlayer>()->setEnable(true);
 		setEnable(false);
 	}
 }
 
-/// <summary>
-/// busca el punto mas cercano del circuito. Desde ahi empieza el circuito
-/// </summary>
-void LoopMovement::onEnable()
+void LoopMovement::move()
 {
 	findObjective();
-	if(rb_)
+	if (rb_)
 		updateVelocity();
-}
-
-void LoopMovement::onDisable()
-{
-	// volvemos al comportamiento de persecucion
-	// assert porque no tenemos otro movimiento para los enemigos
-	assert(entity_->hasComponent<ChasePlayer>());
-	entity_->getComponent<ChasePlayer>()->setEnable(true);
 }
 
 void LoopMovement::findObjective()
