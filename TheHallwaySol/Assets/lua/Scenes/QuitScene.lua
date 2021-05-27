@@ -1,4 +1,4 @@
-﻿MenuCtrl = {
+QuitScene = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
@@ -17,74 +17,31 @@ UI = {
         Play=true
     },
     Children={
-        entities={"Background", "Title", "CtrlImage","BackButton"},
-        Background={
+        entities={"QuitText","YesButton","NoButton"},
+        QuitText={
             Active= true,
-            Components={"Image", "Transform"},
+            Components={"Text", "Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
-            Image={
-                Active = true,
-                Style= "TheHallway/StaticImage",
-                Name = "MenuBackground",
-                Image = "menuBackground.png",
-                TargetResolution = {1920,1080},
-                Position = {0,0},
-                Size = {1920,1080},
-                Background=false,
-                Border=false
-            },
-        },
-        
-        Title = {
-            Active = true,
-            Components={"Text","Transform"},
-            Transform = {
-                Position = {0,0,0},
-                Scale = {1,1,1},
-                Rotation = {0,0,0}
-            },
-            Text= {
+            Text={
                 Active = true,
                 Background = false,
                 Border = false,
                 Style= "TheHallway/StaticText",
-                Name = "Title",
-                Text = "CONTROLES",
+                Name = "QuitText",
+                Text = "Do you want to close the game?",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.34,-0.01},
-                Size = {600,250},
-                TargetResolution = {1920,1080},
-            }
+                Position = {0.15,-0.01  },
+                Size = {1200,250}
+                },
         },
-        CtrlImage={
-            Active= true,
-            Components={"Image", "Transform"},
-            Transform = {
-                Position = {0,0,0},
-                Scale = {1,1,1},
-                Rotation = {0,0,0}
-            },
-            Image={
-                Active = true,
-                Style= "TheHallway/StaticImage",
-                Name = "MenuCtrlImage",
-                Image = "MenuCtrl.png",
-                Position = {0,0},
-                Size = {1920,1080},
-                TargetResolution = {1920,1080},
-                Background=false,
-                Border=false
-            },
-        },
-
-        BackButton = {
+        YesButton = {
             Active =true,
             Components={"Button", "Transform"},
             Transform = {
@@ -93,23 +50,45 @@ UI = {
                 Rotation = {0,0,0}
             },
             Button={
-                Active = true,
-                Enable = true, 
-                Type = "Button",
-                Style= "TheHallway/Button",
-                Name = "backButton",
-                Text = "<-",
-                TLColor = "FFA20410",
-                TRColor = "FFA20410",
-                BLColor = "FFA20410",
-                BRColor = "FFA20410",
-                Position = {0.001,0.01},
-                TargetResolution = {1920,1080},
-                Size = {125,100},
-                CallBackFunction = "back"
+            Active = true,
+            Enable = true, 
+            Type = "Button",
+            Style= "TheHallway/Button",
+            Name = "quitButton",
+            Text = "Yes",
+            TLColor = "FFA20410",
+            TRColor = "FFA20410",
+            BLColor = "FFA20410",
+            BRColor = "FFA20410",
+            Position = {0.3,0.35},
+            Size = {400,100},
+            CallBackFunction = "quit"
+        },},
+        NoButton = {
+            Active =true,
+            Components={"Button", "Transform"},
+            Transform = {
+                Position = {0,0,0},
+                Scale = {1,1,1},
+                Rotation = {0,0,0}
             },
+            Button={
+            Active = true,
+            Enable = true, 
+            Type = "Button",
+            Style= "TheHallway/Button",
+            Name = "NoButton",
+            Text = "No",
+            TLColor = "FFA20410",
+            TRColor = "FFA20410",
+            BLColor = "FFA20410",
+            BRColor = "FFA20410",
+            Position = {0.3,0.7},
+            Size = {400,100},
+            CallBackFunction = "back"
         },
     }
+}
 }
 sceneLight = {
     Active = true,
