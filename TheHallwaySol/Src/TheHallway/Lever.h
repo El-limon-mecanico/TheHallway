@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-
+class ProgressBar;
 class MazeManager;
 
 class Lever : public Component
@@ -15,7 +15,7 @@ private:
     bool charged_ = false;
 
     MazeManager* mazeMng_ = nullptr;
-
+    ProgressBar* pb_ = nullptr;
 public:
     Lever() {}
     ~Lever() {}
@@ -30,7 +30,8 @@ public:
     virtual void update();
     virtual void onTriggerEnter(QuackEntity* other, Vector3D point);
     virtual void onTriggerExit(QuackEntity* other, Vector3D point);
-    virtual void onDisable();
+    virtual void start() override;
+    void finish();
 
     static std::string GetName() { return "Lever"; }
 };

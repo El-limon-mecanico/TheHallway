@@ -921,6 +921,7 @@
     -->
     <WidgetLook name="TaharezLook/ProgressBar">
         <Property name="Size" value="{{0, 256}, {0, 32}}" />
+        <PropertyDefinition name="ProgressColour" initialValue="FFFFFF00" redrawOnWrite="true" />
         <NamedArea name="ProgressArea">
             <Area>
                 <Dim type="LeftEdge" >
@@ -938,6 +939,7 @@
                         </OperatorDim>
                     </OperatorDim>
                 </Dim>
+                <Colours topLeft="FF000000" topRight="FF000000" bottomLeft="FF000000" bottomRight="FF000000" />
             </Area>
         </NamedArea>
         <ImagerySection name="frame">
@@ -969,7 +971,9 @@
         </StateImagery>
         <StateImagery name="EnabledProgress">
             <Layer>
-                <Section section="progress_lights" />
+                <Section section="progress_lights">
+                <ColourProperty name="ProgressColour" />
+                </Section>
             </Layer>
         </StateImagery>
         <StateImagery name="DisabledProgress">

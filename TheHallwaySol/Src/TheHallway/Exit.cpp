@@ -9,6 +9,7 @@ void Exit::onTriggerEnter(QuackEntity* other, Vector3D point)
 {
 	if (other->hasComponent<PlayerMovement>())
 	{
-		SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "menuppl");
+		InputManager::Instance()->setMouseVisibility(true);
+		SceneMng::Instance()->loadScene("Scenes/WinScene.lua", "WinScene");
 	}
 }

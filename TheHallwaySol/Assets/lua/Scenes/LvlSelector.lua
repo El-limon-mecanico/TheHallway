@@ -1,14 +1,20 @@
-lvlSelector = {
+LvlSelector = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
 UI = {
     Active=true,
-    Components = {"Transform"},
+    Components = {"Transform","AudioSource"},
     Transform = {
         Position = {0,0,0},
         Scale = {1,1,1},
         Rotation = {0,0,0}
+    },
+    AudioSource={
+        Source= "MenusTheHallway.wav",
+        Volume=0.25,
+        Loops=-1,
+        Play=true
     },
     Children={
         entities={"EzGame","MedGame","HardGame","Title"},
@@ -140,13 +146,16 @@ defaultCamera = {
     },
 
     Camera = {
-        Name = "MenuCtrl",
+        Name = "MainCam",
         Background = {0.46,0.49,0.48},
         LookAt = {0,0,0},
         Width = 1,
         Height = 1,
+        xProp = 16,
+        yProp = 9,
         NearClipDistance = 1,
         FarClipDistance = 100000,
-        ProjectionType = "Perspective"
+        ProjectionType = "Perspective",
+        zOrder = 0
     },
 }

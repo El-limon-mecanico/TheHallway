@@ -4,18 +4,19 @@
 #include "QuackEntity.h"
 #include "QuackEnginePro.h"
 #include "PlayerMovement.h"
-
+#include "ProgressBar.h"
 
 bool Lighter::init(luabridge::LuaRef parameterTable)
 {
-	readVariable<float>(parameterTable, "ChargeSpeed", &chargeSpeed_);
-	readVariable<float>(parameterTable, "DischargeSpeed", &dischargeSpeed_);
-	return true;
+
+	bool correct  = readVariable<float>(parameterTable, "ChargeSpeed",&chargeSpeed_);
+	correct &= readVariable<float>(parameterTable, "DischargeSpeed", &dischargeSpeed_);
+	return correct;
 }
 
 
 void Lighter::update() {
-	// si la linterna no está apagada y se pulsa el botón de carga, se carga la linterna     
+	// si la linterna no estï¿½ apagada y se pulsa el botï¿½n de carga, se carga la linterna     
 	if (InputManager::Instance()->getMouseButtons().leftDown) {
 		//cargas si se puede hacer
 		if (actualCharge_ < 1) {
@@ -23,7 +24,7 @@ void Lighter::update() {
 			if (pM_->getMoving())
 				pM_->setMoving(false);
 			actualCharge_ += QuackEnginePro::Instance()->time()->deltaTime() * chargeSpeed_;
-			if (actualCharge_ > 1) //si llega al máximo, setea
+			if (actualCharge_ > 1) //si llega al mï¿½ximo, setea
 				actualCharge_ = 1;
 		}
 	}
@@ -34,11 +35,17 @@ void Lighter::update() {
 		//descargas
 		if (actualCharge_ >0) {
 			actualCharge_ -= QuackEnginePro::Instance()->time()->deltaTime() * dischargeSpeed_;
-			if (actualCharge_ < 0)//si llega al mínimo, setea
+			if (actualCharge_ < 0)//si llega al mï¿½nimo, setea
 				actualCharge_ = 0;
 		}
 	}
 	light_->setDistance(distance_* actualCharge_);
+	if(actualCharge_<0.25)
+		progressBar_->setProperty("ProgressColour", "FFFF0000");
+	else
+		progressBar_->setProperty("ProgressColour", "FFFFFFFF");
+	progressBar_->setProgress(actualCharge_);
+
 }
 
 void Lighter::start()
@@ -46,4 +53,6 @@ void Lighter::start()
 	light_ = entity_->getComponent<Light>();
 	distance_ = light_->getDistance();
 	pM_ = entity_->getComponent<PlayerMovement>();
+	progressBar_ = entity_->getComponent<ProgressBar>();
+	progressBar_->setProperty("ProgressColour", "FFFFFFFF");
 }

@@ -20,7 +20,7 @@ public:
 	virtual bool init(luabridge::LuaRef parameterTable = { nullptr }) override;
 
 	static std::string GetName() { return "PlayerMovement"; }
-
+	virtual void onEnable() override;
 	void start() override;
 	void rotate();
 	void move();

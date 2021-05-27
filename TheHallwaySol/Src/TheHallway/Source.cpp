@@ -45,7 +45,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));
-		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "menuppl");
+		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "MenuPpl");
 	}
 	return 0;
 }

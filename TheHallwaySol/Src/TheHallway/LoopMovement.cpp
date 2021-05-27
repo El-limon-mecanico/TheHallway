@@ -8,10 +8,15 @@
 
 bool LoopMovement::init(luabridge::LuaRef parameterTable)
 {
-	readVariable<float>(parameterTable, "Speed", &speed_);
-	readVariable<float>(parameterTable, "Distance", &playerTriggerDistance_);
+	bool correct = true;
+	correct &= readVariable<float>(parameterTable, "Speed",&speed_);
+	correct &= readVariable<float>(parameterTable, "Distance",&playerTriggerDistance_);
 	LuaRef ob = NULL;
-	readVariable<LuaRef>(parameterTable, "Objectives",&ob);
+	correct &= readVariable<LuaRef>(parameterTable, "Objectives",&ob);
+
+	if (!correct)
+		return false;
+
 	for (size_t i = 1; i <= ob.length(); i++)
 	{
 		Vector3D v;

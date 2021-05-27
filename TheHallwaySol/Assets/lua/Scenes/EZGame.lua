@@ -28,7 +28,7 @@ sceneLight = {
 
 Player = {
     Active = true,
-    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter", "Health"},
+    Components = {"Transform", "MeshRenderer","Rigidbody","PlayerMovement", "Light", "Lighter","ProgressBar" ,"Health"},
 
     Transform = {
         Position = {0,3,3},
@@ -61,9 +61,16 @@ Player = {
     },
     Lighter ={
         ChargeSpeed = 0.3,
-        DischargeSpeed = 0.08
+        DischargeSpeed = 0.08,
     },
-    
+    ProgressBar={
+        Active = true,
+        Style= "TheHallway/ProgressBar",
+        Name = "LighterProgress",
+        Position = {0.15,0.01},
+        Size = {150,50},
+        Progress = 0
+    },
     PlayerMovement = 
     {
         WalkingSpeed = 10,
@@ -91,10 +98,12 @@ Player = {
 
             Camera = {
                 Name = "MainCam",
-                Background = {1,1,1},
+                Background = {0,0,0},
                 LookAt = {0,7,5},
                 Width = 1,
                 Height = 1,
+                xProp = 16,
+                yProp = 9,
                 NearClipDistance = 1,
                 FarClipDistance = 100000,
                 ProjectionType = "Perspective",
@@ -110,7 +119,7 @@ Player = {
 
 Maze = {
     Active = true,
-    Components = {"Transform", "MazeManager"},
+    Components = {"Transform", "MazeManager","AudioSource"},
 
     Transform = {
         Position = {0,0,0},
@@ -126,6 +135,13 @@ Maze = {
 	    Ghosts = 1,
         Slimes = 1,
         PointsGhosts = 4,
+    },
+    AudioSource={
+        Source= "TheHallway.wav",
+        Volume=1,
+        Loops=-1,
+        Play=true
+
     }
 }
 
