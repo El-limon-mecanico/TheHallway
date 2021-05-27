@@ -1,0 +1,42 @@
+material TheHallway/Wall
+ {
+	receive_shadows on
+    technique
+    {
+       pass
+        {
+          specular 0.2 0.2 0.2 1.0 64.0
+		  lighting on
+		  alpha_to_coverage off
+          texture_unit
+          {
+            texture Wall.png
+			tex_address_mode wrap
+            colour_op modulate
+            scale 0.1 0.1
+          }
+
+       }   
+    }
+ }
+
+ material TheHallway/Floor
+ {
+	receive_shadows on
+    technique
+    {
+       pass
+        {
+          specular 0.2 0.2 0.2 1.0 64.0
+		  lighting on
+		  alpha_to_coverage off
+          texture_unit
+          {
+            texture Floor.png
+			tex_address_mode wrap
+            colour_op modulate
+            scale 0.1 0.1
+          }
+       }   
+    }
+ }

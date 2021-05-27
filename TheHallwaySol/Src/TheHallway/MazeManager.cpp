@@ -26,7 +26,6 @@ bool MazeManager::init(luabridge::LuaRef parameterTable)
 	correct &=readVariable<int>(parameterTable, "Slimes", &numSlimes_);
 	correct &=readVariable<int>(parameterTable, "PointsGhosts", &pointsGhost_);
 
-
 	// para las palancas
 	correct &=readVariable<size_t>(parameterTable, "Levers", &numLevers_);
 	if (!correct)
@@ -458,7 +457,7 @@ void MazeManager::activateLever()
 	{
 		//creamos una puerta
 		QuackEntity* salida = SceneMng::Instance()->getCurrentScene()->createEntityByPrefab("Entities/Door.lua", "Door", "Salida");
-		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, 0, exit_.second * WALL_SCALE));
+		salida->transform()->setGlobalPosition(Vector3D(exit_.first * WALL_SCALE, salida->transform()->position().y, exit_.second * WALL_SCALE));
 	}
 }
 

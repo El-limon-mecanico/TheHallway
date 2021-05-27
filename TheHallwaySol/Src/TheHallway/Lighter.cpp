@@ -60,8 +60,8 @@ void Lighter::start()
 {
 	light_ = entity_->getComponent<Light>();
 	distance_ = light_->getDistance();
-	pM_ = entity_->getComponent<PlayerMovement>();
+	pM_ = entity_->transform()->getParent()->getComponent<PlayerMovement>();
 	sound_=transform->getChildByName("LighterSound")->getComponent<AudioSource>();
-	progressBar_ = entity_->getComponent<ProgressBar>();
+	progressBar_ = entity_->transform()->getParent()->getComponent<ProgressBar>();
 	progressBar_->setProperty("ProgressColour", "FFFFFFFF");
 }

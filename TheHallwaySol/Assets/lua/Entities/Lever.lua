@@ -23,7 +23,7 @@ Manivela ={
     },
 
     Lever = {
-        Total = 10,
+        Total = 5,
         ChargingVel = 1,
         UncharginVel = 0.5
     },

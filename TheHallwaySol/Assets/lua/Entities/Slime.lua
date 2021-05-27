@@ -5,12 +5,12 @@ Slime = {
 
     Transform = {
         Position = {-10,0,0},
-        Scale = {700,700,700},
-        Rotation = {90,40,0}
+        Scale = {0.8,0.8,0.8},
+        Rotation = {0,0,0}
     },
 
     MeshRenderer = {
-        Mesh = "Icosphere.mesh",
+        Mesh = "Oozey.mesh",
     },
 
     Rigidbody = {
