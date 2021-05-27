@@ -17,7 +17,7 @@ UI = {
         Play=true
     },
     Children={
-        entities={"Background", "GameOverText","MainMenuButton","SelectLevelButton"},
+        entities={"Background", "GameOverText","MainMenuButton","SelectLevelButton", "QuitButton"},
         Background={
             Active= true,
             Components={"Image", "Transform"},
@@ -76,7 +76,7 @@ UI = {
                 Type = "Button",
                 Style= "TheHallway/Button",
                 Name = "GOMainButton",
-                Text = "Menú Principal",
+                Text = "Menï¿½ Principal",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
@@ -110,8 +110,32 @@ UI = {
                 TargetResolution = {1920,1080},
                 Size = {750,150},
                 CallBackFunction = "toLvlSelector"
-            },
-        }
+            }
+        },
+    QuitButton = {
+        Active = true,
+        Components={"Button","Transform"},
+                Transform = {
+                    Position = {0,0,0},
+                    Scale = {1,1,1},
+                    Rotation = {0,0,0}
+                },
+                Button = {
+                    Active = true,
+                    Enable = true,
+                    Type = "Button",
+                    Style= "TheHallway/Button",
+                    Name = "QuitButton",
+                    Text = "x",
+                    TLColor = "FFA20410",
+                    TRColor = "FFA20410",
+                    BLColor = "FFA20410",
+                    BRColor = "FFA20410",
+                    Position = {0.9,0.01},
+                    Size = {100,100},
+                    CallBackFunction = "toQuitScene"
+                }
+            }
     }
 }
 sceneLight = {

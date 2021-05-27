@@ -39,9 +39,19 @@ void GameCallbacks::toMenuPpl()
 {
 	SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "MenuPpl");
 }
+
 void GameCallbacks::fullscreen()
 {
 	QuackEnginePro::Instance()->setFullScreen(!QuackEnginePro::Instance()->getFullScreen());
+
+void GameCallbacks::quit()
+{
+	QuackEnginePro::Instance()->quit();
+}
+void GameCallbacks::toQuitScene()
+{
+	SceneMng::Instance()->pushNewScene("Scenes/QuitScene.lua", "QuitScene");
+
 }
 void GameCallbacks::toLvlSelector()
 {
@@ -58,6 +68,8 @@ void GameCallbacks::initCallbacks()
 	CallBacks::instance()->addMethod("back", back);
 	CallBacks::instance()->addMethod("toMenuppl", toMenuPpl);
 	CallBacks::instance()->addMethod("fullscreen", fullscreen);
+	CallBacks::instance()->addMethod("toQuitScene", toQuitScene);
+	CallBacks::instance()->addMethod("quit", quit);
 }
 
 

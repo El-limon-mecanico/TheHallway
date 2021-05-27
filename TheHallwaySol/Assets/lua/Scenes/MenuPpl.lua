@@ -16,7 +16,7 @@ UI = {
         Play=true
     },
     Children = {
-        entities={"Background", "StartButton","CtrlButton","QuackImage","Title", "FullScreenButton"},
+        entities={"Background", "StartButton","CtrlButton","QuackImage","Title", "FullScreenButton","QuitButton"},
         Background={
             Active= true,
             Components={"Image", "Transform"},
@@ -88,10 +88,33 @@ UI = {
                 CallBackFunction = "toLvlSelector"
             }
         },
-        
-        QuackImage={
+        QuitButton = {
             Active = true,
-            Components={"Image","Transform"},
+            Components={"Button","Transform"},
+                    Transform = {
+                        Position = {0,0,0},
+                        Scale = {1,1,1},
+                        Rotation = {0,0,0}
+                    },
+                    Button = {
+                        Active = true,
+                        Enable = true,
+                        Type = "Button",
+                        Style= "TheHallway/Button",
+                        Name = "QuitButton",
+                        Text = "x",
+                        TLColor = "FFA20410",
+                        TRColor = "FFA20410",
+                        BLColor = "FFA20410",
+                        BRColor = "FFA20410",
+                        Position = {0.9,0.01},
+                        Size = {100,100},
+                        CallBackFunction = "toQuitScene"
+                    }
+                },
+    QuackImage={
+    Active = true,
+    Components={"Image","Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
