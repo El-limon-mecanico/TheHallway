@@ -31,7 +31,8 @@ Player = {
         Name = "LighterProgress",
         Position = {0.2,0.01},
         Size = {150,50},
-        Progress = 0
+        Progress = 0,
+        TargetResolution = {1920,1080}
     },
     PlayerMovement = 
     {
@@ -173,7 +174,7 @@ Player = {
                     Components={"AudioSource"},
                     AudioSource={
                         Source= "GirlScream.ogg",
-                        Volume=1,
+                        Volume=0.3,
                         Loops=0,
                         Play=false,
                         Enabled =true,
@@ -185,7 +186,7 @@ Player = {
                     Components={"AudioSource"},
                     AudioSource={
                         Source= "BoyScream.ogg",
-                        Volume=1,
+                        Volume=0.3,
                         Loops=0,
                         Play=false,
                         Enabled =true,
@@ -261,6 +262,7 @@ Minimap =
         Background = false,
         Border = false,
         Position = {0.776, 0.04},
-        Size = {236, 220}
+        Size = {236, 220},
+        TargetResolution = {1920,1080}
     }
 }

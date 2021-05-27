@@ -1,4 +1,4 @@
-LvlSelector = {
+QuitScene = {
     entities = {"defaultCamera", "sceneLight","UI"}
 }
 
@@ -17,7 +17,7 @@ UI = {
         Play=true
     },
     Children={
-        entities={"Background", "EzGame","MedGame","HardGame","Title"},
+        entities={"Background", "QuitText","YesButton","NoButton"},
         Background={
             Active= true,
             Components={"Image", "Transform"},
@@ -38,31 +38,31 @@ UI = {
                 Border=false
             },
         },
-        Title = {
-            Active = true,
-            Components={"Text","Transform"},
+        QuitText={
+            Active= true,
+            Components={"Text", "Transform"},
             Transform = {
                 Position = {0,0,0},
                 Scale = {1,1,1},
                 Rotation = {0,0,0}
             },
-            Text= {
+            Text={
                 Active = true,
                 Background = false,
                 Border = false,
                 Style= "TheHallway/StaticText",
-                Name = "TitleLvl",
-                Text = "Nivel de dificultad",
+                Name = "QuitText",
+                Text = "¿Seguro?",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.29,-0.01  },
+                Position = {0.39,-0.01  },
                 TargetResolution = {1920,1080},
-                Size = {810,250}
-            }
+                Size = {425,250}
+            },
         },
-        EzGame = {
+        YesButton = {
             Active =true,
             Components={"Button", "Transform"},
             Transform = {
@@ -75,19 +75,19 @@ UI = {
                 Enable = true, 
                 Type = "Button",
                 Style= "TheHallway/Button",
-                Name = "EZButton",
-                Text = "Fácil",
+                Name = "quitButton",
+                Text = "Si",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.41,0.35},
+                Position = {0.39,0.35},
                 TargetResolution = {1920,1080},
-                Size = {350,150},
-                CallBackFunction = "ToEzGame"
+                Size = {400,150},
+                CallBackFunction = "quit"
             },
         },
-        MedGame = {
+        NoButton = {
             Active =true,
             Components={"Button", "Transform"},
             Transform = {
@@ -100,41 +100,16 @@ UI = {
                 Enable = true, 
                 Type = "Button",
                 Style= "TheHallway/Button",
-                Name = "MedButton",
-                Text = "Medio",
+                Name = "NoButton",
+                Text = "No",
                 TLColor = "FFA20410",
                 TRColor = "FFA20410",
                 BLColor = "FFA20410",
                 BRColor = "FFA20410",
-                Position = {0.41,0.55},
-                Size = {350,150},
+                Position = {0.39,0.7},
                 TargetResolution = {1920,1080},
-                CallBackFunction = "ToMedGame"
-            },
-        },
-        HardGame = {
-            Active =true,
-            Components={"Button", "Transform"},
-            Transform = {
-                Position = {0,0,0},
-                Scale = {1,1,1},
-                Rotation = {0,0,0}
-            },
-            Button={
-                Active = true,
-                Enable = true, 
-                Type = "Button",
-                Style= "TheHallway/Button",
-                Name = "HardButton",
-                Text = "Difícil",
-                TLColor = "FFA20410",
-                TRColor = "FFA20410",
-                BLColor = "FFA20410",
-                BRColor = "FFA20410",
-                Position = {0.41,0.75},
-                TargetResolution = {1920,1080},
-                Size = {350,150},
-                CallBackFunction = "ToHardGame"
+                Size = {400,150},
+                CallBackFunction = "back"
             },
         }
     }

@@ -31,7 +31,8 @@ Player = {
         Name = "LighterProgress",
         Position = {0.2,0.01},
         Size = {150,50},
-        Progress = 0
+        Progress = 0,
+        TargetResolution = {1920,1080}
     },
     PlayerMovement = 
     {
@@ -173,7 +174,7 @@ Player = {
                     Components={"AudioSource"},
                     AudioSource={
                         Source= "GirlScream.ogg",
-                        Volume=1,
+                        Volume=0.3,
                         Loops=0,
                         Play=false,
                         Enabled =true,
@@ -185,7 +186,7 @@ Player = {
                     Components={"AudioSource"},
                     AudioSource={
                         Source= "BoyScream.ogg",
-                        Volume=1,
+                        Volume=0.3,
                         Loops=0,
                         Play=false,
                         Enabled =true,
@@ -211,10 +212,10 @@ Maze = {
     MazeManager = {
         Active = true,
         Size = 6,
-        Holes = 100,
-        Levers = 2,
+        Holes = 105,
+        Levers = 1,
 	    Ghosts = 0,
-        Slimes = 1,
+        Slimes = 0,
         PointsGhosts = 4,
     },
     AudioSource={
@@ -260,6 +261,7 @@ Minimap =
         Background = false,
         Border = false,
         Position = {0.776, 0.04},
-        Size = {296, 275}
+        Size = {396, 375},
+        TargetResolution = {1920,1080}
     }
 }
