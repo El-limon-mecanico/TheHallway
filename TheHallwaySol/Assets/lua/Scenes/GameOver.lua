@@ -17,7 +17,7 @@ UI = {
         Play=true
     },
     Children={
-        entities={"GameOverText","MainMenuButton","SelectLevelButton"},
+        entities={"GameOverText","MainMenuButton","SelectLevelButton","QuitButton"},
         GameOverText={
             Active= true,
             Components={"Text", "Transform"},
@@ -87,7 +87,31 @@ UI = {
             Size = {400,100},
             CallBackFunction = "toLvlSelector"
         },
-    }
+    },
+    QuitButton = {
+        Active = true,
+        Components={"Button","Transform"},
+                Transform = {
+                    Position = {0,0,0},
+                    Scale = {1,1,1},
+                    Rotation = {0,0,0}
+                },
+                Button = {
+                    Active = true,
+                    Enable = true,
+                    Type = "Button",
+                    Style= "TheHallway/Button",
+                    Name = "QuitButton",
+                    Text = "x",
+                    TLColor = "FFA20410",
+                    TRColor = "FFA20410",
+                    BLColor = "FFA20410",
+                    BRColor = "FFA20410",
+                    Position = {0.9,0.01},
+                    Size = {100,100},
+                    CallBackFunction = "toQuitScene"
+                }
+            },
 }
 }
 sceneLight = {

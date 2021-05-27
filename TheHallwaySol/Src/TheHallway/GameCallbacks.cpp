@@ -4,6 +4,7 @@
 #include "CallBacks.h"
 #include "SceneMng.h"
 #include "InputManager.h"
+#include "QuackEnginePro.h"
 std::unique_ptr<GameCallbacks> GameCallbacks::instance_;
 
 void GameCallbacks::ToEZGame()
@@ -38,6 +39,14 @@ void GameCallbacks::toMenuPpl()
 {
 	SceneMng::Instance()->loadScene("Scenes/MenuPpl.lua", "MenuPpl");
 }
+void GameCallbacks::quit()
+{
+	QuackEnginePro::Instance()->quit();
+}
+void GameCallbacks::toQuitScene()
+{
+	SceneMng::Instance()->pushNewScene("Scenes/QuitScene.lua", "QuitScene");
+}
 void GameCallbacks::toLvlSelector()
 {
 	SceneMng::Instance()->loadScene("Scenes/LvlSelector.lua", "LvlSelector");
@@ -52,6 +61,8 @@ void GameCallbacks::initCallbacks()
 	CallBacks::instance()->addMethod("toControls", toControls);
 	CallBacks::instance()->addMethod("back", back);
 	CallBacks::instance()->addMethod("toMenuppl", toMenuPpl);
+	CallBacks::instance()->addMethod("toQuitScene", toQuitScene);
+	CallBacks::instance()->addMethod("quit", quit);
 }
 
 
