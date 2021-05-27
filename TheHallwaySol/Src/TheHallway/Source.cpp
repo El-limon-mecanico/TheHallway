@@ -46,7 +46,7 @@ WinMain(HINSTANCE zHInstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdS
 		UIElement::addScheme("TheHallway.scheme");
 		Light::setAmbientLight(Vector3D(0, 0, 0));
 		//QuackEnginePro::Instance()->setFullScreen(true);
-		QuackEnginePro::Instance()->start("Scenes/MenuPpl.lua", "MenuPpl");
+		QuackEnginePro::Instance()->start("Scenes/WinScene.lua", "WinScene");
 	}
 	return 0;
 }

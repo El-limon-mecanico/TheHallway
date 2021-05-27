@@ -43,7 +43,7 @@ void GameCallbacks::toMenuPpl()
 void GameCallbacks::fullscreen()
 {
 	QuackEnginePro::Instance()->setFullScreen(!QuackEnginePro::Instance()->getFullScreen());
-
+}
 void GameCallbacks::quit()
 {
 	QuackEnginePro::Instance()->quit();
